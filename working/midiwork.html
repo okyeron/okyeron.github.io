@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <script>
+
+      const state = {
+        midiAccess: null,
+        midiInputPort: null,
+        midiOutputPort: null,
+
+      };
+
+      const setup = async () => {
+        navigator.requestMIDIAccess({ sysex: true }).then((midiAccess) => {
+
+			console.log('MIDI Access established', midiAccess);
+			state.midiAccess = midiAccess;
+
+				const signature = raw("f0 7d 00 00 0F");
+
+				const midiInput = midiAccess.inputs.values().next().value;
+				midiInput.onmidimessage = (e) => {
+// 					console.log('MIDI Message', e.data);
+
+					const cmd = e.data[0];
+					const type = e.data[0] & 0xf0;
+					const channel =  e.data[0] & 0xf;
+					const cntrl = e.data[1];
+					const cntrlvalue = e.data[2];
+
+					// Check the sysex data to see if it matches a config message
+					if (match(signature, e.data)){
+						// store some variables
+						const command = e.data[4];
+						const modelnum = e.data[5];
+						const model = ({0x03: "8x2"})[e.data[5]];
+						const ver = e.data[6];
+						const version = e.data[6] + "." + e.data[7] + "." + e.data[8];
+						const bank = e.data[9];
+						const eeprom_version = e.data[10];
+
+						const usbccstart = 25;
+						const trsccstart = 41;
+						const usbchanstart = 57;
+						const trschanstart = 73;
+
+						let usbccs = [];
+						let trsccs = [];
+						let usbchans = [];
+						let trschans = [];
+						for (var k = usbccstart; k < usbccstart+16; k++) {
+							usbccs.push(e.data[k])
+						}
+						for (var h = trsccstart; h < trsccstart+16; h++) {
+							trsccs.push(e.data[h])
+						}
+						for (var i = usbchanstart; i < usbchanstart+16; i++) {
+							usbchans.push(e.data[i]+1)
+						}
+						for (var j = trschanstart; j < trschanstart+16; j++) {
+							trschans.push(e.data[j]+1)
+						}
+						
+						var dlblock1 = "CC";
+						makerowcontainer (dlblock1)
+						makecellsrow(usbchans, usbchanstart, "USB Channels", dlblock1);
+						makecellsrow(usbccs, usbccstart, "USB CCs", dlblock1);
+
+						var dlblock2 = "TRS";
+						makerowcontainer (dlblock2)
+						makecellsrow(trschans, trschanstart, "TRS Channels", dlblock2);
+						makecellsrow(trsccs, trsccstart, "TRS CCs", dlblock2);
+						
+// 						console.log('usbccs', usbccs);
+// 						console.log('trsccs', trsccs);
+// 						console.log('usbchans', usbchans);
+// 						console.log('trschans', trschans);
+
+					}
+
+					// if CC message do things
+					if (type == 176){
+						// function to show knob inputs here
+						console.log('cntrl: '+ cntrl + ":"+ cntrlvalue);
+// 						showcontroller( cntrl, cntrlvalue );
+					}
+
+				};
+				const midiOutput = midiAccess.outputs.values().next().value;
+				if (midiOutput.state === 'connected' && midiOutput.type === 'output') {
+					// send some random sysex to open the output port 
+					midiOutput.send([0xf0, 0x7d, 0x00, 0xf7]);
+				}
+			
+// 			midiAccess.addEventListener('statechange', (e) => {
+// 			});
+
+          midiAccess.onstatechange = (e) => {
+				console.log('MIDI State Change', e.port.type, e.port.state);
+
+				if (e.port.state === 'connected' && e.port.type === 'input') {
+				  const midiInput = midiAccess.inputs.values().next().value;
+				}
+
+				if (e.port.state === 'connected' && e.port.type === 'output') {
+				  const midiOutput = midiAccess.outputs.values().next().value;
+
+				  // send sysex query to get config from device
+				  midiOutput.send([0xf0, 0x7d, 0x00, 0x00, 0x1f, 0xf7]);
+				}
+          };
+          
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('Initializing Page...');
+        setup();
+      });
+	
+
+	function hex(data) {
+	  return data.reduce(function(s, x) {
+		return s + " " + x.toString(16).padStart(2, "0");
+	  }, "").slice(1);
+	}
+
+	function raw(line) {
+	  const words = line.split(/\s+/).filter(Boolean);
+	  const bytes = words.map(x => Number("0x" + x));
+	  return bytes.map(x => isNaN(x) || x > 0xff ? null : x);
+	}
+
+	function match(pattern, data) {
+	  if (pattern == null || data.length < pattern.length)
+		return false;
+	  for (let index = 0; index < pattern.length; index++)
+		if (pattern[index] != null && pattern[index] != data[index])
+		  return false;
+	  return true;
+	}
+	function validateMaxOne(object) {
+		if (object.max) object.value = Math.min(parseInt(object.max), parseInt(object.value) || 1);
+	}
+	function validateMaxZero(object) {
+		if (object.max) object.value = Math.min(parseInt(object.max), parseInt(object.value) || 0);
+	}
+
+	function makerowcontainer (id){
+		var t = document.createElement("dl");
+		t.id = id;
+		main.appendChild(t);
+	}
+
+	function makecellsrow(data_array, idstart, description, container){
+
+			const t = document.getElementById(container);
+		
+			var newRow = document.createElement("dd");
+			newRow.className = "row1";
+			t.appendChild(newRow);
+
+			var label = document.createElement("span");
+			label.className = "rlabel";
+			label.innerHTML= description;
+		
+			for (var col = 0; col < 16; col++) {
+				var newCell = document.createElement("input");
+				newCell.setAttribute("type", "number");
+				newCell.setAttribute("min", "0");
+				newCell.setAttribute("max", "127");
+				newCell.setAttribute("oninput","validateMaxZero(this)")
+				newCell.setAttribute("id", (idstart + col));
+				newCell.setAttribute("value", data_array[col]);
+				newCell.setAttribute("class", "ccbox");
+
+				newRow.appendChild(newCell);
+			}
+			newRow.appendChild(label);
+	}
+
+    </script>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  
+	<body>
+		<header>
+			<div id="title">8x2 Config</div>
+			<span id="status"></span>
+		</header>
+		<div id="main">
+		</div>
+		<div id="nav">
+<!-- 
+		<button id="saveconfig"><span class="fas fa-file-import"></span>
+			Save Config
+		</button>
+ -->
+		<span id="alert"></span>
+		</div>
+	</body>
+
+</html>
