@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>load preset test</title>
+</head>
+<body>
+
+
+<form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
+
+    <h2>Load Preset JSON</h2>
+     <input type='button' id='btnLoad' value='Load Preset File' onclick='importData();'>
+
+</form>
+
+
+<script type="text/javascript">
+
+const importData = () => {
+  const fileInputNode = document.createElement('input');
+  fileInputNode.setAttribute('type', 'file');
+  fileInputNode.setAttribute('id', 'uploadedConfig');
+  fileInputNode.setAttribute('onchange', 'window.handleFiles(this.files)');
+
+  window.handleFiles = (files) => {
+    if (files.length > 0) {
+      const newConfig = files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener('load', (e) => {
+      	let lines = e.target.result;
+        const newConfigData = JSON.parse(lines);
+        console.log(lines);
+        // the next line is how i load my data. you can do whatever you want here <==
+//         editingConfig.update((_old) => newConfigData);
+        
+        // do we want an alert?
+        alert(
+          "New configuration imported. Choose 'Save Config' to upload and save changes, or 'Cancel' to abort"
+        );
+      });
+
+      reader.readAsText(newConfig);
+
+      window.handleFiles = null;
+    }
+  };
+
+  fileInputNode.click();
+  fileInputNode.remove();
+};
+
+    	</script>
+
+</body>
+</html>
