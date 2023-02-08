@@ -188,15 +188,11 @@ const disconnectedCallback = (e: PortEvent) => {
   }
 };
 
-const webMidiEnabled = ref(false);
-
 const initialize = () => {
   console.debug('Web MIDI access granted. Initializing.');
 
   WebMidi.addListener('connected', connectedCallback);
   WebMidi.addListener('disconnected', disconnectedCallback);
-
-  webMidiEnabled.value = true;
 };
 
 // Any time the value of midiOutput changes i.e. when we find a new 8x2 output port,
