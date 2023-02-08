@@ -203,6 +203,7 @@ watch(midiOutput, (/* newValue */ _, oldValue) => {
 
   if (midiOutput.value && midiOutput.value.state === 'connected') {
     console.debug('requesting config');
+
     midiOutput.value.send(requestConfigMessage);
   }
 });
