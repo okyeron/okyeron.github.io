@@ -15,6 +15,8 @@ const mappings = reactive<Mappings>({});
 
 const midiBank = ref<Bank>(1);
 
+const potentiometers = ref<number[]>([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+
 // External to this module, we expose a writeable computed where accessing
 // the value proxies to midiBank's value, but setting the value merely
 // aspirationally requests a new bank, and the value doesn't update until
@@ -118,13 +120,19 @@ function getPort(direction: Port): Input | Output | null {
 const inputListenerCallbacks: InputListenerCallbacks = {
   // TODO: Figure out how to receive knob states
   controlchange: [
-    //   (e) => {
-    //     if (e.message.statusByte === 176) {
-    //       console.debug(e);
-    //       const [control, controlValue] = e.message.dataBytes;
-    //       console.debug(`channel ${e.message.channel}. cntrl: ${control}:${controlValue}`);
-    //     }
-    //   },
+      (e) => {
+        if (e.message.statusByte === 176) {
+          // console.debug(e);
+          const [control, controlValue] = e.message.dataBytes;
+          // console.debug(`channel ${e.message.channel}. cntrl: ${control}:${controlValue}`);
+          const thisPot = mappings[midiBank.value]?.usb.ccs;
+          const thisIdx = thisPot?.findIndex((el) => el === control);
+          console.debug(thisIdx);
+          if (thisIdx != null) {
+            potentiometers.value[thisIdx] = controlValue;
+          }        
+        }
+      },
   ],
   sysex: [
     (e) => {
@@ -237,5 +245,6 @@ export const useHachiNi = () => {
     bank: externalMidiBank,
     info: readonly(midiInfo),
     midiSupported: WebMidi.supported,
+    potentiometers,
   };
 };

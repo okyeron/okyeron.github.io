@@ -3,8 +3,9 @@
     <div class="value-container">
       <div class="radial-mask" />
 
-      <div class="value">{{ tweenedValue }}</div>
-
+      <!-- <div class="value">{{ tweenedValue }}</div> -->
+      <div class="value">{{ tweenedValue === 0 ? '-' : tweenedValue }}</div> 
+      
       <div class="mark-container start stop">
         <div class="pip" />
       </div>
@@ -42,12 +43,12 @@ const POT_RANGE = 270;
 // the component chain.
 const colors = [
   // https://coolors.co/palette/ff595e-ffca3a-8ac926-1982c4-6a4c93
-  [255, 89, 94],
-  [255, 202, 58],
-  [138, 201, 38],
-  [25, 130, 196],
   [106, 76, 147],
-
+  [25, 130, 196],
+  [138, 201, 38],
+  [255, 202, 58],
+  [255, 89, 94],
+ 
   // https://coolors.co/palette/5f0f40-9a031e-fb8b24-e36414-0f4c5c
   // [95, 15, 64],
   // [154, 3, 30],

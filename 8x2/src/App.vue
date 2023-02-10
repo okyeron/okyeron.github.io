@@ -13,6 +13,7 @@
       v-model:channels="channels"
       v-model:interface="midiInterface"
       :info="info"
+      :potentiometers="potentiometers"
     />
   </main>
 </template>
@@ -26,7 +27,7 @@ import { Interface } from '@/midi/types';
 
 const midiInterface = ref<Interface>('usb');
 
-const { connected, connecting, mappings, bank, info, midiSupported } = useHachiNi();
+const { connected, connecting, mappings, bank, info, midiSupported, potentiometers } = useHachiNi();
 
 const ccs = computed({
   get() {

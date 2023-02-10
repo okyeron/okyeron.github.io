@@ -22,11 +22,11 @@
         />
 
         <div class="pots-config">
-          <MappingsGroup v-model:ccs="firstEightCcs" v-model:channels="firstEightChannels" />
+          <MappingsGroup v-model:ccs="firstEightCcs" v-model:channels="firstEightChannels" :potentiometers="firstEightPotentiometers" />
 
           <div style="width: 100%; margin-top: 2rem" />
 
-          <MappingsGroup v-model:ccs="lastEightCcs" v-model:channels="lastEightChannels" :count-offset="8" />
+          <MappingsGroup v-model:ccs="lastEightCcs" v-model:channels="lastEightChannels"  :potentiometers="lastEightPotentiometers" :count-offset="8" />
         </div>
       </div>
 
@@ -64,6 +64,7 @@ const props = defineProps<{
   channels: number[];
   interface: Interface;
   info: Info | null;
+  potentiometers: number[];
 }>();
 
 const emit = defineEmits<{
@@ -90,6 +91,10 @@ const midiInterface = computed({
     emit('update:interface', value);
   },
 });
+
+const firstEightPotentiometers = computed(() => props.potentiometers.slice(0, 8));
+
+const lastEightPotentiometers = computed(() => props.potentiometers.slice(8));
 
 // TODO: Splitting the values in two like this is really gross, but
 // comes from wanting to render two rows of knobs when screen space allows.
