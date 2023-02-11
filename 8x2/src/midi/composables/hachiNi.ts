@@ -39,6 +39,14 @@ const connecting = computed(() => {
   return connected.value && null == mappings[midiBank.value];
 });
 
+watch(connected, () => {
+  if (!connected.value) {
+    // Go ahead and wipe out the cached bank data. There is no guarantee
+    // that it will be valid and current when the device reconnects.
+    Banks.forEach((bank) => delete mappings[bank]);
+  }
+});
+
 // If connected to an output port, this sends the bank change request, followed
 // immediately by the message to request the config state.
 const selectBank = (bank: Bank) => {
@@ -182,10 +190,6 @@ const connectedCallback = (e: PortEvent) => {
 const disconnectedCallback = (e: PortEvent) => {
   console.debug(`disconnected ${e.port.name} ${e.port.type}`);
   console.debug(e);
-
-  // Go ahead and wipe out the cached bank data. There is no guarantee
-  // that it will be valid and current when the device reconnects.
-  Banks.forEach((bank) => delete mappings[bank]);
 
   if (e.port.type === 'input' && e.port.name === deviceName) {
     midiInput.value = null;
