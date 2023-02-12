@@ -45,7 +45,6 @@
           <label class="compact-label">CC</label>
         </div>
 
-        <!-- <Potentiometer :modelValue="meterValues[i]" :max="127" :time="750" /> -->
         <Potentiometer :modelValue="potentiometers[i]" :max="127" />
 
         <div class="meter-number">{{ countOffset + i + 1 }}</div>
@@ -55,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from 'vue';
+import { computed } from 'vue';
 import Potentiometer from '@/components/Potentiometer.vue';
 
 const props = withDefaults(
@@ -90,42 +89,6 @@ const meterChannels = computed({
     emit('update:channels', value);
   },
 });
-
-const METER_MIN = 0;
-const METER_MAX = 127;
-
-// const meterValues = ref<number[]>([]);
-
-// // TODO: Remove all of this placeholder meter animation code once actual
-// // values are plumbed in.
-// const setMeterValue = (value: number, index: number, meters: Ref<number[]>) => {
-//   meters.value[index] = value;
-// };
-
-// const randomizeMeterValue = (index: number, meters: Ref<number[]>) => {
-//   const delta = METER_MAX - METER_MIN + 1;
-//   const value = METER_MIN + Math.floor(Math.random() * delta);
-
-//   setMeterValue(value, index, meters);
-// };
-
-// const setRandomMeterValues = () => {
-//   for (let i = 0; i < props.channels.length; i++) {
-//     randomizeMeterValue(i, meterValues);
-//   }
-// };
-
-// watch(
-//   () => props.channels,
-//   () => {
-//     if (props.channels.length !== meterValues.value.length) {
-//       setRandomMeterValues();
-//     }
-//   },
-//   { immediate: true }
-// );
-
-// setInterval(setRandomMeterValues, 1000);
 </script>
 
 <style scoped>
