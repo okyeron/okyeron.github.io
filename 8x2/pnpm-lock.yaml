@@ -15,12 +15,10 @@ specifiers:
   typescript: ^4.9.5
   vite: ^4.0.0
   vue: ^3.2.45
-  vue-femtotween: ^1.0.0
   webmidi: ^3.1.3
 
 dependencies:
   vue: 3.2.47
-  vue-femtotween: 1.0.0_vue@3.2.47
   webmidi: 3.1.3
 
 devDependencies:
@@ -1159,10 +1157,6 @@ packages:
       reusify: 1.0.4
     dev: true
 
-  /femtotween/2.0.3:
-    resolution: {integrity: sha512-99uiZP5fZL7gW/ShzZYFp16Q+vLF8t5NI/kpSx3bTnTfeUTosHV7s09KcMe8WToj+BpI6G0dLnIcgVW+792phA==}
-    dev: false
-
   /file-entry-cache/6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -2069,15 +2063,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /vue-femtotween/1.0.0_vue@3.2.47:
-    resolution: {integrity: sha512-CyIVz2w70x1aigk7zAgfOZjCd9sYMJaIbosYcQO0TUlVBxrgkNQd7LMRS9MaawMrqJiokusv/ASN5f4ciL6+3Q==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      femtotween: 2.0.3
-      vue: 3.2.47
-    dev: false
 
   /vue/3.2.47:
     resolution: {integrity: sha512-60188y/9Dc9WVrAZeUVSDxRQOZ+z+y5nO2ts9jWXSTkMvayiWxCWOWtBQoYjLeccfXkiiPZWAHcV+WTPhkqJHQ==}

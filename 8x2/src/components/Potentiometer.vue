@@ -3,9 +3,8 @@
     <div class="value-container">
       <div class="radial-mask" />
 
-      <!-- <div class="value">{{ tweenedValue }}</div> -->
-      <div class="value">{{ tweenedValue === 0 ? '-' : tweenedValue }}</div> 
-      
+      <div class="value">{{ modelValue === min ? '-' : modelValue }}</div>
+
       <div class="mark-container start stop">
         <div class="pip" />
       </div>
@@ -22,8 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue';
-import { useTween } from 'vue-femtotween';
+import { computed } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -31,9 +29,8 @@ const props = withDefaults(
     modelValue: number;
     min?: number;
     max?: number;
-    time?: number;
   }>(),
-  { grow: false, min: 0, max: 127, time: 0 }
+  { grow: false, min: 0, max: 127 }
 );
 
 const POT_RANGE = 270;
@@ -48,7 +45,7 @@ const colors = [
   [138, 201, 38],
   [255, 202, 58],
   [255, 89, 94],
- 
+
   // https://coolors.co/palette/5f0f40-9a031e-fb8b24-e36414-0f4c5c
   // [95, 15, 64],
   // [154, 3, 30],
@@ -57,16 +54,9 @@ const colors = [
   // [15, 76, 92],
 ];
 
-// TODO: Something buggy/glitchy with the way the dial tweens to new values
-// when the value is rapidly updated. Need to fix this.
-const tweenedValue = useTween(toRef(props, 'modelValue'), {
-  time: props.time,
-  precision: 0,
-});
-
 const percentage = computed(() => {
   const range = props.max - props.min;
-  const position = tweenedValue.value - props.min;
+  const position = props.modelValue - props.min;
 
   return position / range;
 });
@@ -100,7 +90,7 @@ const background = computed(() => {
 });
 
 const atExtremity = computed(() => {
-  return tweenedValue.value === props.min || tweenedValue.value === props.max;
+  return props.modelValue === props.min || props.modelValue === props.max;
 });
 
 const valueNumberBorder = computed(() => {
@@ -187,7 +177,7 @@ const radialMaskBackground = computed(() => {
 }
 
 .meter.grow {
-  height: calc(var(--width) + v-bind(tweenedValue / (max - min)) * 100px);
+  height: calc(var(--width) + v-bind(modelValue / (max - min)) * 100px);
 }
 
 .meter.shake .value-container .value {
