@@ -62,7 +62,7 @@ const selectBank = (bank: Bank) => {
 const extractInfo = (bytes: number[]): Info => {
   return {
     modelNum: bytes[3],
-    model: { 0x03: '8x2' }[bytes[3]],
+    model: { 0x05: '8x2' }[bytes[3]],
     ver: bytes[4],
     version: bytes.slice(4, 7).join('.'),
     eepromVersion: bytes[8],
