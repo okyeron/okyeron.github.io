@@ -64,8 +64,8 @@ export const useHachiNi = () => {
   const callbacks: MIDICallbacks = [
     (e, output) => {
       const [status, bank] = e.data;
-
-      if (status === 192) {
+      // Program Change on any channel
+      if (192 <= status && status <= 207) {
         selectBank((bank + 1) as Bank, output);
       }
     },
