@@ -128,9 +128,11 @@ export const useHachiNi = () => {
 
   watchEffect(() => {
     if (!connected.value) {
-      // Go ahead and wipe out the cached bank data. There is no guarantee
-      // that it will be valid and current when the device reconnects.
+      // Go ahead and wipe out the cached bank + potentiometer position data. There is
+      // no guarantee that it will be valid and current when the device reconnects.
       Banks.forEach((bank) => delete mappings[bank]);
+
+      potentiometers.value.fill(0, 0, 16);
     }
   });
 
