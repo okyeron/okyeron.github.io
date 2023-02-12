@@ -65,7 +65,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import HachiNi from '@/components/HachiNi.vue';
 import MappingsGroup from '@/components/MappingsGroup.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
-import { Bank, Banks, Info, Interface } from '@/midi/types';
+import { Bank, Banks, Info, Interface } from '@/access/types';
 
 const props = defineProps<{
   bank: Bank;
@@ -73,7 +73,7 @@ const props = defineProps<{
   channels: number[];
   interface: Interface;
   info: Info | null;
-  potentiometers: number[];
+  potentiometers: readonly number[];
 }>();
 
 const emit = defineEmits<{

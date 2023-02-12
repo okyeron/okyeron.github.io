@@ -1,4 +1,4 @@
-import { InputEventMap } from 'webmidi';
+export type MidiAccessState = 'disabled' | 'pending' | 'requesting' | 'enabled';
 
 export const Banks = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 export type BanksTuple = typeof Banks;
@@ -28,5 +28,5 @@ export type Mappings = {
   };
 };
 
-// Provides typing for `inputListenerCallbacks` in ../composables/hachiNi.ts
-export type InputListenerCallbacks = { [K in keyof InputEventMap]?: InputEventMap[K][] };
+export type MIDICallback = (e: WebMidi.MIDIMessageEvent, output: WebMidi.MIDIOutput | null) => void;
+export type MIDICallbacks = MIDICallback[];

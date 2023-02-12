@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "baseUrl": "./",
-    "types": ["vite/client"],
+    "types": ["vite/client", "webmidi"],
     "paths": {
       // "@*": ["./src/*", "./dist/*"]
       "@/*": ["./src/*", "./dist/*"]

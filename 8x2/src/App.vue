@@ -1,8 +1,10 @@
 <template>
   <main>
-    <div v-if="!midiSupported">Web MIDI not supported</div>
+    <div v-if="access === 'disabled'">Web MIDI not supported or access denied</div>
 
-    <div v-else-if="connecting">Connecting to Hachi Ni <LoadingEllipsis /></div>
+    <div v-else-if="access === 'requesting'">Requesting MIDI access</div>
+
+    <div v-else-if="access === 'enabled' && connecting">Connecting to Hachi Ni <LoadingEllipsis /></div>
 
     <div v-else-if="!connected">Plug it in</div>
 
@@ -22,12 +24,12 @@
 import { computed, ref } from 'vue';
 import Configurator from '@/components/Configurator.vue';
 import LoadingEllipsis from '@/components/LoadingEllipsis.vue';
-import { useHachiNi } from '@/midi/composables';
-import { Interface } from '@/midi/types';
+import { useHachiNi } from '@/access/composables';
+import { Interface } from '@/access/types';
 
 const midiInterface = ref<Interface>('usb');
 
-const { connected, connecting, mappings, bank, info, midiSupported, potentiometers } = useHachiNi();
+const { access, connecting, connected, mappings, bank, info, potentiometers } = useHachiNi();
 
 const ccs = computed({
   get() {

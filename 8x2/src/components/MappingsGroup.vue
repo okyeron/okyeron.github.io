@@ -62,7 +62,7 @@ const props = withDefaults(
     ccs: number[];
     channels: number[];
     countOffset?: number;
-    potentiometers: number[];
+    potentiometers: readonly number[];
   }>(),
   { countOffset: 0 }
 );
