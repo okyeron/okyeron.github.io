@@ -22,11 +22,20 @@
         />
 
         <div class="pots-config">
-          <MappingsGroup v-model:ccs="firstEightCcs" v-model:channels="firstEightChannels" :potentiometers="firstEightPotentiometers" />
+          <MappingsGroup
+            v-model:ccs="firstEightCcs"
+            v-model:channels="firstEightChannels"
+            :potentiometers="firstEightPotentiometers"
+          />
 
           <div style="width: 100%; margin-top: 2rem" />
 
-          <MappingsGroup v-model:ccs="lastEightCcs" v-model:channels="lastEightChannels"  :potentiometers="lastEightPotentiometers" :count-offset="8" />
+          <MappingsGroup
+            v-model:ccs="lastEightCcs"
+            v-model:channels="lastEightChannels"
+            :potentiometers="lastEightPotentiometers"
+            :count-offset="8"
+          />
         </div>
       </div>
 
