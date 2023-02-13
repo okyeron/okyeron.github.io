@@ -16,6 +16,7 @@
       v-model:interface="midiInterface"
       :info="info"
       :potentiometers="potentiometers"
+      @save-config="saveConfig(mappings)"
     />
   </main>
 </template>
@@ -29,7 +30,7 @@ import { Interface } from '@/access/types';
 
 const midiInterface = ref<Interface>('usb');
 
-const { access, connecting, connected, mappings, bank, info, potentiometers } = useHachiNi();
+const { access, connecting, connected, mappings, bank, info, potentiometers, saveConfig } = useHachiNi();
 
 const ccs = computed({
   get() {

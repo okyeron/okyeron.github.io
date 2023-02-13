@@ -52,7 +52,7 @@
           </div>
 
           <div class="button-container">
-            <button>Save Config</button>
+            <button @click="$emit('save-config')">Save Config</button>
           </div>
         </div>
       </div>
@@ -81,6 +81,7 @@ const emit = defineEmits<{
   (e: 'update:ccs', value: number[]): void;
   (e: 'update:channels', value: number[]): void;
   (e: 'update:interface', value: Interface): void;
+  (e: 'save-config'): void;
 }>();
 
 const midiBank = computed({
