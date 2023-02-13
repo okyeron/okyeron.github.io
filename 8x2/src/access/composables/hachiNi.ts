@@ -47,7 +47,7 @@ export const useHachiNi = () => {
 
   const bank = ref<Bank>(1);
 
-  const potentiometers = ref<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const potentiometers = ref<number[]>(new Array(16).fill(0, 0, 16));
 
   // If connected to an output port, this sends the bank change request, followed
   // immediately by the message to request the config state.
@@ -157,9 +157,9 @@ export const useHachiNi = () => {
       console.log(JSON.stringify(info.value?.modelNum, null, 2));
       const modelNum = info.value?.modelNum;
       // const modelNum = info.value;
-      const settingsBlock = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-	    const sendConfigMessage = [0xf0, ...manufacturerId, 0x0E, modelNum, 0x00, 0x00, 0x00, bank.value -1, ...settingsBlock ];
-		  // console.log(sendConfigMessage);
+      const settingsBlock = new Array(15).fill(0, 0, 15);
+      const sendConfigMessage = [0xf0, ...manufacturerId, 0x0e, modelNum, 0, 0, 0, bank.value - 1, ...settingsBlock];
+      // console.log(sendConfigMessage);
       var outbound = [];
  
       const mapping = mappings[bank.value];
