@@ -15,17 +15,19 @@ export type Info = {
   eepromVersion: number;
 };
 
-export type Mappings = {
-  [key in Bank]?: {
-    usb: {
-      ccs: number[];
-      channels: number[];
-    };
-    trs: {
-      ccs: number[];
-      channels: number[];
-    };
+export type Mapping = {
+  usb: {
+    ccs: number[];
+    channels: number[];
   };
+  trs: {
+    ccs: number[];
+    channels: number[];
+  };
+};
+
+export type Mappings = {
+  [key in Bank]?: Mapping;
 };
 
 export type MIDICallback = (e: WebMidi.MIDIMessageEvent, output: WebMidi.MIDIOutput | null) => void;
