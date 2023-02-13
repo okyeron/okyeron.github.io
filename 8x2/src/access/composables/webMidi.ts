@@ -13,7 +13,10 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
 
   const connected = computed(() => {
     return (
-      input.value && output.value && inputDeviceState.value === 'connected' && outputDeviceState.value === 'connected'
+      input.value != null &&
+      output.value != null &&
+      inputDeviceState.value === 'connected' &&
+      outputDeviceState.value === 'connected'
     );
   });
 
