@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { Mapping } from '@/access/types';
+import { Mapping, MappingSchema } from '@/access/types';
 import { ref } from 'vue';
 
 const emit = defineEmits<{
@@ -19,10 +19,16 @@ const onFileUpload = async () => {
   const file = fileInput.value?.files?.[0];
 
   if (file) {
-    // TODO: Validation of the data.
-    const config: Mapping = await file.text().then(JSON.parse);
+    const unvalidatedConfig = await file.text().then(JSON.parse);
 
-    emit('load-config', config);
+    const parseResult = MappingSchema.safeParse(unvalidatedConfig);
+
+    if (parseResult.success) {
+      emit('load-config', parseResult.data);
+    } else {
+      // TODO: Emit load-failed event?
+      console.error('Invalid config file');
+    }
   }
 };
 </script>

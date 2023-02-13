@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export type MidiAccessState = 'disabled' | 'pending' | 'requesting' | 'enabled';
 
 export const Banks = [1, 2, 3, 4, 5, 6, 7, 8] as const;
@@ -15,16 +17,18 @@ export type Info = {
   eepromVersion: number;
 };
 
-export type Mapping = {
-  usb: {
-    ccs: number[];
-    channels: number[];
-  };
-  trs: {
-    ccs: number[];
-    channels: number[];
-  };
-};
+export const MappingSchema = z.object({
+  usb: z.object({
+    ccs: z.array(z.number()),
+    channels: z.array(z.number()),
+  }),
+  trs: z.object({
+    ccs: z.array(z.number()),
+    channels: z.array(z.number()),
+  }),
+});
+
+export type Mapping = z.infer<typeof MappingSchema>;
 
 export type Mappings = {
   [key in Bank]?: Mapping;
