@@ -52,6 +52,10 @@
           </div>
 
           <div class="button-container">
+            <ConfigUploadButton @load-config="$emit('load-config', $event)" />
+          </div>
+
+          <div class="button-container">
             <button @click="$emit('save-config')">Save Config</button>
           </div>
         </div>
@@ -62,10 +66,11 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import ConfigUploadButton from '@/components/ConfigUploadButton.vue';
 import HachiNi from '@/components/HachiNi.vue';
 import MappingsGroup from '@/components/MappingsGroup.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
-import { Bank, Banks, Info, Interface } from '@/access/types';
+import { Bank, Banks, Info, Interface, Mapping } from '@/access/types';
 
 const props = defineProps<{
   bank: Bank;
@@ -77,6 +82,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
+  (e: 'load-config', value: Mapping): void;
   (e: 'update:bank', value: Bank): void;
   (e: 'update:ccs', value: number[]): void;
   (e: 'update:channels', value: number[]): void;

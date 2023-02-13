@@ -16,6 +16,7 @@
       v-model:interface="midiInterface"
       :info="info"
       :potentiometers="potentiometers"
+      @load-config="onLoadConfig"
       @save-config="saveConfig(mappings)"
     />
   </main>
@@ -26,7 +27,7 @@ import { computed, ref } from 'vue';
 import Configurator from '@/components/Configurator.vue';
 import LoadingEllipsis from '@/components/LoadingEllipsis.vue';
 import { useHachiNi } from '@/access/composables';
-import { Interface } from '@/access/types';
+import { Interface, Mapping } from '@/access/types';
 
 const midiInterface = ref<Interface>('usb');
 
@@ -51,6 +52,10 @@ const channels = computed({
     console.debug(value);
   },
 });
+
+const onLoadConfig = (config: Mapping) => {
+  console.log('loaded config:', config);
+};
 </script>
 
 <style></style>
