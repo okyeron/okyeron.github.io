@@ -13,15 +13,21 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-const props = defineProps<{
-  modelValue: number;
-  min: number;
-  max: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    modelValue: number;
+    min: number;
+    max: number;
+    resetOnBlur?: boolean;
+  }>(),
+  { resetOnBlur: true }
+);
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void;
 }>();
+
+const initialValue = props.modelValue;
 
 const current = computed({
   get() {
@@ -37,6 +43,9 @@ const onChange = (e: Event) => {
 
   if (e.type === 'input' && rawValue === '') {
     // No-op. Give user the chance to see the error of their ways.
+    return;
+  } else if (props.resetOnBlur && e.type === 'blur' && rawValue === '') {
+    current.value = initialValue;
   } else {
     const parsedValue = parseInt(rawValue);
 
