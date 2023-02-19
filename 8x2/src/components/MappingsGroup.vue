@@ -26,9 +26,13 @@
           <div class="align-start row justify-center input-group">
             <div class="color-padding" />
 
-            <!-- TODO: This v-model binding to an array member is not working as expected.
-              No update event is fired. Needs to be fixed. -->
-            <input v-model.number="meterChannels[i]" type="number" min="1" max="16" />
+            <NumberInput
+              v-model="meterChannels[i]"
+              :min="1"
+              :max="16"
+              :tabindex="i + 1 + countOffset"
+              :class="{ 'value-diverged': meterChannels[i] !== channels[i] }"
+            />
           </div>
 
           <label class="compact-label">Ch.</label>
@@ -38,8 +42,13 @@
           <div class="align-start row justify-center input-group">
             <div class="color-padding" />
 
-            <!-- TODO: Same as above. -->
-            <input v-model.number="meterCCs[i]" type="number" min="0" max="127" />
+            <NumberInput
+              v-model="meterCCs[i]"
+              :min="0"
+              :max="127"
+              :tabindex="i + 1 + meterCCs.length * 2 + countOffset"
+              :class="{ 'value-diverged': meterCCs[i] !== ccs[i] }"
+            />
           </div>
 
           <label class="compact-label">CC</label>
@@ -54,7 +63,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { reactive, watch } from 'vue';
+import NumberInput from '@/components/NumberInput.vue';
 import Potentiometer from '@/components/Potentiometer.vue';
 
 const props = withDefaults(
@@ -72,22 +82,29 @@ const emit = defineEmits<{
   (e: 'update:channels', value: number[]): void;
 }>();
 
-const meterCCs = computed({
-  get() {
-    return props.ccs;
-  },
-  set(value) {
-    emit('update:ccs', value);
-  },
+const meterCCs = reactive<number[]>([]);
+props.ccs.forEach((cc) => meterCCs.push(cc));
+
+watch(
+  () => props.ccs,
+  () => meterCCs.splice(0, meterCCs.length, ...props.ccs)
+);
+
+watch(meterCCs, (newValue) => {
+  console.log('meterCCs updated');
+  emit('update:ccs', newValue);
 });
 
-const meterChannels = computed({
-  get() {
-    return props.channels;
-  },
-  set(value) {
-    emit('update:channels', value);
-  },
+const meterChannels = reactive<number[]>([]);
+props.channels.forEach((channel) => meterChannels.push(channel));
+
+watch(
+  () => props.channels,
+  () => meterChannels.splice(0, meterChannels.length, ...props.channels)
+);
+
+watch(meterChannels, (newValue) => {
+  emit('update:channels', newValue);
 });
 </script>
 
@@ -206,5 +223,9 @@ const meterChannels = computed({
   .compact-label {
     display: block;
   }
+}
+
+.value-diverged {
+  border: 1px dashed white;
 }
 </style>

@@ -23,23 +23,42 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import Configurator from '@/components/Configurator.vue';
 import LoadingEllipsis from '@/components/LoadingEllipsis.vue';
 import { useHachiNi } from '@/access/composables';
-import { Interface, Mapping } from '@/access/types';
+import { Banks, Interface, Mapping, Mappings } from '@/access/types';
 
 const midiInterface = ref<Interface>('usb');
 
 const { access, connecting, connected, mappings, bank, info, potentiometers, saveConfig } = useHachiNi();
+
+const editorMappings = reactive<Mappings>({});
+
+watch(
+  mappings,
+  () =>
+    Banks.forEach((bank) => {
+      if (mappings[bank]) {
+        // Clone without copying object references.
+        editorMappings[bank] = JSON.parse(JSON.stringify(mappings[bank]));
+      }
+    }),
+  {
+    immediate: true,
+  }
+);
 
 const ccs = computed({
   get() {
     return mappings?.[bank.value]?.[midiInterface.value]?.ccs ?? [];
   },
   set(value) {
-    console.debug('received ccs update:');
-    console.debug(value);
+    const mapping = editorMappings[bank.value];
+
+    if (mapping) {
+      mapping[midiInterface.value].ccs = value;
+    }
   },
 });
 
@@ -48,8 +67,11 @@ const channels = computed({
     return mappings?.[bank.value]?.[midiInterface.value]?.channels ?? [];
   },
   set(value) {
-    console.debug('received channels update:');
-    console.debug(value);
+    const mapping = editorMappings[bank.value];
+
+    if (mapping) {
+      mapping[midiInterface.value].channels = value;
+    }
   },
 });
 

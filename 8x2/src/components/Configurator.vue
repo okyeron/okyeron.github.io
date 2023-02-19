@@ -120,9 +120,7 @@ const firstEightCcs = computed({
     return props.ccs.slice(0, 8);
   },
   set(value) {
-    value.push(...props.ccs.slice(8));
-
-    emit('update:ccs', value);
+    emit('update:ccs', [...value, ...props.ccs.slice(8)]);
   },
 });
 
@@ -131,9 +129,7 @@ const lastEightCcs = computed({
     return props.ccs.slice(8);
   },
   set(value) {
-    const updatedCcs = [...props.ccs.slice(0, 8), ...value];
-
-    emit('update:ccs', updatedCcs);
+    emit('update:ccs', [...props.ccs.slice(0, 8), ...value]);
   },
 });
 
@@ -142,9 +138,7 @@ const firstEightChannels = computed({
     return props.channels.slice(0, 8);
   },
   set(value) {
-    value.push(...props.channels.slice(8));
-
-    emit('update:channels', value);
+    emit('update:channels', [...value, ...props.channels.slice(8)]);
   },
 });
 
@@ -153,9 +147,7 @@ const lastEightChannels = computed({
     return props.channels.slice(8);
   },
   set(value) {
-    const updatedChannels = [...props.channels.slice(0, 8), ...value];
-
-    emit('update:channels', updatedChannels);
+    emit('update:channels', [...props.channels.slice(0, 8), ...value]);
   },
 });
 

@@ -161,33 +161,33 @@ export const useHachiNi = () => {
       const sendConfigMessage = [0xf0, ...manufacturerId, 0x0e, modelNum, 0, 0, 0, bank.value - 1, ...settingsBlock];
       // console.log(sendConfigMessage);
       var outbound = [];
- 
+
       const mapping = mappings[bank.value];
 
       if (mapping) {
         for (var k = 0; k < 16; k++) {
-          outbound.push ( mapping.usb.ccs[k]);
+          outbound.push(mapping.usb.ccs[k]);
         }
         for (var h = 0; h < 16; h++) {
-          outbound.push ( mapping.trs.ccs[h]);
+          outbound.push(mapping.trs.ccs[h]);
         }
 
         // fix channels which are 1 based
         for (var i = 0; i < 16; i++) {
-          outbound.push ( mapping.usb.channels[i] - 1);
+          outbound.push(mapping.usb.channels[i] - 1);
         }
         for (var j = 0; j < 16; j++) {
-          outbound.push ( mapping.trs.channels[j] - 1 );
+          outbound.push(mapping.trs.channels[j] - 1);
         }
       }
 
-  		outbound.push (0xF7);
-      sendConfigMessage.push (...outbound);
+      outbound.push(0xf7);
+      sendConfigMessage.push(...outbound);
       console.log(sendConfigMessage);
-//       output.value.send(....);
-	  }
-  }
-  
+      //       output.value.send(....);
+    }
+  };
+
   return {
     access,
     connected,
@@ -196,6 +196,6 @@ export const useHachiNi = () => {
     bank: externalBank,
     info: readonly(info),
     potentiometers: readonly(potentiometers),
-    saveConfig
+    saveConfig,
   };
 };

@@ -79,6 +79,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input {
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
+
 .column {
   display: flex;
   flex-direction: column;
