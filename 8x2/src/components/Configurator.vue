@@ -21,6 +21,10 @@
           class="bank-selector selector"
         />
 
+        <!-- Binding key to midiBank is a slightly hacky way of forcing the MappingsGroup to rerender
+             whenever a bank switch occurs. In doing this, the NumberInput children of MappingsGroup
+             are forced to rerender. This causes the NumberInputs internally to cache new initial
+             values to reset to when their inputs are cleared. i.e. the current mappings of the new bank -->
         <div class="pots-config">
           <MappingsGroup
             v-model:ccs="firstEightCcs"
