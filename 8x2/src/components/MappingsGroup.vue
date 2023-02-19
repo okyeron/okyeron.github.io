@@ -28,10 +28,11 @@
 
             <NumberInput
               v-model="meterChannels[i]"
+              @resetValue="() => (meterChannels[i] = onDeviceChannels[i])"
               :min="1"
               :max="16"
               :tabindex="i + 1 + countOffset"
-              :class="{ 'value-diverged': meterChannels[i] !== channels[i] }"
+              :class="{ 'value-diverged': meterChannels[i] !== onDeviceChannels[i] }"
             />
           </div>
 
@@ -44,10 +45,11 @@
 
             <NumberInput
               v-model="meterCCs[i]"
+              @resetValue="() => (meterCCs[i] = onDeviceCcs[i])"
               :min="0"
               :max="127"
               :tabindex="i + 1 + meterCCs.length * 2 + countOffset"
-              :class="{ 'value-diverged': meterCCs[i] !== ccs[i] }"
+              :class="{ 'value-diverged': meterCCs[i] !== onDeviceCcs[i] }"
             />
           </div>
 
@@ -72,6 +74,8 @@ const props = withDefaults(
     ccs: number[];
     channels: number[];
     countOffset?: number;
+    onDeviceCcs: readonly number[];
+    onDeviceChannels: readonly number[];
     potentiometers: readonly number[];
   }>(),
   { countOffset: 0 }

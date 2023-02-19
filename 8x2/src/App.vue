@@ -15,6 +15,8 @@
       v-model:channels="channels"
       v-model:interface="midiInterface"
       :info="info"
+      :on-device-ccs="mappings[bank]?.[midiInterface].ccs ?? []"
+      :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
       :potentiometers="potentiometers"
       @load-config="onLoadConfig"
       @save-config="saveConfig(mappings)"
@@ -23,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, reactive, ref, watch, watchEffect } from 'vue';
 import Configurator from '@/components/Configurator.vue';
 import LoadingEllipsis from '@/components/LoadingEllipsis.vue';
 import { useHachiNi } from '@/access/composables';
-import { Banks, Interface, Mapping, Mappings } from '@/access/types';
+import { Bank, Banks, Interface, Mappings, MappingSchema } from '@/access/types';
 
 const midiInterface = ref<Interface>('usb');
 
@@ -35,23 +37,9 @@ const { access, connecting, connected, mappings, bank, info, potentiometers, sav
 
 const editorMappings = reactive<Mappings>({});
 
-watch(
-  mappings,
-  () =>
-    Banks.forEach((bank) => {
-      if (mappings[bank]) {
-        // Clone without copying object references.
-        editorMappings[bank] = JSON.parse(JSON.stringify(mappings[bank]));
-      }
-    }),
-  {
-    immediate: true,
-  }
-);
-
 const ccs = computed({
   get() {
-    return mappings?.[bank.value]?.[midiInterface.value]?.ccs ?? [];
+    return editorMappings?.[bank.value]?.[midiInterface.value]?.ccs ?? [];
   },
   set(value) {
     const mapping = editorMappings[bank.value];
@@ -64,7 +52,7 @@ const ccs = computed({
 
 const channels = computed({
   get() {
-    return mappings?.[bank.value]?.[midiInterface.value]?.channels ?? [];
+    return editorMappings?.[bank.value]?.[midiInterface.value]?.channels ?? [];
   },
   set(value) {
     const mapping = editorMappings[bank.value];
@@ -75,8 +63,45 @@ const channels = computed({
   },
 });
 
-const onLoadConfig = (config: Mapping) => {
-  console.log('loaded config:', config);
+const overwriteEditorMappings = (newMappings: Mappings) => {
+  Banks.forEach((bank) => {
+    const mapping = newMappings[bank];
+
+    if (mapping) {
+      // Clone without copying object references.
+      editorMappings[bank] = JSON.parse(JSON.stringify(mapping));
+    }
+  });
+};
+
+watch(mappings, () => overwriteEditorMappings(mappings), {
+  immediate: true,
+});
+
+const onLoadConfig = async (file: File) => {
+  const unvalidatedConfig = await file.text().then(JSON.parse);
+
+  const parseResult = MappingSchema.safeParse(unvalidatedConfig);
+
+  if (parseResult.success) {
+    const bankToOverwrite = parseResult.data.bank ?? bank.value;
+
+    // Switch to overwritten bank if not the active bank.
+    if (bankToOverwrite !== bank.value) {
+      const unwatch = watchEffect(() => {
+        if (bankToOverwrite === bank.value) {
+          unwatch();
+
+          overwriteEditorMappings({ [bankToOverwrite]: parseResult.data });
+        }
+      });
+
+      bank.value = bankToOverwrite as Bank;
+    }
+  } else {
+    // TODO: Some sort of notification
+    console.error('Invalid config file');
+  }
 };
 </script>
 

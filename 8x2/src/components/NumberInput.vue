@@ -24,10 +24,9 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
+  (e: 'reset-value'): void;
   (e: 'update:modelValue', value: number): void;
 }>();
-
-const initialValue = props.modelValue;
 
 const current = computed({
   get() {
@@ -45,7 +44,7 @@ const onChange = (e: Event) => {
     // No-op. Give user the chance to see the error of their ways.
     return;
   } else if (props.resetOnBlur && e.type === 'blur' && rawValue === '') {
-    current.value = initialValue;
+    emit('reset-value');
   } else {
     const parsedValue = parseInt(rawValue);
 

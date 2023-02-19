@@ -21,16 +21,13 @@
           class="bank-selector selector"
         />
 
-        <!-- Binding key to midiBank is a slightly hacky way of forcing the MappingsGroup to rerender
-             whenever a bank switch occurs. In doing this, the NumberInput children of MappingsGroup
-             are forced to rerender. This causes the NumberInputs internally to cache new initial
-             values to reset to when their inputs are cleared. i.e. the current mappings of the new bank -->
         <div class="pots-config">
           <MappingsGroup
             v-model:ccs="firstEightCcs"
             v-model:channels="firstEightChannels"
+            :on-device-ccs="onDeviceFirstEightCcs"
+            :on-device-channels="onDeviceFirstEightChannels"
             :potentiometers="firstEightPotentiometers"
-            :key="midiBank"
           />
 
           <div style="width: 100%; margin-top: 2rem" />
@@ -38,8 +35,9 @@
           <MappingsGroup
             v-model:ccs="lastEightCcs"
             v-model:channels="lastEightChannels"
+            :on-device-ccs="onDeviceLastEightCcs"
+            :on-device-channels="onDeviceLastEightChannels"
             :potentiometers="lastEightPotentiometers"
-            :key="midiBank"
             :count-offset="8"
           />
         </div>
@@ -84,11 +82,13 @@ const props = defineProps<{
   channels: number[];
   interface: Interface;
   info: Info | null;
+  onDeviceCcs: readonly number[];
+  onDeviceChannels: readonly number[];
   potentiometers: readonly number[];
 }>();
 
 const emit = defineEmits<{
-  (e: 'load-config', value: Mapping): void;
+  (e: 'load-config', value: File): void;
   (e: 'update:bank', value: Bank): void;
   (e: 'update:ccs', value: number[]): void;
   (e: 'update:channels', value: number[]): void;
@@ -130,6 +130,8 @@ const firstEightCcs = computed({
   },
 });
 
+const onDeviceFirstEightCcs = computed(() => props.onDeviceCcs.slice(0, 8));
+
 const lastEightCcs = computed({
   get() {
     return props.ccs.slice(8);
@@ -138,6 +140,8 @@ const lastEightCcs = computed({
     emit('update:ccs', [...props.ccs.slice(0, 8), ...value]);
   },
 });
+
+const onDeviceLastEightCcs = computed(() => props.onDeviceCcs.slice(8));
 
 const firstEightChannels = computed({
   get() {
@@ -148,6 +152,8 @@ const firstEightChannels = computed({
   },
 });
 
+const onDeviceFirstEightChannels = computed(() => props.onDeviceChannels.slice(0, 8));
+
 const lastEightChannels = computed({
   get() {
     return props.channels.slice(8);
@@ -156,6 +162,8 @@ const lastEightChannels = computed({
     emit('update:channels', [...props.channels.slice(0, 8), ...value]);
   },
 });
+
+const onDeviceLastEightChannels = computed(() => props.onDeviceChannels.slice(8));
 
 const onInfoClick = () => {
   console.log(JSON.stringify(props.info, null, 2));

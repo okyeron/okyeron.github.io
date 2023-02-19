@@ -26,6 +26,8 @@ export const MappingSchema = z.object({
     ccs: z.array(z.number()),
     channels: z.array(z.number()),
   }),
+  flipped: z.optional(z.boolean()),
+  bank: z.optional(z.number()),
 });
 
 export type Mapping = z.infer<typeof MappingSchema>;
