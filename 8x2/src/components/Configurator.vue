@@ -26,6 +26,7 @@
             v-model:ccs="firstEightCcs"
             v-model:channels="firstEightChannels"
             :potentiometers="firstEightPotentiometers"
+            :key="midiBank"
           />
 
           <div style="width: 100%; margin-top: 2rem" />
@@ -34,6 +35,7 @@
             v-model:ccs="lastEightCcs"
             v-model:channels="lastEightChannels"
             :potentiometers="lastEightPotentiometers"
+            :key="midiBank"
             :count-offset="8"
           />
         </div>
