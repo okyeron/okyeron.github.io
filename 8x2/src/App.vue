@@ -85,19 +85,25 @@ const onLoadConfig = async (file: File) => {
 
   if (parseResult.success) {
     const bankToOverwrite = parseResult.data.bank ?? bank.value;
+    const needToSwitch = bankToOverwrite !== bank.value;
 
-    // Switch to overwritten bank if not the active bank.
-    if (bankToOverwrite !== bank.value) {
+    let bankSwitched: Function | undefined;
+
+    const awaitBankSwitch = needToSwitch ? new Promise((resolve) => (bankSwitched = resolve)) : Promise.resolve();
+
+    if (needToSwitch) {
       const unwatch = watchEffect(() => {
         if (bankToOverwrite === bank.value) {
           unwatch();
 
-          overwriteEditorMappings({ [bankToOverwrite]: parseResult.data });
+          bankSwitched?.();
         }
       });
 
       bank.value = bankToOverwrite as Bank;
     }
+
+    return awaitBankSwitch.then(() => overwriteEditorMappings({ [bankToOverwrite]: parseResult.data }));
   } else {
     // TODO: Some sort of notification
     console.error('Invalid config file');
