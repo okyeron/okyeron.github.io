@@ -1,4 +1,4 @@
-# 八x二　Configurator
+# 八x二 Configurator
 
 [hachi-ni configurator](<https://okyeron.github.io/8x2/index.html>) 
 
