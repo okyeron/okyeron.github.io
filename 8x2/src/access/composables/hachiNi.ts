@@ -1,5 +1,5 @@
 import { computed, reactive, readonly, ref, watchEffect } from 'vue';
-import { Mappings, Bank, Info, Banks, MIDICallbacks } from '@/access/types';
+import { Mappings, Bank, Info, Banks, MIDICallbacks, Mapping } from '@/access/types';
 import { useWebMidi } from './webMidi';
 
 const deviceName = 'hachi-ni';
@@ -152,39 +152,36 @@ export const useHachiNi = () => {
     },
   });
 
-  const saveConfig = (config: Mappings) => {
+  const saveConfig = (destBank: Bank, mapping: Mapping) => {
     if (connected.value) {
-      console.log(JSON.stringify(info.value?.modelNum, null, 2));
-      const modelNum = info.value?.modelNum;
-      // const modelNum = info.value;
       const settingsBlock = new Array(15).fill(0, 0, 15);
-      const sendConfigMessage = [0xf0, ...manufacturerId, 0x0e, modelNum, 0, 0, 0, bank.value - 1, ...settingsBlock];
-      // console.log(sendConfigMessage);
-      var outbound = [];
 
-      const mapping = mappings[bank.value];
+      const sendConfigMessage = [
+        0xf0,
+        ...manufacturerId,
+        0x0e,
+        info.value?.modelNum,
+        0,
+        0,
+        0,
+        destBank - 1,
+        ...settingsBlock,
+      ];
 
-      if (mapping) {
-        for (var k = 0; k < 16; k++) {
-          outbound.push(mapping.usb.ccs[k]);
-        }
-        for (var h = 0; h < 16; h++) {
-          outbound.push(mapping.trs.ccs[h]);
-        }
+      const newMapping = [
+        ...mapping.usb.ccs,
+        ...mapping.trs.ccs,
+        ...mapping.usb.channels.map((channel) => channel - 1),
+        ...mapping.trs.channels.map((channel) => channel - 1),
+        0xf7,
+      ];
 
-        // fix channels which are 1 based
-        for (var i = 0; i < 16; i++) {
-          outbound.push(mapping.usb.channels[i] - 1);
-        }
-        for (var j = 0; j < 16; j++) {
-          outbound.push(mapping.trs.channels[j] - 1);
-        }
-      }
+      sendConfigMessage.push(...newMapping);
 
-      outbound.push(0xf7);
-      sendConfigMessage.push(...outbound);
-      console.log(sendConfigMessage);
-      //       output.value.send(....);
+      output.value?.send(sendConfigMessage, 0);
+
+      // Force 8x2 to echo back updated bank mapping to configurator
+      selectBank(destBank, output.value);
     }
   };
 

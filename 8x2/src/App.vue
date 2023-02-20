@@ -19,7 +19,7 @@
       :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
       :potentiometers="potentiometers"
       @load-config="onLoadConfig"
-      @save-config="saveConfig(mappings)"
+      @save-config="onSaveConfig"
     />
   </main>
 </template>
@@ -107,6 +107,14 @@ const onLoadConfig = async (file: File) => {
   } else {
     // TODO: Some sort of notification
     console.error('Invalid config file');
+  }
+};
+
+const onSaveConfig = () => {
+  const mapping = editorMappings[bank.value];
+
+  if (mapping) {
+    saveConfig(bank.value, mapping);
   }
 };
 </script>
