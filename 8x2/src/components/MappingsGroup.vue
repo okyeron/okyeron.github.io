@@ -95,7 +95,6 @@ watch(
 );
 
 watch(meterCCs, (newValue) => {
-  console.log('meterCCs updated');
   emit('update:ccs', newValue);
 });
 
