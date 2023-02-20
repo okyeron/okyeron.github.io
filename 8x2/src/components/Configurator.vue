@@ -52,6 +52,10 @@
 
         <div class="buttons row align-center">
           <div class="button-container">
+            <button v-show="configDiverged" @click="$emit('reset-config')">Reset</button>
+          </div>
+
+          <div class="button-container">
             <button @click="onInfoClick">Info</button>
           </div>
 
@@ -60,7 +64,7 @@
           </div>
 
           <div class="button-container">
-            <button @click="$emit('save-config')">Save Config</button>
+            <button @click="$emit('save-config')" :disabled="!configDiverged">Save Config</button>
           </div>
         </div>
       </div>
@@ -89,6 +93,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'load-config', value: File): void;
+  (e: 'reset-config'): void;
   (e: 'update:bank', value: Bank): void;
   (e: 'update:ccs', value: number[]): void;
   (e: 'update:channels', value: number[]): void;
@@ -164,6 +169,12 @@ const lastEightChannels = computed({
 });
 
 const onDeviceLastEightChannels = computed(() => props.onDeviceChannels.slice(8));
+
+const configDiverged = computed(
+  () =>
+    props.ccs.some((cc, i) => cc !== props.onDeviceCcs[i]) ||
+    props.channels.some((channel, i) => channel !== props.onDeviceChannels[i])
+);
 
 const onInfoClick = () => {
   console.log(JSON.stringify(props.info, null, 2));

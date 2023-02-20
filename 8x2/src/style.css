@@ -79,6 +79,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  color: var(--border-color);
+}
+
+button:disabled:hover {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  color: var(--border-color);
+}
+
 input {
   border: 1px solid var(--border-color);
   border-radius: 2px;
