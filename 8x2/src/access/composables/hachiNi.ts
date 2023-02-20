@@ -168,15 +168,13 @@ export const useHachiNi = () => {
         ...settingsBlock,
       ];
 
-      const newMapping = [
+      sendConfigMessage.push(
         ...mapping.usb.ccs,
         ...mapping.trs.ccs,
         ...mapping.usb.channels.map((channel) => channel - 1),
         ...mapping.trs.channels.map((channel) => channel - 1),
-        0xf7,
-      ];
-
-      sendConfigMessage.push(...newMapping);
+        0xf7
+      );
 
       output.value?.send(sendConfigMessage, 0);
 
