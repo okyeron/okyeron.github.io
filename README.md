@@ -4,6 +4,6 @@
 
 # OMX-27 
 
-[OMX-27 browser_test](<https://okyeron.github.io/OMX-27/browser_test/index.html>) 
+[OMX-27 USBMIDI browser test](<https://okyeron.github.io/OMX-27/browser_test/index.html>) 
 
 [OMX-27 web config](<https://okyeron.github.io/OMX-27/webconfig/index.html>) 
