@@ -296,7 +296,7 @@ onBeforeUnmount(() => {
   position: absolute;
   right: 0;
   row-gap: 0.25em;
-  top: calc(-200% - 1em);
+  top: calc(-200% - 0.85em);
   visibility: hidden;
   width: min-content;
   z-index: 2;
