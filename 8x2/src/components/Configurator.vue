@@ -7,6 +7,8 @@
         label="Interface"
         :class="['selector interface-selector', { scrolling: scrolling }]"
       />
+
+      <ConfigUploadButton @load-config="$emit('load-config', $event)" class="config-upload-button" />
     </div>
 
     <div :class="['configurator-body', { scrolling: scrolling }]">
@@ -58,10 +60,6 @@
           </div>
 
           <div class="button-container">
-            <ConfigUploadButton @load-config="$emit('load-config', $event)" />
-          </div>
-
-          <div class="button-container">
             <button class="save-menu-button">
               <div class="row align-center">
                 <div>Save</div>
@@ -88,7 +86,7 @@ import ConfigUploadButton from '@/components/ConfigUploadButton.vue';
 import HachiNi from '@/components/HachiNi.vue';
 import MappingsGroup from '@/components/MappingsGroup.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
-import { Bank, Banks, Info, Interface, Mapping } from '@/access/types';
+import { Bank, Banks, Info, Interface } from '@/access/types';
 
 const props = defineProps<{
   bank: Bank;
@@ -227,6 +225,7 @@ onBeforeUnmount(() => {
 }
 
 .interface-selector {
+  flex: 1 0 auto;
   padding-left: 1ch;
 }
 
@@ -312,6 +311,19 @@ onBeforeUnmount(() => {
 
 .save-menu:focus-within {
   visibility: visible;
+}
+
+.interface-selector-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.config-upload-button {
+  border-bottom: unset;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 2ch;
+  padding: 0 1ch 0 1ch;
 }
 
 @media screen and (max-width: 640px) {
