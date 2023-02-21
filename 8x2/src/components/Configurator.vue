@@ -331,14 +331,6 @@ onBeforeUnmount(() => {
     top: 0;
   }
 
-  .buttons {
-    gap: 0.5ch;
-  }
-
-  .button-container {
-    padding: 0;
-  }
-
   .interface-selector-container {
     padding-top: 1em;
     background: var(--background-color);
