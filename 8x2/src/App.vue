@@ -6,7 +6,7 @@
 
     <div v-else-if="access === 'enabled' && connecting">Connecting to Hachi Ni <LoadingEllipsis /></div>
 
-    <div v-else-if="!connected">Plug it in</div>
+    <div v-else-if="!connected">No device detected. Did you turn it on?</div>
 
     <Configurator
       v-else-if="connected && !connecting"
