@@ -47,16 +47,16 @@
         <header class="title">
           <HachiNi class="japanese" />
 
-          <span class="ayy-by-two">(8x2)</span>
+          <div class="ayy-by-two">
+            <div>({{ info?.model ?? '8x2' }})</div>
+
+            <div>v{{ info?.version }}</div>
+          </div>
         </header>
 
         <div class="buttons row align-center">
-          <div class="button-container">
-            <button v-show="configDiverged" @click="$emit('reset-config')">Reset</button>
-          </div>
-
-          <div class="button-container">
-            <button @click="onInfoClick">Info</button>
+          <div v-show="configDiverged" class="button-container">
+            <button @click="$emit('reset-config')">Reset</button>
           </div>
 
           <div class="button-container">
@@ -175,10 +175,6 @@ const configDiverged = computed(
     props.ccs.some((cc, i) => cc !== props.onDeviceCcs[i]) ||
     props.channels.some((channel, i) => channel !== props.onDeviceChannels[i])
 );
-
-const onInfoClick = () => {
-  console.log(JSON.stringify(props.info, null, 2));
-};
 
 const interfaceSelectorContainer = ref(null);
 
