@@ -66,6 +66,7 @@ button {
   padding: var(--padding);
   margin: 0;
   transition: background-color, color, border-color, 0.125s;
+  user-select: none;
 }
 
 button:hover {

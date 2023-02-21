@@ -155,6 +155,7 @@ watch(meterChannels, (newValue) => {
   border-radius: 50%;
   right: calc(-1 * (var(--dimension) + 1px + 2 * var(--padding)));
   bottom: calc(-1 * (var(--padding) * 2 + 2px + var(--dimension)) / 2);
+  user-select: none;
   transition: 0.125s ease border;
 }
 
@@ -185,6 +186,7 @@ watch(meterChannels, (newValue) => {
 
 .dashes-container .dash-container {
   height: 0.75rem;
+  user-select: none;
   width: calc(100% + 1ch);
 }
 

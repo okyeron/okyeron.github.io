@@ -215,6 +215,7 @@ const radialMaskBackground = computed(() => {
   display: flex;
   justify-content: center;
   transition: 0.15s ease border-color;
+  user-select: none;
   width: 80%;
   height: 80%;
   z-index: 1;

@@ -267,6 +267,7 @@ onBeforeUnmount(() => {
 
 .ayy-by-two {
   font-family: monospace;
+  user-select: none;
 }
 
 .japanese {
