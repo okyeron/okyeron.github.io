@@ -1,6 +1,6 @@
 <template>
   <button @click="fileInput?.click">
-    Load
+    Import
     <input ref="fileInput" @input="onFileUpload" accept="application/json" type="file" class="file-input" />
   </button>
 </template>
