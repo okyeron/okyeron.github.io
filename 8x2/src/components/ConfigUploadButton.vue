@@ -1,7 +1,7 @@
 <template>
   <button @click="fileInput?.click">
-    Load Config
-    <input ref="fileInput" @change="onFileUpload" accept="application/json" type="file" class="file-input" />
+    Load
+    <input ref="fileInput" @input="onFileUpload" accept="application/json" type="file" class="file-input" />
   </button>
 </template>
 
@@ -19,6 +19,12 @@ const onFileUpload = async () => {
 
   if (file) {
     emit('load-config', file);
+
+    const input = fileInput.value;
+
+    if (input) {
+      input.value = ''; // Clear input so that same file could be loaded again.
+    }
   }
 };
 </script>
