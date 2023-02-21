@@ -48,9 +48,7 @@
           <HachiNi class="japanese" />
 
           <div class="ayy-by-two">
-            <div>({{ info?.model ?? '8x2' }})</div>
-
-            <div>v{{ info?.version }}</div>
+            <span>({{ info?.model ?? '8x2' }})</span> <span>v{{ info?.version }}</span>
           </div>
         </header>
 
@@ -318,6 +316,7 @@ onBeforeUnmount(() => {
 
 @media screen and (max-width: 640px) {
   .title {
+    flex-direction: column;
     font-size: 0.5em;
   }
 
