@@ -5,6 +5,8 @@
         v-model="midiInterface"
         :options="['usb', 'trs']"
         label="Interface"
+        padding="4ch"
+        shrink
         :class="['selector interface-selector', { scrolling: scrolling }]"
       />
 

@@ -19,12 +19,14 @@ import { computed } from 'vue';
 
 const props = withDefaults(
   defineProps<{
+    shrink?: boolean;
     label: string;
     modelValue: string | number;
     options: readonly (string | number)[];
+    padding?: string;
     vertical?: boolean;
   }>(),
-  { vertical: false }
+  { shrink: false, padding: '2ch', vertical: false }
 );
 
 const emit = defineEmits<{
@@ -48,13 +50,14 @@ const value = computed({
 
 <style scoped>
 .tab {
+  --horizontal-padding: v-bind(padding);
   align-items: center;
   justify-content: center;
   border-left: 1px dashed var(--border-color);
   display: flex;
   flex-grow: 1;
   font-weight: bold;
-  padding: 0 2ch 0 2ch;
+  padding: 0 var(--horizontal-padding) 0 var(--horizontal-padding);
   text-transform: uppercase;
   transition: 0.125s ease background;
 }
@@ -112,7 +115,7 @@ const value = computed({
   border-bottom: none;
   border-top-left-radius: 1ch;
   border-top-right-radius: 1ch;
-  flex-grow: 1;
+  flex-grow: v-bind("shrink ? '0' : '1'");
   padding: 0;
   margin: 0;
 }
