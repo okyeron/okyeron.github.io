@@ -14,10 +14,12 @@
       v-model:ccs="ccs"
       v-model:channels="channels"
       v-model:interface="midiInterface"
+      :disable-save="!configDiverged"
       :info="info"
       :on-device-ccs="mappings[bank]?.[midiInterface].ccs ?? []"
       :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
       :potentiometers="potentiometers"
+      @export-config="onExportConfig"
       @load-config="onLoadConfig"
       @reset-config="onResetConfig"
       @save-config="onSaveConfig"
@@ -75,9 +77,47 @@ const overwriteEditorMappings = (newMappings: Mappings) => {
   });
 };
 
+const configDiverged = computed(
+  () =>
+    JSON.stringify(mappings[bank.value]?.['usb']) !== JSON.stringify(editorMappings[bank.value]?.['usb']) ||
+    JSON.stringify(mappings[bank.value]?.['trs']) !== JSON.stringify(editorMappings[bank.value]?.['trs'])
+);
+
 watch(mappings, () => overwriteEditorMappings(mappings), {
   immediate: true,
 });
+
+const onExportConfig = () => {
+  const editorMapping = editorMappings[bank.value];
+
+  if (editorMapping) {
+    const data = JSON.stringify(editorMapping);
+    const blob = new Blob([data], { type: 'application/octet-stream' });
+
+    const link = document.createElement('a');
+
+    link.style.position = 'fixed';
+    link.style.visibility = 'hidden';
+    link.setAttribute('download', 'hachi-ni-config.json');
+    link.href = window.URL.createObjectURL(blob);
+
+    if (typeof link.download === 'undefined') {
+      link.setAttribute('target', '_blank');
+    }
+
+    document.body.appendChild(link);
+
+    try {
+      link.click();
+    } finally {
+      setTimeout(() => {
+        window.URL.revokeObjectURL(link.href);
+      }, 10000);
+
+      link.remove();
+    }
+  }
+};
 
 const onLoadConfig = async (file: File) => {
   const unvalidatedConfig = await file.text().then(JSON.parse);
@@ -112,7 +152,16 @@ const onLoadConfig = async (file: File) => {
 };
 
 const onResetConfig = () => {
-  overwriteEditorMappings(mappings);
+  const editorMapping = editorMappings[bank.value];
+  const onDeviceInterfaceConfig = mappings?.[bank.value]?.[midiInterface.value];
+
+  if (editorMapping && onDeviceInterfaceConfig) {
+    const newMapping: typeof editorMapping = JSON.parse(JSON.stringify(editorMapping));
+
+    newMapping[midiInterface.value] = JSON.parse(JSON.stringify(onDeviceInterfaceConfig));
+
+    overwriteEditorMappings({ [bank.value]: newMapping });
+  }
 };
 
 const onSaveConfig = () => {

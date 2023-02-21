@@ -64,7 +64,19 @@
           </div>
 
           <div class="button-container">
-            <button @click="$emit('save-config')" :disabled="!configDiverged">Save Config</button>
+            <button class="save-menu-button">
+              <div class="row align-center">
+                <div>Save</div>
+
+                <div class="split-arrow">↑</div>
+              </div>
+
+              <div class="column save-menu">
+                <button @click="$emit('export-config')">Export to File</button>
+
+                <button @click="$emit('save-config')" :disabled="disableSave">Save to Device</button>
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -84,6 +96,7 @@ const props = defineProps<{
   bank: Bank;
   ccs: number[];
   channels: number[];
+  disableSave: boolean;
   interface: Interface;
   info: Info | null;
   onDeviceCcs: readonly number[];
@@ -92,6 +105,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
+  (e: 'export-config'): void;
   (e: 'load-config', value: File): void;
   (e: 'reset-config'): void;
   (e: 'update:bank', value: Bank): void;
@@ -271,6 +285,34 @@ onBeforeUnmount(() => {
   left: var(--horizontal-padding);
   bottom: calc(-1 * var(--bottom-offset));
   white-space: nowrap;
+}
+
+.save-menu-button {
+  position: relative;
+}
+
+.save-menu {
+  position: absolute;
+  right: 0;
+  row-gap: 0.25em;
+  top: calc(-200% - 1em);
+  visibility: hidden;
+  width: min-content;
+  z-index: 2;
+}
+
+.split-arrow {
+  border-left: 1px solid currentColor;
+  margin-left: 5px;
+  padding-left: 5px;
+}
+
+.save-menu-button:focus .save-menu {
+  visibility: visible;
+}
+
+.save-menu:focus-within {
+  visibility: visible;
 }
 
 @media screen and (max-width: 640px) {

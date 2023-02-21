@@ -6,7 +6,7 @@ body {
 :root {
   --background-color: #222222;
   --border-color: rgba(255, 255, 255, 0.3);
-  --highlight-color: rgba(255, 255, 255, 0.5);
+  --highlight-color: rgba(127, 127, 127);
   --text-color: #fefefe;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
