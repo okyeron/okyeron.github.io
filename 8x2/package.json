@@ -1,5 +1,6 @@
 {
   "name": "hachi-ni-web-configurator",
+  "packageManager": "pnpm",
   "private": true,
   "version": "0.0.0",
   "type": "module",
