@@ -327,7 +327,7 @@ onBeforeUnmount(() => {
   padding: 0 1ch 0 1ch;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
   .title {
     flex-direction: column;
     font-size: 0.5em;
