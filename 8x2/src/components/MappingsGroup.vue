@@ -113,12 +113,11 @@ watch(meterChannels, (newValue) => {
 
 <style scoped>
 .meters-container {
-  align-items: end;
-  display: flex;
-  justify-content: space-around;
+  --column-count: 8;
+  display: grid;
+  grid-template-columns: repeat(var(--column-count), 1fr);
   column-gap: 4.25ch;
   row-gap: 2rem;
-  flex-wrap: wrap;
 }
 
 .meter-container {
@@ -227,6 +226,16 @@ watch(meterChannels, (newValue) => {
 
   .compact-label {
     display: block;
+  }
+
+  .meters-container {
+    --column-count: 2;
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1119px) {
+  .meters-container {
+    --column-count: 4;
   }
 }
 
