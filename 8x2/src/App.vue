@@ -8,31 +8,38 @@
 
     <div v-else-if="!connected">No device detected. Did you turn it on?</div>
 
-    <Configurator
-      v-else-if="connected && !connecting"
-      v-model:bank="bank"
-      v-model:ccs="ccs"
-      v-model:channels="channels"
-      v-model:interface="midiInterface"
-      :disable-save="!configDiverged"
-      :info="info"
-      :on-device-ccs="mappings[bank]?.[midiInterface].ccs ?? []"
-      :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
-      :potentiometers="potentiometers"
-      @export-config="onExportConfig"
-      @load-config="onLoadConfig"
-      @reset-config="onResetConfig"
-      @save-config="onSaveConfig"
-    />
+    <ConfiguratorLayout v-else-if="connected && !connecting">
+      <template #configurator>
+        <Configurator
+          v-model:bank="bank"
+          v-model:ccs="ccs"
+          v-model:channels="channels"
+          v-model:interface="midiInterface"
+          :disable-save="!configDiverged"
+          :info="info"
+          :on-device-ccs="mappings[bank]?.[midiInterface].ccs ?? []"
+          :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
+          :potentiometers="potentiometers"
+          @export-config="onExportConfig"
+          @load-config="onLoadConfig"
+          @reset-config="onResetConfig"
+          @save-config="onSaveConfig"
+        />
+      </template>
+    </ConfiguratorLayout>
+
+    <ModalOverlay />
   </main>
 </template>
 
 <script setup lang="ts">
 import { computed, reactive, ref, watch, watchEffect } from 'vue';
 import Configurator from '@/components/Configurator.vue';
+import ConfiguratorLayout from '@/components/ConfiguratorLayout.vue';
 import LoadingEllipsis from '@/components/LoadingEllipsis.vue';
 import { useHachiNi } from '@/access/composables';
 import { Bank, Banks, Interface, Mappings, MappingSchema } from '@/access/types';
+import ModalOverlay from '@/components/ModalOverlay.vue';
 
 const midiInterface = ref<Interface>('usb');
 
