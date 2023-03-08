@@ -124,6 +124,10 @@ input {
   justify-content: space-between;
 }
 
+.justify-end {
+  justify-content: end;
+}
+
 .relative-position {
   position: relative;
 }
