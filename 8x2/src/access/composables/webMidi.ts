@@ -1,6 +1,8 @@
 import { computed, readonly, ref, watch } from 'vue';
 import { MidiAccessState, MIDICallbacks } from '@/access/types';
 
+const debug = (...message: any[]) => console.debug('[Web MIDI]:', ...message);
+
 export const useWebMidi = (deviceManufacturer: string, deviceName: string, callbacks: MIDICallbacks) => {
   const access = ref<MidiAccessState>('pending');
   const input = ref<WebMidi.MIDIInput | null>(null);
@@ -31,6 +33,18 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     const port = isInput ? input : output;
 
     store.value = e.port.state === 'connected' && e.port.connection === 'open' ? 'connected' : 'disconnected';
+
+    debug(
+      'State Change Event',
+      JSON.stringify(
+        {
+          ...extractPortProperties(e.port),
+          connectionState: store.value,
+        },
+        null,
+        2
+      )
+    );
 
     if (e.port.state === 'disconnected') {
       port.value = null;
@@ -68,10 +82,6 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
       state: port?.state,
       type: port?.type,
     };
-  };
-
-  const debug = (...message: any[]) => {
-    console.debug('[Web MIDI]:', ...message);
   };
 
   watch(
