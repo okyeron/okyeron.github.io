@@ -1,7 +1,7 @@
 import { computed, readonly, ref, watch } from 'vue';
 import { MidiAccessState, MIDICallbacks } from '@/access/types';
 
-export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
+export const useWebMidi = (deviceManufacturer: string, deviceName: string, callbacks: MIDICallbacks) => {
   const access = ref<MidiAccessState>('pending');
   const input = ref<WebMidi.MIDIInput | null>(null);
   const inputDeviceState = ref<WebMidi.MIDIPortDeviceState>('disconnected');
@@ -69,12 +69,15 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
     };
   };
 
+  const debug = (...message: any[]) => {
+    console.debug('[Web MIDI]:', ...message);
+  };
+
   watch(
     [access, connected, input, inputDeviceState, output, outputDeviceState],
     () => {
-      console.debug('[Web MIDI]: State History Snapshot -----------------------');
-
-      console.debug(
+      debug(
+        'State History Snapshot',
         JSON.stringify(
           {
             access: access.value,
@@ -88,11 +91,19 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
           2
         )
       );
-
-      console.debug('----------------------------------------------------------');
     },
     { immediate: true }
   );
+
+  const findPort = <T extends WebMidi.MIDIPort>(map: Map<string, T>): T | null => {
+    for (const [_, value] of map) {
+      if (value.manufacturer === deviceManufacturer && value.name?.includes(deviceName)) {
+        return value;
+      }
+    }
+
+    return null;
+  };
 
   // Why the type assertions? TypeScript has taken the view of only supporting the smaller
   // subset covered by all browsers, and not the expanded list with things like Web MIDI
@@ -102,7 +113,7 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
   navigator.permissions
     .query(midiPermission)
     .then((result) => {
-      console.debug(`[Web MIDI]: MIDI + Sysex permissions query result: ${result.state}`);
+      debug(`MIDI + Sysex permissions query result: ${result.state}`);
 
       if (result.state === 'prompt') {
         access.value = 'requesting';
@@ -113,27 +124,27 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
     .then(() => {
       navigator.requestMIDIAccess({ sysex: true }).then(
         (midiAccess) => {
-          console.debug('[Web MIDI]: MIDI access request: granted');
+          debug('MIDI access request: granted');
 
           midiAccess.addEventListener('statechange', stateChangeHandler);
 
-          console.debug(
-            '[Web MIDI]: Available MIDI Input ports:',
+          debug(
+            'Available MIDI Input ports:',
             JSON.stringify([...midiAccess.inputs.values()].map(extractPortProperties), null, 2)
           );
 
-          console.debug(
-            '[Web MIDI]: Available MIDI Output ports:',
+          debug(
+            'Available MIDI Output ports:',
             JSON.stringify([...midiAccess.outputs.values()].map(extractPortProperties), null, 2)
           );
 
-          input.value = [...midiAccess.inputs.values()].find((input) => input.name === deviceName) ?? null;
-          output.value = [...midiAccess.outputs.values()].find((output) => output.name === deviceName) ?? null;
+          input.value = findPort(midiAccess.inputs);
+          output.value = findPort(midiAccess.outputs);
 
           access.value = 'enabled';
         },
         () => {
-          console.debug('[Web MIDI]: MIDI access request: denied');
+          debug('MIDI access request: denied');
 
           access.value = 'disabled';
         }
@@ -143,7 +154,7 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
       // Likely caused by 'midi' not being in the PermissionName enumeration
       // or requestMIDIAccess not being a property of navigator:
       // i.e. browser doesn't support web MIDI.
-      console.debug(`[Web MIDI]: MIDI (permissions query/access request) error: ${e.message}`);
+      debug(`MIDI (permissions query/access request) error: ${e.message}`);
 
       access.value = 'disabled';
     });
