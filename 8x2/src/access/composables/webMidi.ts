@@ -1,6 +1,8 @@
 import { computed, readonly, ref, watch } from 'vue';
 import { MidiAccessState, MIDICallbacks } from '@/access/types';
 
+const debug = (...message: any[]) => console.debug('[Web MIDI]:', ...message);
+
 export const useWebMidi = (deviceManufacturer: string, deviceName: string, callbacks: MIDICallbacks) => {
   const access = ref<MidiAccessState>('pending');
   const input = ref<WebMidi.MIDIInput | null>(null);
@@ -20,8 +22,12 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     );
   });
 
+  const validPort = (port: WebMidi.MIDIPort) => {
+    return port.manufacturer === deviceManufacturer && port.name?.includes(deviceName);
+  };
+
   const stateChangeHandler = (e: WebMidi.MIDIConnectionEvent) => {
-    if (e.port.name !== deviceName) {
+    if (!validPort(e.port)) {
       return;
     }
 
@@ -31,6 +37,18 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     const port = isInput ? input : output;
 
     store.value = e.port.state === 'connected' && e.port.connection === 'open' ? 'connected' : 'disconnected';
+
+    debug(
+      'State Change Event',
+      JSON.stringify(
+        {
+          ...extractPortProperties(e.port),
+          connectionState: store.value,
+        },
+        null,
+        2
+      )
+    );
 
     if (e.port.state === 'disconnected') {
       port.value = null;
@@ -66,11 +84,8 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
       manufacturer: port?.manufacturer,
       name: port?.name,
       state: port?.state,
+      type: port?.type,
     };
-  };
-
-  const debug = (...message: any[]) => {
-    console.debug('[Web MIDI]:', ...message);
   };
 
   watch(
@@ -95,9 +110,9 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     { immediate: true }
   );
 
-  const findPort = <T extends WebMidi.MIDIPort>(map: Map<string, T>): T | null => {
-    for (const [_, value] of map) {
-      if (value.manufacturer === deviceManufacturer && value.name?.includes(deviceName)) {
+  const findPort = <T extends WebMidi.MIDIPort>(portMap: Map<string, T>): T | null => {
+    for (const [_, value] of portMap) {
+      if (validPort(value)) {
         return value;
       }
     }
