@@ -66,6 +66,7 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
       manufacturer: port?.manufacturer,
       name: port?.name,
       state: port?.state,
+      type: port?.type,
     };
   };
 
