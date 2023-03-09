@@ -22,8 +22,12 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     );
   });
 
+  const validPort = (port: WebMidi.MIDIPort) => {
+    return port.manufacturer === deviceManufacturer && port.name?.includes(deviceName);
+  };
+
   const stateChangeHandler = (e: WebMidi.MIDIConnectionEvent) => {
-    if (e.port.name !== deviceName) {
+    if (!validPort(e.port)) {
       return;
     }
 
@@ -106,9 +110,9 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     { immediate: true }
   );
 
-  const findPort = <T extends WebMidi.MIDIPort>(map: Map<string, T>): T | null => {
-    for (const [_, value] of map) {
-      if (value.manufacturer === deviceManufacturer && value.name?.includes(deviceName)) {
+  const findPort = <T extends WebMidi.MIDIPort>(portMap: Map<string, T>): T | null => {
+    for (const [_, value] of portMap) {
+      if (validPort(value)) {
         return value;
       }
     }
