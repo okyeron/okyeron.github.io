@@ -1,7 +1,7 @@
 import { computed, readonly, ref, watch } from 'vue';
 import { MidiAccessState, MIDICallbacks } from '@/access/types';
 
-export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
+export const useWebMidi = (deviceManufacturer: string, deviceName: string, callbacks: MIDICallbacks) => {
   const access = ref<MidiAccessState>('pending');
   const input = ref<WebMidi.MIDIInput | null>(null);
   const inputDeviceState = ref<WebMidi.MIDIPortDeviceState>('disconnected');
@@ -95,6 +95,16 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
     { immediate: true }
   );
 
+  const findPort = <T extends WebMidi.MIDIPort>(map: Map<string, T>): T | null => {
+    for (const [_, value] of map) {
+      if (value.manufacturer === deviceManufacturer && value.name?.includes(deviceName)) {
+        return value;
+      }
+    }
+
+    return null;
+  };
+
   // Why the type assertions? TypeScript has taken the view of only supporting the smaller
   // subset covered by all browsers, and not the expanded list with things like Web MIDI
   // that Chromium et al. support. My understanding, at least.
@@ -128,8 +138,8 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
             JSON.stringify([...midiAccess.outputs.values()].map(extractPortProperties), null, 2)
           );
 
-          input.value = [...midiAccess.inputs.values()].find((input) => input.name === deviceName) ?? null;
-          output.value = [...midiAccess.outputs.values()].find((output) => output.name === deviceName) ?? null;
+          input.value = findPort(midiAccess.inputs);
+          output.value = findPort(midiAccess.outputs);
 
           access.value = 'enabled';
         },

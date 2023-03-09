@@ -2,6 +2,7 @@ import { computed, reactive, readonly, ref, watchEffect } from 'vue';
 import { Mappings, Bank, Info, Banks, MIDICallbacks, Mapping } from '@/access/types';
 import { useWebMidi } from './webMidi';
 
+const deviceManufacturer = 'denki-oto';
 const deviceName = 'hachi-ni';
 const manufacturerId = [125, 0, 0];
 const requestConfigMessage = [0xf0, ...manufacturerId, 0x1f, 0xf7];
@@ -111,7 +112,7 @@ export const useHachiNi = () => {
     },
   ];
 
-  const { access, output, connected } = useWebMidi(deviceName, callbacks);
+  const { access, output, connected } = useWebMidi(deviceManufacturer, deviceName, callbacks);
 
   // 8x2 specific concept of connecting. i.e. The input/output ports are connected,
   // and we are awaiting receipt of the initial config state for the active bank.
