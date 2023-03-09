@@ -213,7 +213,6 @@ onBeforeUnmount(() => {
   border: 1px dashed var(--border-color);
   border-radius: 2.5ch;
   padding: 2rem 4rem 3rem 0;
-  align-items: center;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -328,7 +327,7 @@ onBeforeUnmount(() => {
   padding: 0 1ch 0 1ch;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
   .title {
     flex-direction: column;
     font-size: 0.5em;

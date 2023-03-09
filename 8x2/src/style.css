@@ -133,7 +133,7 @@ input {
   visibility: hidden;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
   #app {
     padding-left: 1rem;
     padding-right: 1rem;

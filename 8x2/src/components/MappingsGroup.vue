@@ -113,12 +113,11 @@ watch(meterChannels, (newValue) => {
 
 <style scoped>
 .meters-container {
-  align-items: end;
-  display: flex;
-  justify-content: space-around;
+  --column-count: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--column-count), 1fr);
   column-gap: 4.25ch;
   row-gap: 2rem;
-  flex-wrap: wrap;
 }
 
 .meter-container {
@@ -219,7 +218,7 @@ watch(meterChannels, (newValue) => {
   top: -1.25em;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
   .dashes-container,
   .labels-container {
     display: none;
@@ -227,6 +226,18 @@ watch(meterChannels, (newValue) => {
 
   .compact-label {
     display: block;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  .meters-container {
+    --column-count: 4;
+  }
+}
+
+@media screen and (min-width: 1120px) {
+  .meters-container {
+    --column-count: 8;
   }
 }
 
