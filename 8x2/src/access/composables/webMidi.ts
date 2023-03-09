@@ -59,6 +59,41 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
     newValue?.open();
   });
 
+  const extractPortProperties = (port: WebMidi.MIDIPort | null) => {
+    return {
+      connection: port?.connection,
+      id: port?.id,
+      manufacturer: port?.manufacturer,
+      name: port?.name,
+      state: port?.state,
+    };
+  };
+
+  watch(
+    [access, connected, input, inputDeviceState, output, outputDeviceState],
+    () => {
+      console.debug('[Web MIDI]: State History Snapshot -----------------------');
+
+      console.debug(
+        JSON.stringify(
+          {
+            access: access.value,
+            connected: connected.value,
+            input: extractPortProperties(input.value),
+            inputDeviceState: inputDeviceState.value,
+            output: extractPortProperties(output.value),
+            outputDeviceState: outputDeviceState.value,
+          },
+          null,
+          2
+        )
+      );
+
+      console.debug('----------------------------------------------------------');
+    },
+    { immediate: true }
+  );
+
   // Why the type assertions? TypeScript has taken the view of only supporting the smaller
   // subset covered by all browsers, and not the expanded list with things like Web MIDI
   // that Chromium et al. support. My understanding, at least.
@@ -67,6 +102,8 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
   navigator.permissions
     .query(midiPermission)
     .then((result) => {
+      console.debug(`[Web MIDI]: MIDI + Sysex permissions query result: ${result.state}`);
+
       if (result.state === 'prompt') {
         access.value = 'requesting';
       } else if (result.state === 'denied') {
@@ -76,7 +113,19 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
     .then(() => {
       navigator.requestMIDIAccess({ sysex: true }).then(
         (midiAccess) => {
+          console.debug('[Web MIDI]: MIDI access request: granted');
+
           midiAccess.addEventListener('statechange', stateChangeHandler);
+
+          console.debug(
+            '[Web MIDI]: Available MIDI Input ports:',
+            JSON.stringify([...midiAccess.inputs.values()].map(extractPortProperties), null, 2)
+          );
+
+          console.debug(
+            '[Web MIDI]: Available MIDI Output ports:',
+            JSON.stringify([...midiAccess.outputs.values()].map(extractPortProperties), null, 2)
+          );
 
           input.value = [...midiAccess.inputs.values()].find((input) => input.name === deviceName) ?? null;
           output.value = [...midiAccess.outputs.values()].find((output) => output.name === deviceName) ?? null;
@@ -84,15 +133,19 @@ export const useWebMidi = (deviceName: string, callbacks: MIDICallbacks) => {
           access.value = 'enabled';
         },
         () => {
+          console.debug('[Web MIDI]: MIDI access request: denied');
+
           access.value = 'disabled';
         }
       );
     })
     .catch((e) => {
-      if (e instanceof TypeError) {
-        // Likely caused by 'midi' not being in the PermissionName enumeration. i.e. browser doesn't support web MIDI.
-        access.value = 'disabled';
-      }
+      // Likely caused by 'midi' not being in the PermissionName enumeration
+      // or requestMIDIAccess not being a property of navigator:
+      // i.e. browser doesn't support web MIDI.
+      console.debug(`[Web MIDI]: MIDI (permissions query/access request) error: ${e.message}`);
+
+      access.value = 'disabled';
     });
 
   return {
