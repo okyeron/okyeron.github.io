@@ -16,11 +16,14 @@ const extractInfo = (data: number[]): Info => {
     ver: data[2],
     version: data.slice(2, 5).join('.'),
     eepromVersion: data[6],
+    currentmode: data[7],
+    PlayingPattern: data[8],
+    midiChannel: data[9],
   };
 };
 
 const extractMappings = (data: number[]) => {
-  const usbCcStart = 25;
+  const usbCcStart = 10;
   const trsCcStart = 41;
   const usbChanStart = 57;
   const trsChanStart = 73;
@@ -31,7 +34,7 @@ const extractMappings = (data: number[]) => {
   return startOffsets.map((offset) => {
     const values = [];
 
-    for (let i = offset; i < offset + 16; i++) {
+    for (let i = offset; i < offset + 5; i++) {
       values.push(data[i]);
     }
 
@@ -48,7 +51,7 @@ export const useOMX27 = () => {
 
   const bank = ref<Bank>(1);
 
-  const potentiometers = ref<number[]>(new Array(16).fill(0, 0, 16));
+  const potentiometers = ref<number[]>(new Array(5).fill(0, 0, 16));
 
   // If connected to an output port, this sends the bank change request, followed
   // immediately by the message to request the config state.
@@ -92,7 +95,7 @@ export const useOMX27 = () => {
       }
 
       info.value = extractInfo(data);
-
+console.debug('[sysex]:', ...data);
       const [usbCcs, trsCcs, usbChans, trsChans] = extractMappings(data);
 
       const deviceBank = extractBank(data);
