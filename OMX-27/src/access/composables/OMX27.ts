@@ -22,27 +22,29 @@ const extractInfo = (data: number[]): Info => {
   };
 };
 
+const extractBank = (data: number[]): Bank => (data[5] + 1) as Bank; // Sketchy, as there is no validation
+
 const extractMappings = (data: number[]) => {
-  const usbCcStart = 10;
-  const trsCcStart = 41;
-  const usbChanStart = 57;
-  const trsChanStart = 73;
-  const startOffsets = [usbCcStart, trsCcStart, usbChanStart, trsChanStart].map(
+  const usbCcStart = 13;
+
+  const startOffsets = [usbCcStart].map(
     (offset) => offset - 4 // Number of bytes stripped from message start (status + manufacturer id bytes)
   );
 
   return startOffsets.map((offset) => {
-    const values = [];
+    const allCCs = [];
 
-    for (let i = offset; i < offset + 5; i++) {
-      values.push(data[i]);
-    }
-
-    return values;
+    for (let j = 0; j < 5; j++) {
+	    const values = [];
+		for (let i = offset + (j*5); i < offset + (j*5) + 5; i++) {
+		  values.push(data[i]);
+		}
+		allCCs.push(values);
+	}
+    return allCCs;
   });
 };
 
-const extractBank = (data: number[]): Bank => (data[5] + 1) as Bank; // Sketchy, as there is no validation
 
 export const useOMX27 = () => {
   const info = ref<Info | null>(null);
@@ -95,20 +97,22 @@ export const useOMX27 = () => {
       }
 
       info.value = extractInfo(data);
+      const usbCcs = extractMappings(data);
+
 console.debug('[sysex]:', ...data);
-      const [usbCcs, trsCcs, usbChans, trsChans] = extractMappings(data);
+console.debug('[usbCcs]:', ...usbCcs);
 
       const deviceBank = extractBank(data);
 
       mappings[deviceBank] = {
         usb: {
           ccs: usbCcs,
-          channels: usbChans.map((channel) => channel + 1),
+//           channels: usbChans.map((channel) => channel + 1),
         },
-        trs: {
-          ccs: trsCcs,
-          channels: trsChans.map((channel) => channel + 1),
-        },
+//         trs: {
+//           ccs: trsCcs,
+//           channels: trsChans.map((channel) => channel + 1),
+//         },
       };
 
       bank.value = deviceBank;
