@@ -4,7 +4,7 @@
 
     <div v-else-if="access === 'requesting'">Requesting MIDI access</div>
 
-    <div v-else-if="access === 'enabled' && connecting">Connecting to Hachi Ni <LoadingEllipsis /></div>
+    <div v-else-if="access === 'enabled' && connecting">Connecting to OMX-27 <LoadingEllipsis /></div>
 
     <div v-else-if="!connected">No device detected.</div>
 
@@ -98,7 +98,7 @@ const onExportConfig = () => {
 
     link.style.position = 'fixed';
     link.style.visibility = 'hidden';
-    link.setAttribute('download', 'hachi-ni-config.json');
+    link.setAttribute('download', 'omx-27-config.json');
     link.href = window.URL.createObjectURL(blob);
 
     if (typeof link.download === 'undefined') {

@@ -27,10 +27,10 @@
 
         <div class="pots-config">
           <MappingsGroup
-            v-model:ccs="firstEightCcs"
-            v-model:channels="firstEightChannels"
-            :on-device-ccs="onDeviceFirstEightCcs"
-            :on-device-channels="onDeviceFirstEightChannels"
+            v-model:ccs="firstFiveCcs"
+            v-model:channels="firstFiveChannels"
+            :on-device-ccs="onDeviceFirstFiveCcs"
+            :on-device-channels="onDeviceFirstFiveChannels"
             :potentiometers="firstFivePotentiometers"
           />
 
@@ -140,49 +140,49 @@ const firstFivePotentiometers = computed(() => props.potentiometers.slice(0, 5))
 // TODO: Splitting the values in two like this is really gross, but
 // comes from wanting to render two rows of knobs when screen space allows.
 // Potentially a cleaner way of doing this, though.
-const firstEightCcs = computed({
+const firstFiveCcs = computed({
   get() {
-    return props.ccs.slice(0, 8);
+    return props.ccs.slice(0, 5);
   },
   set(value) {
     emit('update:ccs', [...value, ...props.ccs.slice(8)]);
   },
 });
 
-const onDeviceFirstEightCcs = computed(() => props.onDeviceCcs.slice(0, 8));
+const onDeviceFirstFiveCcs = computed(() => props.onDeviceCcs.slice(0, 5));
 
-const lastEightCcs = computed({
+const lastFiveCcs = computed({
   get() {
-    return props.ccs.slice(8);
+    return props.ccs.slice(5);
   },
   set(value) {
-    emit('update:ccs', [...props.ccs.slice(0, 8), ...value]);
+    emit('update:ccs', [...props.ccs.slice(0, 5), ...value]);
   },
 });
 
-const onDeviceLastEightCcs = computed(() => props.onDeviceCcs.slice(8));
+const onDeviceLastFiveCcs = computed(() => props.onDeviceCcs.slice(8));
 
-const firstEightChannels = computed({
+const firstFiveChannels = computed({
   get() {
-    return props.channels.slice(0, 8);
+    return props.channels.slice(0, 5);
   },
   set(value) {
-    emit('update:channels', [...value, ...props.channels.slice(8)]);
+    emit('update:channels', [...value, ...props.channels.slice(5)]);
   },
 });
 
-const onDeviceFirstEightChannels = computed(() => props.onDeviceChannels.slice(0, 8));
+const onDeviceFirstFiveChannels = computed(() => props.onDeviceChannels.slice(0, 5));
 
-const lastEightChannels = computed({
+const lastFiveChannels = computed({
   get() {
-    return props.channels.slice(8);
+    return props.channels.slice(5);
   },
   set(value) {
-    emit('update:channels', [...props.channels.slice(0, 8), ...value]);
+    emit('update:channels', [...props.channels.slice(0, 5), ...value]);
   },
 });
 
-const onDeviceLastEightChannels = computed(() => props.onDeviceChannels.slice(8));
+const onDeviceLastFiveChannels = computed(() => props.onDeviceChannels.slice(5));
 
 const configDiverged = computed(
   () =>
