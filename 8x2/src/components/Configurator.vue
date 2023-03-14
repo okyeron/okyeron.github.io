@@ -1,16 +1,22 @@
 <template>
-  <div>
+  <div class="configurator">
     <div ref="interfaceSelectorContainer" :class="['interface-selector-container', { scrolling: scrolling }]">
-      <TabsSelector
-        v-model="midiInterface"
-        :options="['usb', 'trs'].map((value) => ({ label: value, value }))"
-        label="Interface"
-        padding="4ch"
-        shrink
-        :class="['selector interface-selector', { scrolling: scrolling }]"
-      />
+      <div class="interface-selector">
+        <div class="relative-position interface-components">
+          <TabsSelector
+            v-model="midiInterface"
+            :options="['usb', 'trs'].map((value) => ({ label: value, value }))"
+            label="Interface"
+            padding="4ch"
+            shrink
+            :class="['selector', { scrolling: scrolling }]"
+          />
+        </div>
+      </div>
 
-      <ConfigUploadButton @load-config="$emit('load-config', $event)" class="config-upload-button" />
+      <ConfigUploadButton @load-config="$emit('load-config', $event)" class="config-upload-button top-button" />
+
+      <button @click="onSettingsClick" class="settings-button top-button">Settings</button>
     </div>
 
     <div :class="['configurator-body', { scrolling: scrolling }]">
@@ -87,8 +93,10 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import ConfigUploadButton from '@/components/ConfigUploadButton.vue';
 import HachiNi from '@/components/HachiNi.vue';
 import MappingsGroup from '@/components/MappingsGroup.vue';
+import SettingsMenu from '@/components/SettingsMenu.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
 import { Bank, Banks, Info, Interface } from '@/access/types';
+import { useModal } from '@/composables/modal';
 
 const props = defineProps<{
   bank: Bank;
@@ -188,6 +196,10 @@ const configDiverged = computed(
     props.channels.some((channel, i) => channel !== props.onDeviceChannels[i])
 );
 
+const { setModalContent } = useModal();
+
+const onSettingsClick = () => setModalContent(SettingsMenu);
+
 const interfaceSelectorContainer = ref(null);
 
 const observer = ref();
@@ -208,11 +220,16 @@ onBeforeUnmount(() => {
 </script>
 
 <style>
+.configurator {
+  --body-right-padding: 4rem;
+}
+
 .configurator-body {
   --title-font-size: 2em;
+
   border: 1px dashed var(--border-color);
   border-radius: 2.5ch;
-  padding: 2rem 4rem 3rem 0;
+  padding: 2rem var(--body-right-padding) 3rem 0;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -228,6 +245,10 @@ onBeforeUnmount(() => {
 .interface-selector {
   flex: 1 0 auto;
   padding-left: 1ch;
+}
+
+.interface-components {
+  width: min-content;
 }
 
 .pots-config {
@@ -319,12 +340,22 @@ onBeforeUnmount(() => {
   flex-wrap: nowrap;
 }
 
-.config-upload-button {
+.top-button {
   border-bottom: unset;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   margin-right: 2ch;
-  padding: 0 1ch 0 1ch;
+  padding: 0 2ch 0 2ch;
+}
+
+.config-upload-button {
+  margin-right: -0.5ch;
+  border-top-right-radius: 0;
+  border-right: none;
+}
+
+.settings-button {
+  margin-right: var(--body-right-padding);
 }
 
 @media screen and (max-width: 680px) {
