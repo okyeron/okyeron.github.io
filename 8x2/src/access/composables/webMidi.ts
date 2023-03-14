@@ -22,8 +22,8 @@ export const useWebMidi = (deviceManufacturer: string, deviceName: string, callb
     );
   });
 
-  const validPort = (port: WebMidi.MIDIPort) => {
-    return port.manufacturer === deviceManufacturer && port.name?.includes(deviceName);
+  const validPort = (port: WebMidi.MIDIPort): boolean => {
+    return port.name?.includes(deviceName) ?? false;
   };
 
   const stateChangeHandler = (e: WebMidi.MIDIConnectionEvent) => {
