@@ -3,7 +3,7 @@
     <div ref="interfaceSelectorContainer" :class="['interface-selector-container', { scrolling: scrolling }]">
       <TabsSelector
         v-model="midiInterface"
-        :options="['usb', 'trs']"
+        :options="['usb', 'trs'].map((value) => ({ label: value, value }))"
         label="Interface"
         padding="4ch"
         shrink
@@ -19,7 +19,7 @@
           v-if="midiBank != null"
           ref="bankSelector"
           v-model="midiBank"
-          :options="Banks"
+          :options="Banks.map((value) => ({ label: value.toString(), value }))"
           label="Bank"
           vertical
           class="bank-selector selector"

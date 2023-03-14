@@ -2,27 +2,26 @@
   <div :class="['container', { 'column vertical': vertical, row: !vertical }]">
     <div>{{ label }}</div>
 
-    <fieldset :class="['tab-selector', { 'column vertical': vertical, row: !vertical }]">
-      <template v-for="item in options" :key="item">
-        <input v-model="value" :id="JSON.stringify(item)" :name="name" :value="item" type="radio" class="radio" />
-
-        <label :for="JSON.stringify(item)" class="tab label">
-          {{ item }}
-        </label>
-      </template>
-    </fieldset>
+    <RadioGroup
+      v-model="value"
+      :options="options"
+      :class="['tab-selector', { 'column vertical': vertical, row: !vertical }]"
+      input-class="radio"
+      label-class="tab label"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import RadioGroup, { RadioGroupOption, RadioOptionValueType } from '@/components/RadioGroup.vue';
 
 const props = withDefaults(
   defineProps<{
     shrink?: boolean;
     label: string;
-    modelValue: string | number;
-    options: readonly (string | number)[];
+    modelValue: RadioOptionValueType;
+    options: readonly RadioGroupOption<RadioOptionValueType>[];
     padding?: string;
     vertical?: boolean;
   }>(),
@@ -32,11 +31,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   (e: 'update:model-value', value: string | number): void;
 }>();
-
-// Generate unique name for group of inputs to avoid clashing
-// with other groups spawned by other TabsSelector instances.
-// TODO: Something better than generating a random number.
-const name = `${props.label}-${Math.floor(Math.random() * 1000000)}`;
 
 const value = computed({
   get() {
@@ -49,7 +43,7 @@ const value = computed({
 </script>
 
 <style scoped>
-.tab {
+:deep(.tab) {
   --horizontal-padding: v-bind(padding);
   align-items: center;
   justify-content: center;
@@ -62,55 +56,54 @@ const value = computed({
   transition: 0.125s ease background;
 }
 
-.tab:hover {
+:deep(.tab:hover) {
   background: #111111;
 }
 
-.container.vertical .tab {
+.container.vertical :deep(.tab) {
   border-top: 1px dashed var(--border-color);
 }
 
-.radio:checked + label {
+:deep(.tab:has(.radio:checked)) {
   background-color: var(--highlight-color);
   color: var(--background-color);
 }
 
-.tab:first-of-type,
-.tab:nth-of-type(2) {
+:deep(.tab:first-of-type, .tab:nth-of-type(2)) {
   border-left: none;
 }
 
-.tab:first-of-type {
+:deep(.tab:first-of-type) {
   border-right: 1px dashed var(--border-color);
   border-top-left-radius: calc(1ch - 2px);
 }
 
-.tab:last-of-type {
+:deep(.tab:last-of-type) {
   border-top-right-radius: calc(1ch - 2px);
 }
 
-.container.vertical .tab {
+.container.vertical :deep(.tab) {
   border-left: none;
 }
 
-.container.vertical .tab:first-of-type,
-.container.vertical .tab:nth-of-type(2) {
+.container.vertical :deep(.tab:first-of-type),
+.container.vertical :deep(.tab:nth-of-type(2)) {
   border-top: none;
 }
 
-.container.vertical .tab:first-of-type {
+.container.vertical :deep(.tab:first-of-type) {
   border-right: none;
   border-bottom: 1px dashed var(--border-color);
   border-top-left-radius: 0;
   border-top-right-radius: calc(1ch - 2px);
 }
 
-.container.vertical .tab:last-of-type {
+.container.vertical :deep(.tab:last-of-type) {
   border-top-right-radius: 0;
   border-bottom-right-radius: calc(1ch - 2px);
 }
 
-.tab-selector {
+:deep(.tab-selector) {
   border: 1px dashed var(--border-color);
   border-bottom: none;
   border-top-left-radius: 1ch;
@@ -120,7 +113,7 @@ const value = computed({
   margin: 0;
 }
 
-.tab-selector.vertical {
+:deep(.tab-selector.vertical) {
   border-bottom: 1px dashed var(--border-color);
   border-left: none;
   border-top-right-radius: 1ch;
@@ -129,11 +122,11 @@ const value = computed({
   border-bottom-left-radius: 0;
 }
 
-.radio {
+:deep(.radio) {
   display: none;
 }
 
-.label {
+:deep(.label) {
   cursor: pointer;
 }
 
