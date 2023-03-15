@@ -11,6 +11,8 @@
             shrink
             :class="['selector', { scrolling: scrolling }]"
           />
+
+          <CopyInterfaceConfig @click="onCopyClick" :interface="interface" class="copy-interface-config" />
         </div>
       </div>
 
@@ -97,6 +99,7 @@ import SettingsMenu from '@/components/SettingsMenu.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
 import { Bank, Banks, Info, Interface } from '@/access/types';
 import { useModal } from '@/composables/modal';
+import CopyInterfaceConfig from '@/components/CopyInterfaceConfig.vue';
 
 const props = defineProps<{
   bank: Bank;
@@ -111,6 +114,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
+  (e: 'copy-between-interfaces'): void;
   (e: 'export-config'): void;
   (e: 'load-config', value: File): void;
   (e: 'reset-config'): void;
@@ -199,6 +203,19 @@ const configDiverged = computed(
 const { setModalContent } = useModal();
 
 const onSettingsClick = () => setModalContent(SettingsMenu);
+
+const onCopyClick = async () => {
+  const source = props.interface;
+  const destination: Interface = props.interface === 'trs' ? 'usb' : 'trs';
+
+  const shouldCopy = await setModalContent(`Copy ${source.toUpperCase()} config to ${destination.toUpperCase()}?`, {
+    confirm: true,
+  });
+
+  if (shouldCopy) {
+    emit('copy-between-interfaces');
+  }
+};
 
 const interfaceSelectorContainer = ref(null);
 
@@ -356,6 +373,14 @@ onBeforeUnmount(() => {
 
 .settings-button {
   margin-right: var(--body-right-padding);
+}
+
+.copy-interface-config {
+  top: -1.75em;
+  position: absolute;
+  left: 13ch;
+  right: 7ch;
+  z-index: 1;
 }
 
 @media screen and (max-width: 680px) {

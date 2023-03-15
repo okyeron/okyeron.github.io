@@ -20,6 +20,7 @@
           :on-device-ccs="mappings[bank]?.[midiInterface].ccs ?? []"
           :on-device-channels="mappings[bank]?.[midiInterface].channels ?? []"
           :potentiometers="potentiometers"
+          @copy-between-interfaces="onCopyBetweenInterfaces"
           @export-config="onExportConfig"
           @load-config="onLoadConfig"
           @reset-config="onResetConfig"
@@ -93,6 +94,17 @@ const configDiverged = computed(
 watch(mappings, () => overwriteEditorMappings(mappings), {
   immediate: true,
 });
+
+const onCopyBetweenInterfaces = () => {
+  const bankMappings = editorMappings[bank.value];
+
+  if (bankMappings) {
+    const destinationInterface: Interface = midiInterface.value === 'trs' ? 'usb' : 'trs';
+
+    bankMappings[destinationInterface].ccs = [...bankMappings[midiInterface.value].ccs];
+    bankMappings[destinationInterface].channels = [...bankMappings[midiInterface.value].channels];
+  }
+};
 
 const onExportConfig = () => {
   const editorMapping = editorMappings[bank.value];
