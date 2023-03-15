@@ -33,13 +33,15 @@
           class="bank-selector selector"
         />
 
-        <div class="pots-config">
+        <div class="pots-config relative-position">
           <MappingsGroup
             v-model:ccs="firstEightCcs"
             v-model:channels="firstEightChannels"
+            v-model:channelLink="linkChannels"
             :on-device-ccs="onDeviceFirstEightCcs"
             :on-device-channels="onDeviceFirstEightChannels"
             :potentiometers="firstEightPotentiometers"
+            @granular-update="processGranularUpdate($event)"
           />
 
           <div style="width: 100%; margin-top: 2rem" />
@@ -47,10 +49,12 @@
           <MappingsGroup
             v-model:ccs="lastEightCcs"
             v-model:channels="lastEightChannels"
+            v-model:channelLink="linkChannels"
             :on-device-ccs="onDeviceLastEightCcs"
             :on-device-channels="onDeviceLastEightChannels"
             :potentiometers="lastEightPotentiometers"
             :count-offset="8"
+            @granular-update="processGranularUpdate($event)"
           />
         </div>
       </div>
@@ -94,7 +98,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import ConfigUploadButton from '@/components/ConfigUploadButton.vue';
 import HachiNi from '@/components/HachiNi.vue';
-import MappingsGroup from '@/components/MappingsGroup.vue';
+import MappingsGroup, { GranularUpdate } from '@/components/MappingsGroup.vue';
 import SettingsMenu from '@/components/SettingsMenu.vue';
 import TabsSelector from '@/components/TabsSelector.vue';
 import { Bank, Banks, Info, Interface } from '@/access/types';
@@ -199,6 +203,16 @@ const configDiverged = computed(
     props.ccs.some((cc, i) => cc !== props.onDeviceCcs[i]) ||
     props.channels.some((channel, i) => channel !== props.onDeviceChannels[i])
 );
+
+const linkChannels = ref(false);
+
+const processGranularUpdate = (update: GranularUpdate) => {
+  if (linkChannels.value && update.type === 'channel') {
+    emit('update:channels', new Array(16).fill(update.value, 0, 16));
+  } else if (update.type === 'cc') {
+    // TODO: Handle specific potentiometer updates
+  }
+};
 
 const { setModalContent } = useModal();
 
