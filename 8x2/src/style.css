@@ -153,6 +153,29 @@ input {
   visibility: hidden;
 }
 
+particle {
+  --character: '八';
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+}
+
+particle.ni {
+  --character: '二';
+}
+
+particle::before {
+  content: var(--character);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+}
+
 @media screen and (max-width: 680px) {
   #app {
     padding-left: 1rem;
