@@ -55,7 +55,7 @@
 
       <div class="bottom-border-container row align-center justify-between">
         <header class="title">
-          <HachiNi class="japanese" />
+          <HachiNi v-click-burst class="japanese" />
 
           <div class="ayy-by-two">
             <span>({{ info?.model ?? '8x2' }})</span> <span>v{{ info?.version }}</span>
