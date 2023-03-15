@@ -1,16 +1,18 @@
 <template>
   <div class="row relative-position meters">
     <div class="column dashes-container">
-      <div class="dash-container row align-center">
-        <div class="dash" />
+      <div class="dash-container relative-position row align-center">
+        <div :class="['dash', { link }]" />
 
-        <div style="margin-bottom: 1px; height: 0.75rem; opacity: 0.3">➛</div>
+        <div class="dash-arrow">➛</div>
+
+        <input v-model="link" type="checkbox" class="channel-link" />
       </div>
 
       <div class="dash-container row align-center">
         <div class="dash" />
 
-        <div style="margin-bottom: 1px; height: 0.75rem; opacity: 0.3">➛</div>
+        <div class="dash-arrow">➛</div>
       </div>
     </div>
 
@@ -29,6 +31,7 @@
             <NumberInput
               v-model="meterChannels[i]"
               @resetValue="() => (meterChannels[i] = onDeviceChannels[i])"
+              @update:modelValue="emitGranularUpdate('channel', i, $event)"
               :min="1"
               :max="16"
               :tabindex="i + 1 + countOffset"
@@ -46,6 +49,7 @@
             <NumberInput
               v-model="meterCCs[i]"
               @resetValue="() => (meterCCs[i] = onDeviceCcs[i])"
+              @update:modelValue="emitGranularUpdate('cc', i, $event)"
               :min="0"
               :max="127"
               :tabindex="i + 1 + meterCCs.length * 2 + countOffset"
@@ -65,13 +69,20 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import NumberInput from '@/components/NumberInput.vue';
 import Potentiometer from '@/components/Potentiometer.vue';
+
+export type GranularUpdate = {
+  index: number;
+  type: 'cc' | 'channel';
+  value: number;
+};
 
 const props = withDefaults(
   defineProps<{
     ccs: number[];
+    channelLink: boolean;
     channels: number[];
     countOffset?: number;
     onDeviceCcs: readonly number[];
@@ -82,9 +93,15 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
+  (e: 'granular-update', value: GranularUpdate): void;
   (e: 'update:ccs', value: number[]): void;
+  (e: 'update:channel-link', value: boolean): void;
   (e: 'update:channels', value: number[]): void;
 }>();
+
+const emitGranularUpdate = (type: GranularUpdate['type'], index: number, value: number) => {
+  emit('granular-update', { index, type, value });
+};
 
 const meterCCs = reactive<number[]>([]);
 props.ccs.forEach((cc) => meterCCs.push(cc));
@@ -108,6 +125,15 @@ watch(
 
 watch(meterChannels, (newValue) => {
   emit('update:channels', newValue);
+});
+
+const link = computed({
+  get() {
+    return props.channelLink;
+  },
+  set(link: boolean) {
+    emit('update:channel-link', link);
+  },
 });
 </script>
 
@@ -196,6 +222,20 @@ watch(meterChannels, (newValue) => {
   width: 100%;
 }
 
+.dashes-container .dash.link {
+  border-bottom: 1px solid white;
+}
+
+.dash + .dash-arrow {
+  height: 0.75rem;
+  margin-bottom: 1px;
+  opacity: 0.3;
+}
+
+.dash.link + .dash-arrow {
+  opacity: unset;
+}
+
 .labels-container {
   gap: 1ch;
   margin-right: 1ch;
@@ -216,6 +256,12 @@ watch(meterChannels, (newValue) => {
   position: absolute;
   left: -2.25ch;
   top: -1.25em;
+}
+
+.channel-link {
+  position: absolute;
+  right: -1.5em;
+  top: 0.125em;
 }
 
 @media screen and (max-width: 680px) {
