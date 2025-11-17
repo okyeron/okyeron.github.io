@@ -1,0 +1,114 @@
+// app global css in SCSS form
+// @import 'quasar/src/css/index.sass';
+// @import '~quasar/styles/variables.sass';
+
+:root {
+  --background-color: #222222;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --highlight-color: rgba(127, 127, 127);
+  --q-white: white;
+  --text-color: #fefefe;
+  // font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  height: 100%;
+}
+
+::selection {
+  background: var(--q-accent);
+  color: var(--q-dark);
+  text-shadow: none;
+}
+
+.aero-box {
+  @extend .bg-aero;
+  @extend .border-square-primary;
+}
+
+.bg-blur {
+  backdrop-filter: blur(2px);
+}
+
+.bg-translucent-grey {
+  background-color: rgba(32, 32, 32, 0.4);
+}
+
+.bg-aero {
+  @extend .bg-blur;
+  @extend .bg-translucent-grey;
+}
+
+body.desktop {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+.border-square-primary {
+  border: 1px solid var(--q-primary);
+  border-radius: 0;
+}
+
+$colors: (primary, secondary, accent, negative, positive, 'white');
+
+@each $color in $colors {
+  .glow-#{$color} {
+    filter: drop-shadow(0 0 1.5px var(--q-#{$color}));
+  }
+}
+
+// .q-btn {
+//   @extend .text-glow;
+// }
+
+.q-input {
+  .q-field__native {
+    line-height: 0.45rem;
+  }
+}
+
+// .q-tab {
+//   @extend .text-glow;
+// }
+
+.q-tooltip {
+  background: black;
+  border-radius: 0;
+  border: 1px solid white;
+  text-transform: uppercase;
+}
+
+.text-glow {
+  text-shadow: currentcolor 0px 0px 10px;
+}
+
+.q-item__label--header {
+  padding: 4px 12px;
+}
+
+body {
+  align-items: stretch;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+}
