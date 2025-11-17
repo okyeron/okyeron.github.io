@@ -1,9 +1,6 @@
-# 八x二 Configurator
+# 八x二 and OMX-27 Configurator
 
 [hachi-ni configurator](<https://okyeron.github.io/8x2/index.html>) 
 
-# OMX-27 
+[online configurator for hachi-ni or OMX-27](<https://okyeron.github.io/web-editor/index.html>) 
 
-[OMX-27 USBMIDI browser test](<https://okyeron.github.io/OMX-27/browser_test/index.html>) 
-
-[OMX-27 web config](<https://okyeron.github.io/OMX-27/webconfig/index.html>) 
