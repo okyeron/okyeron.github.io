@@ -10,6 +10,7 @@ import { analyzer } from 'vite-bundle-analyzer'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/web-editor/',
   build: {
     rollupOptions: {
       plugins: [
