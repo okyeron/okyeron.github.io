@@ -47,7 +47,7 @@ watch(omx27.connected, () => {
         <!-- TODO: reflow at smaller screen width -->
         <a href="#/" style="color: inherit; text-decoration: none">
           <q-toolbar-title shrink class="non-selectable" style="text-transform: none">
-            <span class="text-primary">denki-oto</span> WebMIDI Editor
+            <span class="text-primary">denki-oto</span> Web MIDI Editor
           </q-toolbar-title>
         </a>
       </q-toolbar>

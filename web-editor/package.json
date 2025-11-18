@@ -2,7 +2,7 @@
   "name": "denki-oto-web-midi-editor",
   "version": "0.0.1",
   "description": "Browser-based configurator for denki oto products",
-  "productName": "Denki Oto Web MIDI Editor",
+  "productName": "denki oto Web MIDI Editor",
   "author": "Nicholas Sidwell <nicholas@sidwell.dev>",
   "private": true,
   "type": "module",
