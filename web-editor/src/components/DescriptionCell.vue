@@ -21,13 +21,6 @@ const slots = useSlots();
       </div>
     </dt>
 
-
-    <!-- <dt v-if="!slots.name" class="non-selectable q-px-sm text-black text-center text-uppercase">
-      {{ name }}
-    </dt>
-
-    <slot v-else name="name" /> -->
-
     <dd class="non-selectable relative-position text-bold text-center text-uppercase">
       <slot name="value" :value="value">
         <span class="q-px-xs">{{ value }}</span>
@@ -36,12 +29,12 @@ const slots = useSlots();
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .description-cell {
   --color: white;
   --color-transition: background-color var(--color-transition-duration) ease, border-color var(--color-transition-duration) ease, color var(--color-transition-duration) ease;
   --color-transition-duration: 1s;
-  
+
   &:hover {
     --color-transition-duration: 0.15s;
     --color: v-bind(color);

@@ -17,7 +17,7 @@ const { hide = false, revealDelay = 0, ...props } = defineProps<{
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   --size: 1.5ch;
   grid-area: v-bind('$props.note');

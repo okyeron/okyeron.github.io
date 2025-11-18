@@ -24,20 +24,14 @@ const borderColor = computed(() => `var(--q-${props.color})`);
 
 <template>
   <div class="container">
-    <q-btn
-      v-ripple="{ color }"
-      :disable="disable"
-      :style="{ border: `1px solid ${borderColor}` }"
-      square
-      :class="[
-        'fit key-switch rounded-borders',
-        { 'bg-primary': pressed, pressed },
-      ]"
-    />
+    <q-btn v-ripple="{ color }" :disable="disable" :style="{ border: `1px solid ${borderColor}` }" square :class="[
+      'fit key-switch rounded-borders',
+      { 'bg-primary': pressed, pressed },
+    ]" />
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   --size: 5ch;
   grid-area: v-bind('$props.note');

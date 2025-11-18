@@ -1,3 +1,5 @@
+export * from 'src/utils/clickBurst'
+
 export const steppedExponentialAnimationFunction = ({
   base,
   count,

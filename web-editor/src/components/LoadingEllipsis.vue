@@ -1,5 +1,5 @@
 <template>
-  <span v-for="i in 3" :key="i" :class="{ 'visibility-hidden': i > sliceIndex }">.</span>
+  <span v-for="i in 3" :key="i" :class="{ 'invisible': i > sliceIndex }">.</span>
 </template>
 
 <script setup lang="ts">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useWebMidi } from 'src/access/composables/webMidi';
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import router from 'src/router';
 import { useRoute } from 'vue-router';
 
@@ -10,44 +10,73 @@ defineOptions({
 
 const route = useRoute();
 
-const hachiNi = useWebMidi('denki-oto', 'hachi-ni', [() => { }]);
+const tabs = ref<{
+  label: string;
+  name: string;
+  to: string;
+}[]>([]);
 
-watch(hachiNi.connected, () => {
-  if (hachiNi.connected.value) {
-    router.push('/hachi-ni');
-  } else if (route.name === 'hachi-ni') {
-    router.push('/')
-  }
-}, { immediate: true, });
+const setupMidiDeviceTab = (
+  device: ReturnType<typeof useWebMidi>,
+  { label, name }: Pick<(typeof tabs)['value'][number], 'label' | 'name'>
+) => {
+  watch(
+    device.connected,
+    (connected) => {
+      if (connected) {
+        console.log('hachi-ni connected');
+        router.push(`/${name}`);
 
-const omx27 = useWebMidi('denki-oto', 'omx-27', [() => { }]);
+        tabs.value.push({ label, name, to: name });
+      } else {
+        const index = tabs.value.findIndex((t) => t.name === name);
 
-watch(omx27.connected, () => {
-  if (omx27.connected.value) {
-    router.push('/omx-27');
-  } else if (route.name === 'omx-27') {
-    router.push('/')
-  }
-}, { immediate: true, });
+        if (index !== -1) {
+          tabs.value.splice(index, 1);
+        }
+
+        if (route.name === name) {
+          router.push('/');
+        }
+      }
+    },
+    { immediate: true }
+  );
+}
+
+setupMidiDeviceTab(useWebMidi('denki-oto', 'hachi-ni', [() => { }]), {
+  label: '八x二',
+  name: 'hachi-ni',
+});
+
+setupMidiDeviceTab(useWebMidi('denki-oto', 'omx-27', [() => { }]), {
+  label: 'OMX-27',
+  name: 'omx-27',
+});
 </script>
 
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-grey-10">
+    <q-header class="header">
       <q-toolbar class="toolbar">
         <q-tabs active-color="white" active-class="text-glow" indicator-color="white" dense
           style="color: rgb(163 198 228)">
-          <q-route-tab v-if="hachiNi.connected.value" :ripple="false" name="hachi-ni" to="hachi-ni"> 八x二 </q-route-tab>
-
-          <q-route-tab v-if="omx27.connected.value" :ripple="false" name="omx-27" to="omx-27"> OMX-27 </q-route-tab>
+          <q-route-tab v-for="{ label, name, to } in tabs" :key="name" :name :ripple="false" :to>
+            {{ label }}
+          </q-route-tab>
         </q-tabs>
 
         <q-space />
 
-        <!-- TODO: reflow at smaller screen width -->
         <a href="#/" style="color: inherit; text-decoration: none">
           <q-toolbar-title shrink class="non-selectable" style="text-transform: none">
-            <span class="text-primary">denki-oto</span> Web MIDI Editor
+            <div v-if="$q.screen.lt.sm" class="text-subtitle1" style="line-height: 1em">
+              <div><span class="text-primary">denki oto</span></div>
+
+              <div>Web MIDI Editor</div>
+            </div>
+
+            <span v-else><span class="text-primary">denki oto</span> Web MIDI Editor</span>
           </q-toolbar-title>
         </a>
       </q-toolbar>
@@ -60,7 +89,12 @@ watch(omx27.connected, () => {
 </template>
 
 <style lang="scss" scoped>
+.header {
+  background: #111111;
+}
+
 .toolbar {
+  height: 2.25rem;
   min-height: unset;
 }
 </style>

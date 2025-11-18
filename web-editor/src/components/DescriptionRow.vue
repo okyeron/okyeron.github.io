@@ -27,13 +27,13 @@ const slots = useSlots();
     margin-block-end: unset;
     margin-block-start: unset;
 
-    ::v-deep(:nth-child(1 of .description-cell)) {
+    :deep(:nth-child(1 of .description-cell)) {
       dt {
         border-left: 1px solid var(--color, white);
       }
     }
 
-    ::v-deep(:nth-last-child(1 of .description-cell)) {
+    :deep(:nth-last-child(1 of .description-cell)) {
       dt {
         border-right: 1px solid var(--color, white);
       }

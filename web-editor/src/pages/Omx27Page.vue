@@ -2,6 +2,7 @@
 import DeviceConfigurationOverview from 'components/DeviceConfigurationOverview.vue';
 import BorderRevealContainer from 'components/BorderRevealContainer.vue';
 import DescriptionRowHeader from 'components/DescriptionRowHeader.vue';
+import LoadingEllipsis from 'components/LoadingEllipsis.vue';
 import { useOmx27 } from 'src/access/composables';
 import { computed, onMounted, ref, watch } from 'vue';
 import KeyBedItty from 'components/KeyBedItty.vue';
@@ -48,22 +49,9 @@ const onBorderRevealsComplete = () => {
 
 onMounted(() => {
   setTimeout(() => showPotentiometers.value = true, 350);
-})
 
-watch(connected, () => {
-  console.log(JSON.stringify(
-    {
-      access: access.value,
-      bank: bank.value,
-      connected: connected.value,
-      connecting: connecting.value,
-      omxState: {
-        info: omxState.info,
-        midi: omxState.midi,
-      }
-    }, null, 2)
-  )
-}, { immediate: true });
+  document.documentElement.style.setProperty('--background-color', 'var(--q-dark-page)');
+})
 
 const onSaveCcs = ({ bank, ccs }: { bank: OmxBank, ccs: number[] }) => {
   saveConfig({ bank, ccs });
@@ -87,9 +75,11 @@ const showNegotiatingAccessContent = computed(() => (negotiatingAccess.value && 
     <section class=" row fit items-center justify-evenly">
       <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
         <div v-if="connecting" class="col-12 text-center">
-          <p>Connecting to OMX-27.</p>
+          <p>
+            <span>Connecting to OMX-27</span>
 
-          <q-spinner-puff />
+            <LoadingEllipsis />
+          </p>
         </div>
 
         <div v-else-if="connected" class="column justify-center items-center relative-position">
@@ -148,7 +138,7 @@ const showNegotiatingAccessContent = computed(() => (negotiatingAccess.value && 
   </q-page>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .border-reveal-enter-active {
   transition: height 0.67s ease;
 }

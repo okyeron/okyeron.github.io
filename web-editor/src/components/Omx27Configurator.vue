@@ -82,7 +82,7 @@ const onSaveCcs = ({ bank, ccs }: { bank: OmxBank, ccs: number[] }) => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .border-reveal-enter-active {
   transition: height 0.67s ease;
 }
