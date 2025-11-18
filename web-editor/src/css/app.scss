@@ -1,14 +1,11 @@
 // app global css in SCSS form
-// @import 'quasar/src/css/index.sass';
-// @import '~quasar/styles/variables.sass';
 
 :root {
-  --background-color: #222222;
   --border-color: rgba(255, 255, 255, 0.3);
   --highlight-color: rgba(127, 127, 127);
   --q-white: white;
   --text-color: #fefefe;
-  // font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -49,17 +46,6 @@
   @extend .bg-translucent-grey;
 }
 
-body.desktop {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 .border-square-primary {
   border: 1px solid var(--q-primary);
   border-radius: 0;
@@ -73,19 +59,11 @@ $colors: (primary, secondary, accent, negative, positive, 'white');
   }
 }
 
-// .q-btn {
-//   @extend .text-glow;
-// }
-
 .q-input {
   .q-field__native {
     line-height: 0.45rem;
   }
 }
-
-// .q-tab {
-//   @extend .text-glow;
-// }
 
 .q-tooltip {
   background: black;

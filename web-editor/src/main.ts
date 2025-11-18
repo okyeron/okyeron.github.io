@@ -17,7 +17,11 @@ import App from './App.vue'
 
 import router from './router'
 
+import { useClickBurst } from 'src/utils'
+
 const app = createApp(App)
+
+app.directive('click-burst', useClickBurst())
 
 // app.use(createPinia())
 

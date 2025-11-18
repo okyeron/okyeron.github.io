@@ -126,7 +126,7 @@ const link = computed({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .meters-container {
   --column-count: 2;
   display: grid;
@@ -164,7 +164,7 @@ const link = computed({
   align-items: center;
   justify-content: center;
   position: absolute;
-  padding: var(--padding);
+  padding: calc(5 * var(--padding));
   border: 1px dashed #666666;
   border-radius: 50%;
   right: calc(-1 * (var(--dimension) + 1px + 2 * var(--padding)));
@@ -217,7 +217,7 @@ const link = computed({
 
 .dash+.dash-arrow {
   height: 0.75rem;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
   opacity: 0.3;
 }
 
@@ -233,10 +233,10 @@ const link = computed({
 }
 
 .labels-container label {
-  z-index: 1;
-  position: relative;
-  padding: 0 0.5ch 0 0.5ch;
   background: var(--background-color);
+  padding: 0 0.5ch 0 0.5ch;
+  position: relative;
+  z-index: 1;
 }
 
 .compact-label {
@@ -250,7 +250,7 @@ const link = computed({
 .channel-link {
   position: absolute;
   right: -1.5em;
-  top: 0.125em;
+  top: 0.333em;
 }
 
 @media screen and (max-width: 680px) {

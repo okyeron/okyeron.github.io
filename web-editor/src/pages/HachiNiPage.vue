@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { usePageTitle } from 'composables';
-import { computed, reactive, ref, watch, watchEffect } from 'vue';
+import { computed, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import Configurator from 'components/8x2/Configurator.vue';
 import ConfiguratorLayout from 'components/8x2/ConfiguratorLayout.vue';
-import LoadingEllipsis from 'components/8x2/LoadingEllipsis.vue';
+import LoadingEllipsis from 'components/LoadingEllipsis.vue';
 import { useHachiNi } from 'access/composables';
 import { Banks, MappingSchema } from 'access/types';
 import type { Bank, Interface, Mappings } from 'access/types';
 import ModalOverlay from 'components/8x2/ModalOverlay.vue';
 
 usePageTitle('hachi-ni');
+
+onMounted(() => {
+  document.documentElement.style.setProperty('--background-color', '#222222');
+})
 
 const midiInterface = ref<Interface>('usb');
 
@@ -190,157 +194,193 @@ const onSaveConfig = () => {
   </q-page>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #hachi-ni-page {
-  align-items: center;
+  --border-color: rgba(255, 255, 255, 0.3);
+  --highlight-color: rgba(127, 127, 127);
+  --text-color: #fefefe;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  align-items: stretch;
+  background-color: var(--background-color);
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-synthesis: none;
+  font-weight: 400;
+  height: 100%;
+  height: 100%;
+  justify-content: center;
+  line-height: 1.5;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font: initial;
+    font-family: inherit;
+  }
+
+  input {
+    font-size: 10pt;
+  }
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  background: var(--background-color);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   justify-content: center;
   padding: 2em;
   text-align: center;
+}
 
-  :deep(a) {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-  }
+button {
+  --padding: 1ch;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text-color);
+  border-radius: 1ch;
+  background-color: var(--background-color);
+  border: 1px dashed var(--border-color);
+  padding: var(--padding);
+  margin: 0;
+  transition: background-color, color, border-color, 0.125s;
+  user-select: none;
+}
 
-  :deep(a:hover) {
-    color: #535bf2;
-  }
+button:hover {
+  background-color: var(--highlight-color);
+  color: var(--background-color);
+  border-color: var(--background-color);
+}
 
-  :deep(h1) {
-    font-size: 3.2em;
-    line-height: 1.1;
-  }
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
 
-  :deep(button) {
-    --padding: 1ch;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    cursor: pointer;
-    color: var(--text-color);
-    border-radius: 1ch;
-    background-color: var(--background-color);
-    border: 1px dashed var(--border-color);
-    padding: var(--padding);
-    margin: 0;
-    transition: background-color, color, border-color, 0.125s;
-    user-select: none;
-  }
+button:disabled {
+  cursor: not-allowed;
+  color: var(--border-color);
+}
 
-  :deep(button:hover) {
-    background-color: var(--highlight-color);
-    color: var(--background-color);
-    border-color: var(--background-color);
-  }
+button:disabled:hover {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  color: var(--border-color);
+}
 
-  :deep(button:focus,
-    button:focus-visible) {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
+input {
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
 
-  :deep(button:disabled) {
-    cursor: not-allowed;
-    color: var(--border-color);
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+}
 
-  :deep(button:disabled:hover) {
-    background-color: var(--background-color);
-    border-color: var(--border-color);
-    color: var(--border-color);
-  }
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
 
-  :deep(input) {
-    border: 1px solid var(--border-color);
-    border-radius: 2px;
-  }
+.align-center {
+  align-items: center;
+}
 
-  :deep(.column) {
-    display: flex;
-    flex-direction: column;
-  }
+.align-start {
+  align-items: flex-start;
+}
 
-  :deep(.row) {
-    display: flex;
-  }
+.align-self-start {
+  align-self: flex-start;
+}
 
-  :deep(.align-center) {
-    align-items: center;
-  }
+.align-end {
+  align-items: flex-end;
+}
 
-  :deep(.align-start) {
-    align-items: flex-start;
-  }
+.justify-center {
+  justify-content: center;
+}
 
-  :deep(.align-self-start) {
-    align-self: flex-start;
-  }
+.justify-between {
+  justify-content: space-between;
+}
 
-  :deep(.align-end) {
-    align-items: flex-end;
-  }
+.justify-end {
+  justify-content: end;
+}
 
-  :deep(.justify-center) {
-    justify-content: center;
-  }
+.absolute-position {
+  position: absolute;
+}
 
-  :deep(.justify-between) {
-    justify-content: space-between;
-  }
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
 
-  :deep(.justify-end) {
-    justify-content: end;
-  }
+.relative-position {
+  position: relative;
+}
 
-  :deep(.absolute-position) {
-    position: absolute;
-  }
+particle {
+  --character: '八';
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+}
 
-  :deep(.bottom-left) {
-    bottom: 0;
-    left: 0;
-  }
+particle.ni {
+  --character: '二';
+}
 
-  :deep(.relative-position) {
-    position: relative;
-  }
+particle::before {
+  content: var(--character);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+}
 
-  :deep(.visibility-hidden) {
-    visibility: hidden;
-  }
-
-  :deep(particle) {
-    --character: '八';
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    position: fixed;
-    top: 0;
-  }
-
-  :deep(particle.ni) {
-    --character: '二';
-  }
-
-  :deep(particle::before) {
-    content: var(--character);
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    color: white;
-  }
-
-  @media screen and (max-width: 680px) {
-    #hachi-ni-page {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
+@media screen and (max-width: 680px) {
+  #app {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 </style>

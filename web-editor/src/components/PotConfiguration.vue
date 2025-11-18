@@ -186,23 +186,6 @@ onMounted(() => {
             </div>
 
             <div class="col items-center row">
-              <!-- <div class="bank-buttons-container col-auto items-center q-gutter-x-xs row" style="height: min-content">
-                <div>
-                  <q-btn @click="emit('save-ccs', { bank, ccs: modifiedCcs[bank] })" :ripple="false" color="white"
-                    label="save" text-color="black" dense />
-                </div>
-
-                <transition @after-enter="showDiscardButton = true" appear name="reveal-discard-button-container">
-                  <div v-if="showChangesButtonContainer" class="discard-button-container">
-                    <transition @after-leave="showChangesButtonContainer = false"
-                      enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
-                      <q-btn v-if="showDiscardButton" @click="resetModifiedPotentiometers" :ripple="false"
-                        label="discard" dense outline />
-                    </transition>
-                  </div>
-                </transition>
-              </div> -->
-
               <div class="col full-height relative-position">
                 <StripedSpacer shadowed class="dimmed full-height" />
 
@@ -223,7 +206,7 @@ onMounted(() => {
                           enter-active-class="animated faster slideInUp"
                           leave-active-class="animated faster slideOutDown">
                           <q-btn v-if="showDiscardButton" @click="resetModifiedPotentiometers" :ripple="false"
-                            label="discard" dense class="bg-black" style="border: 1px solid white" />
+                            label="discard" dense class="bg-black discard-button" style="border: 1px solid white" />
                         </transition>
                       </div>
                     </div>
@@ -355,7 +338,7 @@ onMounted(() => {
 }
 
 .bank-buttons-container {
-  ::v-deep(.q-btn) {
+  :deep(.q-btn) {
     border-radius: unset;
     font-size: 0.75em;
     font-weight: bold;
@@ -382,20 +365,20 @@ onMounted(() => {
   border-top: 1px solid white;
 
   &-container {
-    ::v-deep(:nth-child(1 of .description-cell)) {
+    :deep(:nth-child(1 of .description-cell)) {
       dt {
         border-left: unset;
       }
     }
   }
 
-  ::v-deep(.q-btn[aria-pressed="true"]) {
+  :deep(.q-btn[aria-pressed="true"]) {
     background-color: white;
   }
 
   border-radius: 0;
 
-  &::v-deep(> .q-btn-item) {
+  &:deep(> .q-btn-item) {
     padding: 0 1ch;
 
     &:not(:last-child) {
@@ -415,15 +398,15 @@ onMounted(() => {
   width: 8.25ch;
   z-index: 1;
 
-  ::v-deep(.q-field__control::after) {
+  :deep(.q-field__control::after) {
     display: none;
   }
 
-  ::v-deep(.q-field__control::before) {
+  :deep(.q-field__control::before) {
     display: none;
   }
 
-  ::v-deep(input.q-field__native) {
+  :deep(input.q-field__native) {
     color: white;
     order: 1;
     padding: 0;
@@ -445,44 +428,44 @@ onMounted(() => {
   }
 
   &.modified {
-    ::v-deep(.q-field__label) {
+    :deep(.q-field__label) {
       opacity: 0;
       transition: opacity 0.25s ease;
     }
   }
 
   &.one-digit {
-    ::v-deep(input.q-field__native) {
+    :deep(input.q-field__native) {
       width: 4.15ch;
     }
   }
 
 
   &.two-digits {
-    ::v-deep(input.q-field__native) {
+    :deep(input.q-field__native) {
       width: 4.65ch;
     }
   }
 
 
   &.three-digits {
-    ::v-deep(input.q-field__native) {
+    :deep(input.q-field__native) {
       width: 5.15ch;
     }
   }
 
-  ::v-deep(.q-field__control) {
+  :deep(.q-field__control) {
     align-items: center;
     height: min-content;
   }
 
-  ::v-deep(.q-field__control-container) {
+  :deep(.q-field__control-container) {
     align-items: center;
     height: 1.5em;
     justify-content: space-between;
   }
 
-  ::v-deep(.q-field__label) {
+  :deep(.q-field__label) {
     align-content: center;
     color: black;
     font-size: 0.75em;
@@ -509,7 +492,7 @@ onMounted(() => {
 }
 
 .potentiometers-row {
-  ::v-deep(dt) {
+  :deep(dt) {
     background: unset;
     border-left: 1px solid white;
     border-right: unset;
@@ -544,5 +527,10 @@ onMounted(() => {
 .discard-button-container {
   filter: drop-shadow(0px 0px 2.5px black);
   overflow: hidden;
+
+  // TODO: Remove once hachi-ni editor integration has CSS fully sorted out
+  .discard-button:hover {
+    color: white;
+  }
 }
 </style>

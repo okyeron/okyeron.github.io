@@ -34,12 +34,12 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 .border-reveal-container {
-  ::v-deep(.dimmed.spacer:after) {
+  :deep(.dimmed.spacer:after) {
     transition: background 0.5s ease;
   }
 
   &:hover {
-    ::v-deep(.dimmed.spacer:after) {
+    :deep(.dimmed.spacer:after) {
       background: unset !important;
       transition: background 0.15s ease;
     }
