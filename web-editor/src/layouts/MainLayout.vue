@@ -24,7 +24,6 @@ const setupMidiDeviceTab = (
     device.connected,
     (connected) => {
       if (connected) {
-        console.log('hachi-ni connected');
         router.push(`/${name}`);
 
         tabs.value.push({ label, name, to: name });
@@ -44,15 +43,25 @@ const setupMidiDeviceTab = (
   );
 }
 
-setupMidiDeviceTab(useWebMidi('denki-oto', 'hachi-ni', [() => { }]), {
-  label: '八x二',
-  name: 'hachi-ni',
-});
+setupMidiDeviceTab(
+  useWebMidi(
+    () => true,
+    (name) => (name ?? '').toLowerCase().includes('hachi-ni'),
+    [() => { }]),
+  {
+    label: '八x二',
+    name: 'hachi-ni',
+  });
 
-setupMidiDeviceTab(useWebMidi('denki-oto', 'omx-27', [() => { }]), {
-  label: 'OMX-27',
-  name: 'omx-27',
-});
+setupMidiDeviceTab(
+  useWebMidi(
+    () => true,
+    (name) => (name ?? '').toLowerCase().includes('omx-27'),
+    [() => { }]),
+  {
+    label: 'OMX-27',
+    name: 'omx-27',
+  });
 </script>
 
 <template>
