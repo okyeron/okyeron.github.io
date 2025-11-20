@@ -1,30 +1,29 @@
-import { computed, reactive, readonly, ref, watchEffect } from 'vue'
-import type { DeviceInfo, MIDICallbacks, MIDICallback, OmxBank } from 'src/access/types'
+import { computed, reactive, readonly, ref, watchEffect } from 'vue';
+import type { DeviceInfo, MIDICallbacks, MIDICallback, OmxBank } from 'src/access/types';
 
-import { omxBanks } from 'src/access/types'
-import { useWebMidi } from './webMidi'
+import { omxBanks } from 'src/access/types';
+import { useWebMidi } from './webMidi';
 
-const ccByte = 176
-const deviceManufacturer = 'denki-oto'
-const deviceName = 'omx-27'
-const manufacturerId = [125, 0, 0]
-const requestConfigMessage = [0xf0, ...manufacturerId, 0x1f, 0xf7]
-const saveConfigMessage = [0xf0, ...manufacturerId, 0x0d]
+const ccByte = 176;
+const deviceName = 'omx-27';
+const manufacturerId = [125, 0, 0];
+const requestConfigMessage = [0xf0, ...manufacturerId, 0x1f, 0xf7];
+const saveConfigMessage = [0xf0, ...manufacturerId, 0x0d];
 
 export const keyStatesRange = {
   end: 85, // 36, // 85,
   start: 59, // 11, // 59,
-}
+};
 
 const potCcsStart =
-  13 - 4 /* Number of bytes stripped from message start (status + manufacturer id bytes) */
+  13 - 4; /* Number of bytes stripped from message start (status + manufacturer id bytes) */
 
 const isEducationalManufacturer = (data: number[]) =>
-  data.every((byte, i) => byte === manufacturerId[i])
+  data.every((byte, i) => byte === manufacturerId[i]);
 
 const extractInfo = (data: number[]): DeviceInfo => {
   if (data.length < 6) {
-    throw new Error('extractInfo expects data indices up to 5 to be populated')
+    throw new Error('extractInfo expects data indices up to 5 to be populated');
   }
 
   return {
@@ -33,37 +32,37 @@ const extractInfo = (data: number[]): DeviceInfo => {
     ver: data[2]!,
     version: data.slice(2, 5).join('.'),
     eepromVersion: data[5]!,
-  }
-}
+  };
+};
 
 const extractSequencerInfo = (data: number[]): SequencerInfo => {
   if (data.length < 8) {
-    throw new Error('extractSequencerInfo expects data indices up to 7 to be populated')
+    throw new Error('extractSequencerInfo expects data indices up to 7 to be populated');
   }
 
-  const mode = modes[data[6]!]
+  const mode = modes[data[6]!];
 
   if (!mode) {
-    throw new Error('extractInfo expects data indices up to 6 to be populated')
+    throw new Error('extractInfo expects data indices up to 6 to be populated');
   }
 
   return {
     mode,
     playingPattern: data[7]!,
-  }
-}
+  };
+};
 
-const modes = ['MIDI', 'Drum', 'Chords', 'S1', 'S2', 'Grids', 'Euclid', 'OM'] as const
+const modes = ['MIDI', 'Drum', 'Chords', 'S1', 'S2', 'Grids', 'Euclid', 'OM'] as const;
 
-type Mode = (typeof modes)[number]
+type Mode = (typeof modes)[number];
 
-const midiMacroModes = ['Off', 'M8', 'Norns', 'Deluge'] as const
+const midiMacroModes = ['Off', 'M8', 'Norns', 'Deluge'] as const;
 
-type MidiMacroMode = (typeof midiMacroModes)[number]
+type MidiMacroMode = (typeof midiMacroModes)[number];
 
-const scaleRoots = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const
+const scaleRoots = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const;
 
-type ScaleRoot = (typeof scaleRoots)[number]
+type ScaleRoot = (typeof scaleRoots)[number];
 
 const scalePatterns = [
   'major',
@@ -107,30 +106,30 @@ const scalePatterns = [
   'yo',
   'hirajoshi',
   'egyptian',
-] as const
+] as const;
 
-type ScalePattern = (typeof scalePatterns)[number] | 'off'
+type ScalePattern = (typeof scalePatterns)[number] | 'off';
 
 type MidiInfo = {
-  channel: number
-  defaultVelocity: number
+  channel: number;
+  defaultVelocity: number;
   macro: {
-    channel: number
-    type: MidiMacroMode
-  }
-}
+    channel: number;
+    type: MidiMacroMode;
+  };
+};
 
 const extractMidiInfo = (data: number[]): MidiInfo => {
   if (data.length < 36) {
-    throw new Error('No')
+    throw new Error('No');
   }
 
   //  29 - MIDI Macro Channel
   //  30 - MIDI Macro Type
-  const type = midiMacroModes[data[35]!]
+  const type = midiMacroModes[data[35]!];
 
   if (!type) {
-    throw new Error('No')!
+    throw new Error('No')!;
   }
 
   return {
@@ -140,29 +139,29 @@ const extractMidiInfo = (data: number[]): MidiInfo => {
       channel: data[34]! + 1,
       type,
     },
-  }
-}
+  };
+};
 
 export type PotentiometerInfo = {
-  activeCcs: number[]
-  bank: OmxBank
-  ccs: number[]
-  values: number[]
-}
+  activeCcs: number[];
+  bank: OmxBank;
+  ccs: number[];
+  values: number[];
+};
 
 export type SequencerInfo = {
-  mode: Mode
-  playingPattern: number
-}
+  mode: Mode;
+  playingPattern: number;
+};
 
 export type OmxState = {
-  info: DeviceInfo
-  keys: Record<number, boolean>
-  potentiometers: PotentiometerInfo
-  scale: ScaleInfo
-  midi: MidiInfo
-  sequencer: SequencerInfo
-}
+  info: DeviceInfo;
+  keys: Record<number, boolean>;
+  potentiometers: PotentiometerInfo;
+  scale: ScaleInfo;
+  midi: MidiInfo;
+  sequencer: SequencerInfo;
+};
 // MODE is
 // var modeid = document.getElementById("6");
 // SYSEXx DUMP FROM DEVICE is 46 bytes
@@ -297,22 +296,22 @@ export type OmxState = {
 
 const extractPotBank = (data: number[]): OmxBank => {
   if (data.length < 44) {
-    throw new Error('No')
+    throw new Error('No');
   }
 
-  return (data[43]! + 1) as OmxBank
-}
+  return (data[43]! + 1) as OmxBank;
+};
 
 const extractPotentiometerCCs = (data: number[]) => {
-  return data.slice(potCcsStart, potCcsStart + 25) // 5 x 5 banks
-}
+  return data.slice(potCcsStart, potCcsStart + 25); // 5 x 5 banks
+};
 
 type ScaleInfo = {
-  group: boolean
-  lock: boolean
-  pattern: ScalePattern
-  root: ScaleRoot
-}
+  group: boolean;
+  lock: boolean;
+  pattern: ScalePattern;
+  root: ScaleRoot;
+};
 
 //  31 - Scale Root
 //  32 - Scale Pattern, -1 for chromatic
@@ -320,17 +319,17 @@ type ScaleInfo = {
 //  34 - Scale Group 16 - Bool
 const extractScaleInfo = (data: number[]): ScaleInfo => {
   if (data.length < 41) {
-    throw new Error('No')
+    throw new Error('No');
   }
 
-  const [root, pattern, lock, group] = data.slice(36, 40) as [number, number, number, number]
+  const [root, pattern, lock, group] = data.slice(36, 40) as [number, number, number, number];
 
-  const scalePattern = pattern === 127 ? 'off' : scalePatterns[pattern]
+  const scalePattern = pattern === 127 ? 'off' : scalePatterns[pattern];
 
-  const scaleRoot = scaleRoots[root]
+  const scaleRoot = scaleRoots[root];
 
   if (!scalePattern || !scaleRoot) {
-    throw new Error('No')
+    throw new Error('No');
   }
 
   return {
@@ -338,8 +337,8 @@ const extractScaleInfo = (data: number[]): ScaleInfo => {
     lock: Boolean(lock),
     pattern: scalePattern,
     root: scaleRoot,
-  }
-}
+  };
+};
 
 // const extract = (data: number[]): ScaleInfo => {
 //   const [root, pattern, lock, group] = data.slice(36, 40);
@@ -353,22 +352,22 @@ const extractScaleInfo = (data: number[]): ScaleInfo => {
 // };
 
 export const useOmx27 = () => {
-  const bank = ref<OmxBank>(1)
+  const bank = ref<OmxBank>(1);
 
-  const potentiometers = ref(Array.from({ length: 25 }).fill(0, 0, 25) as number[])
+  const potentiometers = ref(Array.from({ length: 25 }).fill(0, 0, 25) as number[]);
 
   const activePotentiometerBankCCs = computed<number[]>({
     get() {
-      const offset = omxBanks.length * (bank.value - 1)
+      const offset = omxBanks.length * (bank.value - 1);
 
-      return potentiometers.value.slice(offset, offset + omxBanks.length)
+      return potentiometers.value.slice(offset, offset + omxBanks.length);
     },
     set(value: number[]) {
-      const offset = omxBanks.length * (bank.value - 1)
+      const offset = omxBanks.length * (bank.value - 1);
 
-      potentiometers.value.splice(offset, omxBanks.length, ...value)
+      potentiometers.value.splice(offset, omxBanks.length, ...value);
     },
-  })
+  });
 
   const omxState = reactive<OmxState>({
     info: {
@@ -401,30 +400,30 @@ export const useOmx27 = () => {
       mode: 'MIDI',
       playingPattern: 0,
     },
-  })
+  });
 
-  const ccStatus = computed(() => ccByte + omxState.midi.channel - 1)
+  const ccStatus = computed(() => ccByte + omxState.midi.channel - 1);
 
   const keyStates = computed(() => ({
     pressed: 144 + omxState.midi.channel - 1, // 158,
     released: 128 + omxState.midi.channel - 1, // 142,
-  }))
+  }));
 
   for (let i = keyStatesRange.start; i < keyStatesRange.end; i++) {
-    omxState.keys[i] = false
+    omxState.keys[i] = false;
   }
 
   const selectBank = (bank: OmxBank, output: MIDIOutput | null) => {
     if (output && output.state === 'connected') {
-      output.send([0xb0, 0, bank - 1], 0)
+      output.send([0xb0, 0, bank - 1], 0);
     }
-  }
+  };
 
   const bankSelectCallback: MIDICallback = (e) => {
-    const [status, cc, value] = e.data ?? []
+    const [status, cc, value] = e.data ?? [];
 
     if (cc === undefined || status === undefined || value === undefined) {
-      return
+      return;
     }
 
     // Currently, the OMX-27 does not send any sort of update message
@@ -432,43 +431,43 @@ export const useOmx27 = () => {
     // channel de-syncing with what the web editor understands to be active
     // MIDI channel, we just check to see if the status byte falls within
     // the 176 - 191 range, which correlates to CC messages on MIDI channels 1 - 16.
-    const normalizedStatus = status - ccByte
+    const normalizedStatus = status - ccByte;
 
-    const isCcStatus = 0 <= normalizedStatus && normalizedStatus <= 15
+    const isCcStatus = 0 <= normalizedStatus && normalizedStatus <= 15;
 
     if (isCcStatus && cc === 90) {
-      bank.value = (value + 1) as OmxBank
+      bank.value = (value + 1) as OmxBank;
     }
-  }
+  };
 
   const keyStateCallback: MIDICallback = (e) => {
-    const [status, key] = e.data ?? []
+    const [status, key] = e.data ?? [];
 
     if (key === undefined || status === undefined) {
-      return
+      return;
     }
 
     if (keyStates.value.released === status || keyStates.value.pressed === status) {
-      omxState.keys[key] = keyStates.value.pressed === status
+      omxState.keys[key] = keyStates.value.pressed === status;
     }
-  }
+  };
 
   const potentiometerStateCallback: MIDICallback = (e) => {
     if (!e.data) {
-      return
+      return;
     }
 
-    const [status, control, controlValue] = e.data
+    const [status, control, controlValue] = e.data;
 
     if (status === undefined || control === undefined || controlValue === undefined) {
-      return
+      return;
     }
 
     if (ccStatus.value === status && control !== 90) {
       omxState.potentiometers.values[activePotentiometerBankCCs.value.indexOf(control)] =
-        controlValue
+        controlValue;
     }
-  }
+  };
 
   // This array contains all of the callbacks/code you want to run when MIDI messages
   // are received. Each callback is invoked with the message event and the
@@ -487,72 +486,76 @@ export const useOmx27 = () => {
     potentiometerStateCallback,
     (e) => {
       if (!e.data) {
-        return
+        return;
       }
 
-      const [status, ...data] = Array.from(e.data)
+      const [status, ...data] = Array.from(e.data);
 
       if (status === undefined) {
-        return
+        return;
       }
 
       // 252 is sent when OMX-27 saves on-device
       // Extract, check, and drop manufacturer id bytes
       if (![240, 252].includes(status) || !isEducationalManufacturer(data.splice(0, 3))) {
-        return
+        return;
       }
 
       if (data.length === 0) {
-        output.value?.send(requestConfigMessage, 0)
+        output.value?.send(requestConfigMessage, 0);
 
-        return
+        return;
       }
 
       if (data.length < 44) {
-        throw new Error('No')
+        throw new Error('No');
       }
 
-      omxState.info = extractInfo(data)
+      omxState.info = extractInfo(data);
 
-      potentiometers.value = extractPotentiometerCCs(data)
+      potentiometers.value = extractPotentiometerCCs(data);
 
-      const scaleInfo = extractScaleInfo(data)
+      const scaleInfo = extractScaleInfo(data);
 
-      omxState.scale = scaleInfo
+      omxState.scale = scaleInfo;
 
-      const midiInfo = extractMidiInfo(data)
+      const midiInfo = extractMidiInfo(data);
 
-      omxState.midi = midiInfo
+      omxState.midi = midiInfo;
 
-      omxState.sequencer = extractSequencerInfo(data)
+      omxState.sequencer = extractSequencerInfo(data);
 
-      bank.value = extractPotBank(data) as OmxBank
+      bank.value = extractPotBank(data) as OmxBank;
     },
-  ]
+  ];
 
-  const { access, output, connected } = useWebMidi(deviceManufacturer, deviceName, callbacks)
+  const { access, output, connected } = useWebMidi(
+    () => true,
+    (name) => (name ?? '').toLowerCase().includes(deviceName),
+    callbacks,
+  );
 
   // OMX-27 specific concept of connecting. i.e. The input/output ports are connected,
   // and we are awaiting receipt of the initial config state for the active bank.
-  const connecting = computed(() => connected.value && omxState.info.model === '')
+  const connecting = computed(() => connected.value && omxState.info.model === '');
 
   // Any time the value of output changes i.e. when we find a new OMX-27 output port,
   // this effect makes sure that we automatically send the config state request message.
   // see: https://vuejs.org/guide/essentials/watchers.html#watcheffect
   watchEffect(() => {
     if (output.value && connected.value) {
-      output.value.send(requestConfigMessage, 0)
+      output.value.send(requestConfigMessage, 0);
     }
-  })
+  });
 
   watchEffect(() => {
     if (!connected.value) {
       // Go ahead and wipe out the cached bank + potentiometer position data. There is
       // no guarantee that it will be valid and current when the device reconnects.
 
-      omxState.potentiometers.ccs.fill(0, 0, 25)
+      omxState.potentiometers.ccs.fill(0, 0, 25);
     }
-  })
+  });
 
   // External to this module, we expose a writeable computed where accessing
   // the value proxies to bank's value, but setting the value merely
@@ -563,14 +566,14 @@ export const useOmx27 = () => {
   // see: https://vuejs.org/guide/essentials/computed.html#writable-computed
   const externalBank = computed<OmxBank>({
     get() {
-      return omxState.potentiometers.bank
+      return omxState.potentiometers.bank;
     },
     set(newBank: OmxBank) {
-      selectBank(newBank, output.value)
+      selectBank(newBank, output.value);
 
-      bank.value = newBank
+      bank.value = newBank;
     },
-  })
+  });
 
   const saveConfig = ({ bank, ccs }: { bank: OmxBank; ccs: number[] }) => {
     // (destBank: OmxBank, mapping: Mapping) => {
@@ -626,9 +629,9 @@ export const useOmx27 = () => {
 37: F7
 */
 
-      const offset = omxBanks.length * (bank - 1)
+      const offset = omxBanks.length * (bank - 1);
 
-      potentiometers.value.splice(offset, ccs.length, ...ccs)
+      potentiometers.value.splice(offset, ccs.length, ...ccs);
 
       const sendConfigMessage: number[] = [
         ...saveConfigMessage,
@@ -642,14 +645,14 @@ export const useOmx27 = () => {
         0,
         0,
         0xf7,
-      ]
+      ];
 
-      output.value?.send(sendConfigMessage, 0)
+      output.value?.send(sendConfigMessage, 0);
 
       // Force OMX-27 to echo back updated bank mapping to configurator
       // selectBank(bank, output.value)
     }
-  }
+  };
 
   return {
     access,
@@ -662,5 +665,5 @@ export const useOmx27 = () => {
     potentiometers: omxState.potentiometers,
     omxState: readonly(omxState),
     saveConfig,
-  }
-}
+  };
+};

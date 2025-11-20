@@ -3,9 +3,11 @@ import type { MidiAccessState, MIDICallbacks } from 'src/access/types';
 
 const debug = (...message: unknown[]) => console.debug('[Web MIDI]:', ...message);
 
+type StringPredicate = (value: string | null) => boolean;
+
 export const useWebMidi = (
-  deviceManufacturer: string,
-  deviceName: string,
+  deviceManufacturer: string | StringPredicate,
+  deviceName: string | StringPredicate,
   callbacks: MIDICallbacks,
 ) => {
   const access = ref<MidiAccessState>('pending');
@@ -25,9 +27,16 @@ export const useWebMidi = (
       outputDeviceState.value === 'connected',
   );
 
+  const validateManufacturer: StringPredicate =
+    typeof deviceManufacturer === 'string'
+      ? (name) => name === deviceManufacturer
+      : deviceManufacturer;
+
+  const validateDeviceName: StringPredicate =
+    typeof deviceName === 'string' ? (name) => name === deviceName : deviceName;
+
   const validPort = (port: MIDIPort): boolean =>
-    (port.manufacturer?.includes(deviceManufacturer) ?? false) &&
-    (port.name?.includes(deviceName) ?? false);
+    validateDeviceName(port.name) && validateManufacturer(port.manufacturer);
 
   const extractPortProperties = (port: MIDIPort | null) => ({
     connection: port?.connection,
