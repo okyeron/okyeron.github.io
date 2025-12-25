@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>MidiFX - OMX-27</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "MidiFX";
+        var mkdocs_page_input_path = "MidiFX.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Home/">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Grids-Sequencer/">Grids Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">MidiFX</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#available-midifx">Available MidiFX:</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">---</li>
+      <li class="breadcrumb-item active">MidiFX</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="midifx">MidiFX</h2>
+<p>MidiFX are effects that can be applied after midi data is generated by playing keys or a sequencer and before any midi data goes out of the device. </p>
+<p>MidiFX can currently only be used within the: MIDI (MI), Chord (CH) and Euclidian (EL) modes.</p>
+<p>MidiFX currently only work on internally generated midi, but may support external midi coming in from USB in the future. </p>
+<p>MidiFX are arranged in groups of 8 MidiFX. A group of 8 is called a MidiFX Group. In the MI Mode, midi notes generated by playing the keyboard can only be routed to one MidiFX Group. In the sequencer modes, midi notes can be routed to different MidiFX groups by track. </p>
+<p>Think of a MidiFX group as a pedalboard for Midi. Midi data comes in from the left and go to MidiFX slot 1, then out of slot 1 to slot 2, until slot 8, then out of the device. </p>
+<p>You can change the active MidiFX group in the MI Mode and the Chord modes by holding aux and pressing one of the Top Keys 6-10. </p>
+<p>To enter the MidiFX submode, hold AUX, then hold or double click on a MidiFX Key(Top Keys 6-10). </p>
+<p>Top Key 1: Copy<br />
+Top Key 2: Paste<br />
+Top Key 1 + 2: Cut<br />
+Top Keys 3 - 10: Select a MidiFX slot<br />
+Bottom Keys: Add or change the type of MidiFX for a slot. You must hold down the MidiFX slot key in order to change.   </p>
+<p>To move a MidiFX slot around, you can either cut and paste, or you can hold a MidiFX slot key and turn the encoder.  </p>
+<p>There are several different MidiFX available for each slot. Select a MidiFX slot, and you can edit the parameters for that instance of a MidiFX.  </p>
+<p>Each MidiFX type has a chance parameter. If this is less than 100%, than there is a chance this effect will not be applied.  </p>
+<h3 id="available-midifx">Available MidiFX:</h3>
+<ul>
+<li>Chance: Uses randomness to determine if a note passes through: 100% or gets killed: 0%  </li>
+<li>Transpose: Transpose midi notes by semitones or octaves  </li>
+<li>Randomizer: Randomize notes by range, octaves, velocities, and note lengths.  </li>
+<li>Harmonizer: Generate multiple notes from a single note. Great for 1 key chords, or to randomly play chords by setting it's chance parameter to less than 100%  </li>
+<li>Scaler: This forces notes into a specific scale.<br />
+   -- By default this uses the global scale. Modifying the root and scale pattern parameters changes the global scale. <br />
+   -- You can turn 'GLBL' to off to make this MidiFX instance use it's own unique root and scale pattern.   </li>
+<li>Make Mono: This forces polyphonic midi notes into monophonic.   </li>
+<li>Arpeggiator: This is an advanced arpeggiator. An arpeggiator MidiFX is automatically  added to a MidiFX group if you use any of the arpeggiator AUX quick keys.<br />
+   -- Try combining the arpeggiator with other MidiFX either before or after the arpeggiator for interesting effects.<br />
+   -- Arpeggiators are reasonably resource intensive, try to avoid using more than 3 of them in a MidiFX group for optimal performance.  </li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Arpeggiator/" class="btn btn-neutral float-left" title="Arpeggiator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Note-Select/" class="btn btn-neutral float-right" title="Note Select">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Arpeggiator/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Note-Select/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

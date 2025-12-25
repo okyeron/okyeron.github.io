@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>MIDI Keyboard - OMX-27</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "MIDI Keyboard";
+        var mkdocs_page_input_path = "MIDI-Keyboard.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Home/">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">MIDI Keyboard</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#musical-scales">Musical Scales</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cc-configuration-submode">CC Configuration Submode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#midi-macro-modes">MIDI Macro Modes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#m8-macro-mode">M8 Macro Mode</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Grids-Sequencer/">Grids Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MidiFX/">MidiFX</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Modes</li>
+      <li class="breadcrumb-item active">MIDI Keyboard</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="mi-midi-keyboard">MI - MIDI Keyboard</h2>
+<p>AUX Shortcut keys: 
+- Holding AUX lets you quickly edit the selected parameter<br />
+- Bottom keys 1 and 2 are octave up/down<br />
+- Top keys 1 and 2 cycle through the selected parameter on the display<br />
+- Top key 5 disables MidiFX<br />
+- Top keys 6-10 selects a MidiFX Group to use<br />
+   - Double click or long hold a MidiFX Group to enter the MidiFX submode<br />
+- Bottom key 12 enters the arpeggiator pass-through submode<br />
+   - Pass-through allows you to edit the parameters of the arpeggiator while also still using the keyboard to play notes<br />
+- Bottom key 13 cycles through arpeggiator patterns<br />
+- Bottom key 14 cycles through arpeggiator octave ranges<br />
+- Bottom key 15 toggles the arpeggiator hold function<br />
+- Bottom key 16 toggles the arpeggiator on and off  </p>
+<p>Parameters:</p>
+<p>Page 1:
+- <code>OCT</code>: current Octave<br />
+- <code>CH</code>: active MIDI Channel 
+- <code>CC</code>: displays CC being sent when turning a potentiometer
+- <code>NOTE</code>: displays the last note number that was sent</p>
+<p>Page 2:
+- <code>RR</code>: RoundRobin MIDI Channel distribution
+- <code>RROF</code>: RR offset value <br />
+- <code>PGM</code>: MIDI program change<br />
+- <code>BNK</code>: MIDI bank select.</p>
+<p>Page 3:
+- <code>PBNK</code>: Potentiometer bank select
+- <code>THRU</code>: when "On" incoming USBMIDI is passed to TRS MIDI Out.
+- <code>MCRO</code>: MIDI Macro Mode Select (default is OFF)
+- <code>M-CH</code>: MIDI Macro Mode Channel</p>
+<p>Page 4:
+- <code>ROOT</code> : select the root note for scale mode
+- <code>SCALE</code> : select a scale or turn off scale mode
+- <code>LOCK</code> : locks to the active scale. If this is enabled, you can only play notes in the scale
+- <code>GROUP</code> : groups all the notes of the scale across the lower row of 16 keys. </p>
+<p>Page 5:
+- <code>CC</code> : press the encoder to enter the CC configuration submode.</p>
+<h4 id="musical-scales">Musical Scales</h4>
+<p>Scales can be turned on using the 4th parameter page. When a scale is enabled, the keys in the scale light up, and the root notes light up a brighter color. You can still play chromatically and out of key. </p>
+<p>Enabling the 'LOCK' param makes it so only the notes in the scale send midi notes out. </p>
+<p>Turning on the 'GROUP' parameter maps the scale across the lower row of 16 keys. The root note starts on bottom key 2 which would normally be a C in chromatic mode. </p>
+<p>These scale settings also control the scale of the Scaler MidiFX when they are set to use the global scale. </p>
+<h4 id="cc-configuration-submode">CC Configuration Submode</h4>
+<p>This mode lets you change the CC values that the potentiometers send out. </p>
+<p>Bottom Keys 1-5 let you quickly change the selected bank.  </p>
+<p>Press the AUX key to exit. </p>
+<h4 id="midi-macro-modes">MIDI Macro Modes</h4>
+<p>Midi macro modes are specialized Midi controller modes designed to be used with specific hardware that can be controlled via Midi. </p>
+<p>If a midi macro is selected, you can double click the AUX key to enter the midi macro mode, and double click the AUX key to exit the macro mode.</p>
+<p>Midi macro modes send control midi commands on the Midi Macro channel, which is <code>M-CH</code> in the parameters.</p>
+<h5 id="m8-macro-mode">M8 Macro Mode</h5>
+<p>From MI Mode, be sure <code>M8</code> is selected from the <code>MCRO</code> parameter and then double click the AUX button to enter Macro Mode.</p>
+<p><code>M-CH</code> should be set to the same value as the Control Map Channel in the M8 MIDI settings screen. Default is set to channel 10.  </p>
+<p>Double click the AUX button again to exit Macro Mode.</p>
+<p>The M8 macro mode has two pages, which change what the Keys do.</p>
+<ul>
+<li>Mute Solo Page:</li>
+</ul>
+<p>The bottom row of keys correspond to mutes (orange) and solos (red). The top "black keys" are as follows:  </p>
+<pre><code>Orange - release all mutes  
+Lime - go to mixer screen  
+Cyan - snapshot load/paste *   
+Magenta - snapshot save/enter selection mode *  
+Red - release all solos  
+Yellow - waveform display  
+Blue - play  
+</code></pre>
+<p><img src="images/omx27_m8macro.png" alt="omx27_m8_macro_mode" width="1045" height="425" /></p>
+<p>When M8 is selected from the <code>MCRO</code> parameter - potentiometers send on the <code>M-CH</code> MIDI channel in both regular keyboard mode and in the macro mode. However, notes played on keys send on the currently selected <code>CH</code> MIDI channel.</p>
+<p>* <strong>Notes:</strong><br />
+<em> M8 must be on the Mixer view for snapshots.<br />
+</em> Snapshot Load uses the M8 key combo [SHIFT]+[OPTION]. On any view with a grid (song, chain, phrase, table, etc.) this key enters selection mode.<br />
+* Snapshot Save uses the M8 key combo [SHIFT]+[EDIT]. On any view with a grid this key pastes the copied contents from selection mode.  </p>
+<ul>
+<li>Control Page:</li>
+</ul>
+<p>This page lets you navigate the M8 using the keys on the device instead of the keys on the M8.</p>
+<p>Top Key 1 and Bottoms Keys 1-3: These correspond to the directional arrow keys. </p>
+<p>Top Key 4: Option Key
+Top Key 5: Edit Key
+Bottom Key 6: Shift Key
+Bottom Key 7: Play Key</p>
+<p>The right half of the Keyboard is a 1-octave midi keyboard that sends notes on the same midi channel as when not in macro mode. </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Modes/" class="btn btn-neutral float-left" title="Modes Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Chords/" class="btn btn-neutral float-right" title="Chords">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Modes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Chords/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

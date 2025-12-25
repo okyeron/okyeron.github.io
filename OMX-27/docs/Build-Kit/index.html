@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>OMX-27 version 3 - OMX-27</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "OMX-27 version 3";
+        var mkdocs_page_input_path = "Build-Kit.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Home/">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Grids-Sequencer/">Grids Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MidiFX/">MidiFX</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">OMX-27 version 3</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="omx-27-version-3">OMX-27 version 3</h1>
+<h3 id="please-read-this-entire-guide-first">PLEASE READ THIS ENTIRE GUIDE FIRST</h3>
+<h2 id="before-you-start">Before you start</h2>
+<h3 id="notes-reminders">Notes / Reminders</h3>
+<ul>
+<li>
+<p>Kit PCBs have been flashed and tested. They should be fully functional. The microprocessor, LEDs, OLED, etc. are already assembled. Thru-hole soldering is required for the pots, encoder and switches.</p>
+</li>
+<li>
+<p>For the Cherry MX kit - the keyswitches are snapped into the keyplate first (before soldering them). </p>
+</li>
+<li>
+<p>For the Choc kits - the keyplate fits over the switches and it can be attached later.  </p>
+</li>
+<li>
+<p>Don't forget to put the spacer layer(s) in-between the main PCB and the keyplate before you solder all the switches.</p>
+</li>
+</ul>
+<h3 id="soldering-tips">Soldering Tips</h3>
+<p>I work with a fine point or chisel tip on my iron at 380C-400C. With this setup I typically hold the iron on a pad for about 2 seconds and then apply a bit of solder and then hold the iron there for anything 2-3 seconds. You want to watch for the solder to flow around the joint, but not to hold the iron there forever.</p>
+<p>See <a href="https://learn.adafruit.com/adafruit-guide-excellent-soldering">Adafruit's guide to excellent soldering</a> for lots of good tips and tricks.</p>
+<h1 id="build-video">Build Video</h1>
+<p><a href="https://youtu.be/jUWWuaacoz4">Build/assembly</a> </p>
+<hr />
+<h1 id="kit-build-instructions">Kit Build Instructions</h1>
+<p>The microprocessor, LEDs, OLED, etc. are already assembled. Thru-hole soldering is required for the pots, encoder and switches. </p>
+<h2 id="pots-and-encoder">POTS AND ENCODER</h2>
+<p>Snap pots and encoders into place and solder.</p>
+<p>You may need to gently squeeze the snap-in mounting pins together a tiny bit to get the pots to snap into place.</p>
+<p>Note - You don't need loads of solder on the lugs - just enough to keep them in place.</p>
+<p><img alt="pots soldered" src="buildpix/pots-soldered.jpg" /></p>
+<hr />
+<h2 id="stop-here-and-test">STOP HERE AND TEST</h2>
+<p>At this point you can do a quick test.  </p>
+<p>Plug into USB power and the OLED should display the startup routine. Then the LEDs will light up in a "rainbow" pattern and the main screen will show on the display. Turn the encoder to the right to get to the second page and you can test each of the pots - which should show the CC number and value on the display.  </p>
+<p>If you get random values for the CCs, you may need to check and reflow the solder on the potentiometer pins.</p>
+<p>If the display does not light up or you don't see LEDs light up when you connect to USB power, double check the Power Switch on the right edge of the device. The "On" position is towards the USB port.</p>
+<hr />
+<h1 id="continue-building">Continue building</h1>
+<h2 id="case-parts">Case Parts</h2>
+<p><strong>Carefully</strong> remove the paper backing from the acrylic base plate and set it aside.</p>
+<p>If the brown paper backing material does not come off easily, you can often rub your finger along the surface to get the paper backing to "roll up" a bit </p>
+<p>Cherry MX kits have <strong>two</strong> foam spacer layers. The Choc kit has <strong>one</strong> foam spacer layer.</p>
+<p>For the Cherry MX kit, you will need the PCB "keyplate" for the next step. For the Choc kit, set the keyplate aside until later.</p>
+<h2 id="key-switch-prep-mx-kit">Key Switch Prep (MX Kit)</h2>
+<p>Check the orientation of the switches. The pins go towards the bottom-half and the LED window is at the top.  </p>
+<p>Snap all the key-switches into the keyplate (from the top - keyplate top has text labels for the MIDI anc CV jacks). </p>
+<p>The switches may be a tight fit in the keyplate. Be sure they are snapped all the way into place.</p>
+<p>Set the two black foam spacer layers on the main PCB and align it around the various components. Then set the keyplate with switches into place to be sure all the pins line up and everything is nice and flat. </p>
+<p>Inspect from the bottom that you have 2 pins sticking out for each switch. You may need to gently bend key-switch pins into place if they got slightly bent in transport.</p>
+<p>Use the three of included case screws/nuts to fix everything together for soldering. I suggest using the holes down the middle of the case. This will ensure the key switches are held in place for soldering and that everything will remain flat.</p>
+<h2 id="key-switch-prep-choc-kit">Key Switch Prep (Choc Kit)</h2>
+<p>Check the orientation of the switches. The pins go towards the bottom-half and the LED window at the top.  </p>
+<p>Insert all the key-switches into the PCB.</p>
+<h2 id="switch-soldering">Switch Soldering</h2>
+<p>I suggest going thru and tack-soldering one pin for each switch (just enough solder to hold it in place). Then for each switch - use your not-soldering-iron hand to fully press each switch with your thumb on the bottom side, and re-heat the tacked solder joint. In some cases the swtich might not have been fully inserted and it will snap into place when you do this.</p>
+<p>After all the switches look nice, make another pass and solder the other pin for each switch. Make a third pass and add a touch of solder if needed to the pins you tacked in place earlier.</p>
+<h2 id="assembly">Assembly</h2>
+<p>Remove the screws/nuts if you used them earlier and then reassemble with the bottom plate.</p>
+<p>The nuts fit into the captive cutouts on the bottom plate.</p>
+<p>There are three longer screws which are used for the USB protector.</p>
+<p><img alt="bottom plate" src="buildpix/bottom-plate-nocover.jpg" /></p>
+<p><img alt="top plate" src="buildpix/top-plate-nocover.jpg" /></p>
+<h3 id="usb-protectorcover">USB Protector/Cover</h3>
+<p>Add the cover plate with the three remaining (longer) screws/nuts.</p>
+<p><img alt="top plate cover" src="buildpix/top-plate-cover.jpg" /></p>
+<h3 id="knobs">Knobs</h3>
+<p>Push the knobs onto the pots, make sure the marking on the knob aligns with the marking on the pot. Be carefull not to press the knobs on too hard if you want to change them later. They can be difficult to remove if pressed on too hard.</p>
+<p><img alt="pots closeup" src="buildpix/pots-closeup.jpg" /></p>
+<h3 id="keycaps">Keycaps</h3>
+<p>Then install the keycaps with the window on the top for the LEDs.</p>
+<p><img alt="keycap-install" src="buildpix/keycap-install.jpg" /></p>
+<h2 id="midi-test">MIDI test</h2>
+<p>You can use the <a href="../browser_test/index.html">browser_test</a> script to show USB-MIDI input to your computer. Then you can check to be sure the pots are sending CCs and that you get MIDI note-ons/note-offs when you test each keyswitch's pads. Be sure you have the <code>oct</code> (octave) set to 4 on the display (change with encoder knob).</p>
+<p>Also test the Hardware MIDI OUT 1/8" jack (with an appropriate adapter if needed) and a synth of your choice. Check the MIDI A/B switch position for your particular setup (try both to be sure you have the right one).</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

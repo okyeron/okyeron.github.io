@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Grids Sequencer - OMX-27</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Grids Sequencer";
+        var mkdocs_page_input_path = "Grids-Sequencer.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Home/">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Grids Sequencer</a>
+    <ul class="current">
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MidiFX/">MidiFX</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Modes</li>
+      <li class="breadcrumb-item active">Grids Sequencer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="gr-grids-sequencer">GR - Grids Sequencer</h2>
+<p>An adaptation of the Mutable Instruments "Topographic drum sequencer" module.</p>
+<p>See the original <a href="https://mutable-instruments.net/modules/grids/manual/">Grids Manual</a> [or a video ?] for more.</p>
+<p>Grids is a 4-channel/instrument MIDI trigger generator specialized in the creation and sculpting of rhythmic patterns. The "grid" refers to a map or library of preset drum patterns arranged in a 5x5 grid - which you can steer using X/Y controls.</p>
+<p>Typical drum use would be Bass Drum, Snare, Closed HiHat, Open HiHat (The default note numbers are mapped to these in the GM drum map).</p>
+<p><strong>Quick Keys</strong>
+Grids has many quick keys. Pressing these keys quickly jumps the display to select a specific parameter which can be adjusted with the encoder.</p>
+<p>Keys/Commands: <br />
+ - AUX is sequencer Start/Stop<br />
+ - Pots 1-4 control "event density" (probability) of 4 instruments - values are shown on display<br />
+ - Pot 5 sets resolution (1/2, 1, 2)
+ - Bottom row keys 1-8 are quick-keys for X/Y values - hold a key and turn encoder to change that instrument's X or Y value. You can hold multiple keys to change X/Y on multiple instruments at the same time<br />
+ - LEDs on Keys 9-12 show trigger activity of the playing pattern<br />
+ - Lighted Keys 13,14,16 are quick keys for ACNT/XAOS/BPM
+ - Pattern keys (black keys) can load "snapshots" of density/x/y settings
+ - F2 + Pattern saves a "snapshot" current state of that pattern. Patterns do not automatically save, this is a performance feature, allowing you to load a pattern, tweak it, then quickly load back to it's original state  </p>
+<p>Instrument View Mode:
+  - F1 + Keys 1-4 jump to Instrument View. This shows the current pattern on that instrument (over 2 pages since patterns are 32 steps) and playhead. The LED render of the pattern will update to show each page while playing <br />
+  - Top row lighted keys(A#1, C#2, D#2, F#2) are quick-keys for ACNT/X/Y/XAOS
+  - First 4 keys of bottom row will not be specially lit since they are rendering the pattern, but will allow you to quickly select a different instrument<br />
+  - F2 is a quick key to jump to params page to set Note Number, MIDI Channel and BPM<br />
+  - Key 3(F#1) in Instrument View is a quick key for Midi Channel for the instrument<br />
+  - AUX-key exits Instrument View </p>
+<p>Midi Keyboard Mode:
+   - F1 plus bottom key 16 enters into the Midi Keyboard for sending CCs or playing over the top of the sequencer. Everything works the same as mode MI<br />
+   - Hold Aux and bottom key 16 to exit out of the Midi Keyboard mode  </p>
+<p>Parameters:<br />
+Page 1 Event Densities:
+- <code>DS 1</code>: event density - instrument 1<br />
+- <code>DS 2</code>: event density - instrument 2<br />
+- <code>DS 3</code>: event density - instrument 3<br />
+- <code>DS 4</code>: event density - instrument 4  </p>
+<p>Page 2:
+- <code>NT 1</code>: note number - instrument 1<br />
+- <code>NT 2</code>: note number - instrument 2<br />
+- <code>NT 3</code>: note number - instrument 3<br />
+- <code>NT 4</code>: note number - instrument 4  </p>
+<p>Page 3:
+- <code>ACNT</code>: accent amount (larger number is more variation) - applies to all instruments <br />
+- <code>X</code>: X amount for selected instrument<br />
+- <code>Y</code>: Y amount for selected instrument<br />
+- <code>XAOS</code>: chaos amount - applies to all instruments  </p>
+<p>Page 4 - Main Mode:
+- <code>BPM</code>: tempo  </p>
+<p>Page 4 - Instrument View Active:
+- <code>NT -</code>: note number for active instrument<br />
+- <code>M-CHAN</code>: midi chanel for active instrument<br />
+- <code>BPM</code>: tempo</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Sequencer-2/" class="btn btn-neutral float-left" title="Sequencer 2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Euclidian-Sequencer/" class="btn btn-neutral float-right" title="Euclidian Sequencer">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Sequencer-2/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Euclidian-Sequencer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
