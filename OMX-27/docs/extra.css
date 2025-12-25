@@ -1,0 +1,117 @@
+pre {
+	background-color: #191919 !important;
+font-weight: bold;
+    font-family: "JetBrains Mono", monospace;
+}
+.highlight .k {
+    color: #00c739;
+}
+
+.highlight .na {
+    color: #61b0ff;
+}
+.highlight .nc {
+    color: #ffcb6c;
+}
+.highlight .nf {
+    color: #ffcb6c;
+}
+.highlight .s1 {
+    color: #4bbcff;
+}
+.highlight .o {
+    color: #bcbcbc;
+}
+.highlight .nb {
+    color: #00e943;
+}
+.highlight .mi {
+    color: #ff7e3a;
+}
+.highlight .sd {
+    color: #7e9cff;
+}
+
+
+/*Other*/
+a {
+    color: #3ab1ff;
+}
+a:visited {
+	color: #6ea8fe;
+}
+
+.wy-nav-content {
+	background: #232323;
+	color: aliceblue;
+}
+.wy-menu-vertical li.current {
+    background: #232323;
+
+}
+.wy-menu-vertical li.on a, .wy-menu-vertical li.current>a {
+    color: #404040;
+    background: #00375b;
+    border-color: transparent !important;
+}
+.wy-menu-vertical li.current ul {
+    display: block;
+     border-color: transparent !important;
+
+}
+.wy-menu-vertical li.current a:hover {
+    background: #444;
+}
+.wy-menu-vertical li.current a {
+    color: #f8f8f8;
+    border-color: transparent;
+
+
+}
+.method dt, .class dt, .data dt, .attribute dt, .function dt, .descclassname, .descname {
+	background-color: #525252 !important;
+	color: white !important;
+}
+.toc-backref {
+	color: grey !important;
+}
+code.literal {
+	background-color: #2d2d2d !important;
+	border: 1px solid #6d6d6d !important;
+}
+.wy-nav-content-wrap {
+	background-color: rgba(0, 0, 0, 0.6) !important;
+}
+.wy-alert-title, .rst-content .admonition-title {
+    background: #00375b;
+
+}
+.wy-table-bordered-all, .rst-content table.docutils ,.rst-content table.docutils th,
+.wy-table-bordered-all td, .rst-content table.docutils td {
+    border-color: #e1e4e5;
+    border-color: #3d3d3d !important;
+}
+
+.wy-side-nav-search {
+    background-color: #363636;
+}
+
+wy-table-odd td, .wy-table-striped tr:nth-child(2n-1) td, .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+    background-color: #363636;
+}
+.wy-table thead, .rst-content table.docutils thead, .rst-content table.field-list thead {
+    color: #e5e5e5;
+
+}
+.sidebar {
+	background-color: #191919 !important;
+}
+.sidebar-title {
+	background-color: #2b2b2b !important;
+}
+.xref, .py-meth {
+	color: #7ec3e6 !important;
+}
+.admonition, .note {
+	background-color: #2d2d2d !important;
+}
