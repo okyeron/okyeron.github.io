@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Concepts - OMX-27 docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Concepts";
+        var mkdocs_page_input_path = "Concepts.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27 docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Concepts</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#layout">Layout</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#encoder">Encoder</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aux-key">AUX Key</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#potentiometers">Potentiometers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#key-switches">Key Switches</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#black-keys-sharpflat-keyboard-keys">"Black keys" (sharp/flat keyboard keys)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#white-keys-bottom-row">"White keys" (bottom row)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#changing-modes">Changing Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sub-modes">Sub-Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#macro-modes">Macro-Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#saving-session-state">Saving Session State</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#screensaver">Screensaver</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Grids-Sequencer/">Grids Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MidiFX/">MidiFX</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27 docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Concepts</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="concepts">Concepts <a name="concepts"></a></h2>
+<p>OMX-27 is a MIDI Keyboard and Sequencer. Both USBMIDI (in/out) and hardware MIDI in/out (via 1.8" TRS jack) are supported. Various "modes" can be accessed with the encoder and specific functions, parameters or sub-modes can be accessed with the encoder or key-presses/key-combinations.</p>
+<p>Sequencer modes have 8 patterns (tracks). Sequencer modes currently send MIDI clock and transport control (start/stop) by default.</p>
+<p>CV pitch output is limited to about 4.3 octaves.</p>
+<p>USBMIDI should be plug-and-play with any USBMIDI compatible host. iPad works great with the camera connection kit or a <a href="https://www.amazon.com/gp/product/B09KLXNYHL">lightning to usb micro cable</a>. Hardware MIDI TRS output jack is switchable between Type-A and Type-B.</p>
+<h3 id="layout">Layout <a name="layout"></a></h3>
+<p><img alt="images/omx27_layout4.png" src="../images/omx27_layout4.png" /></p>
+<h3 id="encoder">Encoder <a name="encoder"></a></h3>
+<p>The encoder is the knob directly to the right of the display.</p>
+<p>You can use the encoder to modify parameters and change the selected parameter and page. </p>
+<p>Short press the encoder once to toggle between selecting parameters and editing them. The selected parameter will be highlighted to reflect which mode you are in. </p>
+<p>Long press the encoder to change to a different mode. Once in mode selection, turn the encoder, then short-press to enter the selected mode.</p>
+<h3 id="aux-key">AUX Key <a name="auxkey"></a></h3>
+<p>The top left key is the AUX Key. </p>
+<p>In the MIDI Keyboard and Chords modes, holding this key gives you access to shortcuts. </p>
+<p>In the sequencer modes, this key is a dedicated start stop button. </p>
+<p>This key is also used in many places to quickly edit a parameter. To do this, hold down aux and turn the encoder to quickly edit the selected parameter without needing to press the encoder. If the encoder was already pressed, it is locked in edit mode and the aux shortcut won't work until you exit by pressing the encoder again.</p>
+<p>If you are in a submode, the AUX Key can be used to exit out to the main mode. </p>
+<h3 id="potentiometers">Potentiometers <a name="potentiometers"></a></h3>
+<p>The OMX-27 has 5 potentiometers which are mapped to send continuous controller MIDI messages (CCs). There are 5 banks of CCs available. You can switch banks using the PBNK parameter in the MI and DRUM Modes. </p>
+<p>Bank A is selected by default with the CCs set to controller numbers 21, 22, 23, 24 and 7 (volume). </p>
+<p>The CC's can also be reconfigured on device in the CC Config page, which is found on the last page of the MI Mode parameters. You can also configure the CC banks all at once via the <a href="https://okyeron.github.io/web-editor/">web configurator</a>.</p>
+<h3 id="key-switches">Key Switches <a name="keyswitches"></a></h3>
+<p>The functions of the key switches changes depending on which mode you are in. </p>
+<p>In MI Mode, the key switches work like a normal MIDI keyboard. </p>
+<p>In other modes, the keys have specific functions depending on the mode or submode. Most key interactions should also light up that key's LED.</p>
+<p>In this documentation keys will be referred to by number, from left to right and position, top or bottom. Mentions of "White" or "Black" keys are in reference to a standard piano keyboard layout.</p>
+<h4 id="black-keys-sharpflat-keyboard-keys">"Black keys" (sharp/flat keyboard keys)</h4>
+<p>The top row (black) keys are referenced as <strong>Top 1-10</strong>.</p>
+<p>The first 2 black keys are Function Keys (FUNC)
+- F1 - First black key
+- F2 - Second black key</p>
+<p>FUNC keys are used to perform various shortcuts depending on the mode. </p>
+<p>The other black key functions depend on the current mode.</p>
+<h4 id="white-keys-bottom-row">"White keys" (bottom row)</h4>
+<p>The bottom row (white) keys are referenced as <strong>Bottom 1-16</strong>.</p>
+<p>These have different functions depending on the current mode. For example, in sequencer modes, these are the sequencer step on/off keys.</p>
+<h3 id="changing-modes">Changing Modes <a name="changingmodes"></a></h3>
+<p>The OMX-27 has multiple modes. Each is independent - only one mode can be used at a time. </p>
+<p>Long press the encoder to change modes. </p>
+<h3 id="sub-modes">Sub-Modes <a name="submodes"></a></h3>
+<p>Certain actions will cause you to enter a sub-mode, some examples could be editing MidiFX, configuring the pots, or saving/loading presets. If you are in a sub-mode, the AUX key will typically be flashing or red. A quick press of the AUX key will exit the sub-mode. </p>
+<h3 id="macro-modes">Macro-Modes <a name="macromodes"></a></h3>
+<p>Macro modes are like sub-modes in that they are an alternate mode. Macro-modes can take over the keys, display, encoder, and pots. </p>
+<p>Macro modes are specialized modes designed to be used to control external gear like the M8, Norns, and Deluge. </p>
+<p>You can enter and exit macro modes by double clicking the AUX key in the root level mode. </p>
+<h3 id="saving-session-state">Saving Session State <a name="savingsess"></a></h3>
+<p>To save your current session to memory, first enter Mode Select by holding the encoder. While this is active press AUX to save. </p>
+<p>The next time you restart your device, your last active mode will be loaded, and saved patterns and settings will be recalled. </p>
+<p>Saving is a long operation and not recommended to do while in the middle of a performance. </p>
+<h3 id="screensaver">Screensaver <a name="screensaver"></a></h3>
+<p>After a default timeout (3 minutes), the display will be blanked and in MI Mode a "screensaver" animation will show on the LEDs. The rightmost pot (#5) can be turned to adjust the color. Touching any keys or any of the other pots will exit the screensaver.  </p>
+<p>In S1/S2 the screen will blank, but there is no LED animation.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Modes/" class="btn btn-neutral float-right" title="Modes Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Modes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
