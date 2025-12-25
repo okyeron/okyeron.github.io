@@ -61,6 +61,20 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#white-keys-bottom-row">"White keys" (bottom row)</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#note-select-step-parameters">Note Select / Step Parameters</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#step-events-type">Step Events (TYPE):</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trig-conditions-ab-ratios-cond__">Trig conditions - A/B Ratios (COND):__</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-record">Step Record</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pattern-parameters">Pattern Parameters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pattern-parameters-sequence-reset-automation">Pattern Parameters: Sequence Reset Automation</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
@@ -72,6 +86,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Drum/">Drum</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Macro-Modes/">MIDI Macro Modes</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">---</span></p>
@@ -117,6 +135,8 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="s1-sequencer-1">S1 - Sequencer 1</h2>
+<p>Step sequencer - One pattern active at a time.</p>
+<p>Layout: </p>
 <h4 id="black-keys-sharpflat-keyboard-keys">"Black keys" (sharp/flat keyboard keys)</h4>
 <p>The first 2 black keys are Function Keys (FUNC)
 - F1 - First black key
@@ -141,16 +161,100 @@
  - AUX-key exits sub-modes<br />
  - Hold F1 + F2: first 4 "white keys" select "page" of the current pattern (depending on pattern length)  </p>
 <p>Parameters:<br />
+(see below) </p>
+<h3 id="note-select-step-parameters">Note Select / Step Parameters</h3>
+<p>Long press a step key to enter this mode. Here you can change the note values (note number, velocity, note length and octave), set CC parameter-lock values with the knobs, and set step parameters (step events, step probability, trig conditions).</p>
+<p>While in Note Select, the rightmost and leftmost keys will blink (orange or blue)- these 2 keys will shift the current octave up or down.</p>
+<p>Press AUX to exit Note Select.  </p>
+<p>Parameters:  </p>
+<p>Page 1:<br />
+- <code>NOTE</code>: midi note number<br />
+- <code>OCT</code>: octave<br />
+- <code>VEL</code>: note velocity<br />
+- <code>LEN</code>: note length in steps (1-16)   </p>
+<p>Page 2:<br />
+- <code>TYPE</code>: step event type (see below)<br />
+- <code>PROB</code>: percentage of the step triggering<br />
+- <code>COND</code>: trig conditions (see below)  </p>
+<p>Page 3: (set CC parameter-locks)<br />
+- <code>L-1</code>: pot 1 p-lock value for this step<br />
+- <code>L-2</code>: pot 2 p-lock value for this step<br />
+- <code>L-3</code>: pot 3 p-lock value for this step<br />
+- <code>L-4</code>: pot 4 p-lock value for this step  </p>
+<p>Touching any potentiometer while in Note Select will set that p-lock value.</p>
+<p>To reset/erase a p-lock - Highlight the parameter and turn the encoder to the left.</p>
+<h4 id="step-events-type">Step Events (TYPE):</h4>
+<p>"-" mute
+"+" play
+"1" reset to first step
+"&gt;&gt;" set parttern direction forward
+"&lt;&lt;" set parttern direction reverse
+"#?" jump to random step number
+"?" set random event (of any of the previous events) for that one step</p>
+<h4 id="trig-conditions-ab-ratios-cond__">Trig conditions - A/B Ratios (COND):__</h4>
+<p>Play that step on the A cycle of B total cycles (or bars) of the pattern. Default is 1:1 (every time).
+First number - play step on that cycle thru the pattern
+Second number - resets the counter after that pattern cycle.</p>
+<p>So 1:4 would play on the first cycle, not play on the next three and then reset (after the 4th cycle). 3:8 would play only the 3rd cycle and reset after the 8th.</p>
+<h4 id="step-record">Step Record</h4>
+<p>(SH-101-ish style note entry)</p>
+<p>Holding F1 + a Pattern Key will enter Step Record Mode.</p>
+<p>Enter notes from the keyboard and the sequence step will automatically advance to the next step. Change knob 1-4 positions to set a CC parameter lock for that step. Knob #5 (far right) will enter a velocity value for that step (there is no visual feedback when entering values from the knobs.</p>
+<p>If you want to skip steps while entering notes, use the encoder button to select the STEP parameter and rotate to the step you want to change/update. While a step is selected, you can also record plocks/velocity for that step with the knobs without changing the note value. </p>
+<p>There are two pages of parameters in Step Record. First is the current octave (OCT), step number (STEP), note-value (NOTE), and pattern number (PTN). Second shows the step event parameters TYPE, PROB and COND as described above.</p>
+<p>Press AUX to exit Step Record.</p>
+<p>Keys/Commands:<br />
+- Potentiometers 1-4 set a CC parameter lock<br />
+- Potentiometers 5 sets a step velocity <br />
+- AUX exit this sub-mode  </p>
+<h3 id="pattern-parameters">Pattern Parameters</h3>
+<p>Long press Pattern Key to enter Pattern Params Mode.</p>
+<p>Turning the encoder will show different pages of parameters.</p>
+<p>A short-press on the encoder will select the active parameter for editing. Press the encoder repeatedly until nothing is selected to change pages.</p>
+<p>Press AUX to exit Pattern Parameters.</p>
+<p>Parameters:  </p>
+<p>Page 1:<br />
 - <code>PTN</code>: selected pattern<br />
-- <code>TRSP</code>: transpose (by semitones)<br />
-- <code>SWNG</code>: swing<br />
-- <code>BPM</code>: tempo   </p>
+- <code>LEN</code>: pattern length<br />
+- <code>ROT</code>: rotation<br />
+- <code>CH</code>: midi channel   </p>
+<p>Page 2 (see Sequence Reset Automation below):<br />
+- <code>START</code>: steart<br />
+- <code>END</code>: end<br />
+- <code>FREQ</code>: frequency<br />
+- <code>PROB</code>: probability   </p>
+<p>Page 3:<br />
+- <code>RATE</code>: default note length (1/64th to whole note)  <br />
+- <code>SOLO</code>: MIDI solo   </p>
+<p>Keys/Commands: 
+- Step Keys set pattern length<br />
+- F1 + pattern copies pattern<br />
+- F2 + pattern pastes pattern (to other pattern slot)<br />
+- F1 + F2 + pattern clears the pattern back to GM drum map default (and clears all plocks)  </p>
+<p>(you can paste multiple times - paste buffer should stay the same until you copy again)</p>
+<p>MIDI solo:
+Set a pattern to MIDI solo and you can play the keyboard while that pattern is selected.</p>
+<p>Note - once in MIDI solo, you will only be able to change the active pattern by using the encoder knob.</p>
+<h3 id="pattern-parameters-sequence-reset-automation">Pattern Parameters: Sequence Reset Automation</h3>
+<p>This is located on the second page of pattern parameters</p>
+<p>The goal of this "Sequence Reset Automation" feature was developed in the spirit of classic sequencers that can generate more complex sequences from simpler ones by setting any step in a given sequence to trigger a "reset" based on some constraint (i.e., number of cycles, probability, random).</p>
+<p>Note - This behavior is a pattern-based solution. You can also execute step-based resets in Step Parameters.</p>
+<p>Settings:</p>
 <ul>
-<li><code>SOLO</code>: set the current pattern to MIDI Solo  </li>
-<li><code>LEN</code>: pattern length  </li>
-<li><code>RATE</code>: default note length (1/64th to whole note)  </li>
-<li><code>CV</code>: enable to send CV from this pattern   </li>
+<li>
+<p>START (Currently 0 - PatternLength-1): Use this to set the start step in current pattern to reset to for beginning a new cycle.</p>
+</li>
+<li>
+<p>END (Currently 0 - PatternLength-1): Use this to set the last step in current sequence to end/reset pattern cycles. This in essence is the step that will be used to trigger resets.</p>
+</li>
+<li>
+<p>FREQ of trigger reset (i.e., every X sequence cycle iterations)</p>
+</li>
+<li>
+<p>PROB of triggering reset (percentage)</p>
+</li>
 </ul>
+<p>NOTE: Setting STEP = 0 and PROB = 1 dictates random trigger steps which can lead to interesting results by jumping to random position/step.</p>
               
             </div>
           </div><footer>

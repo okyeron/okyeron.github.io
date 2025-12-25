@@ -61,6 +61,18 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Grids Sequencer</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#quick-keys">Quick Keys</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#keyscommands">Keys/Commands:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instrument-view-mode">Instrument View Mode:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#midi-keyboard-mode">Midi Keyboard Mode:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#menu-pages">Menu Pages</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
@@ -68,6 +80,10 @@
                   <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Drum/">Drum</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Macro-Modes/">MIDI Macro Modes</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">---</span></p>
@@ -117,29 +133,35 @@
 <p>See the original <a href="https://mutable-instruments.net/modules/grids/manual/">Grids Manual</a> [or a video ?] for more.</p>
 <p>Grids is a 4-channel/instrument MIDI trigger generator specialized in the creation and sculpting of rhythmic patterns. The "grid" refers to a map or library of preset drum patterns arranged in a 5x5 grid - which you can steer using X/Y controls.</p>
 <p>Typical drum use would be Bass Drum, Snare, Closed HiHat, Open HiHat (The default note numbers are mapped to these in the GM drum map).</p>
-<p><strong>Quick Keys</strong>
-Grids has many quick keys. Pressing these keys quickly jumps the display to select a specific parameter which can be adjusted with the encoder.</p>
-<p>Keys/Commands: <br />
- - AUX is sequencer Start/Stop<br />
- - Pots 1-4 control "event density" (probability) of 4 instruments - values are shown on display<br />
- - Pot 5 sets resolution (1/2, 1, 2)
- - Bottom row keys 1-8 are quick-keys for X/Y values - hold a key and turn encoder to change that instrument's X or Y value. You can hold multiple keys to change X/Y on multiple instruments at the same time<br />
- - LEDs on Keys 9-12 show trigger activity of the playing pattern<br />
- - Lighted Keys 13,14,16 are quick keys for ACNT/XAOS/BPM
- - Pattern keys (black keys) can load "snapshots" of density/x/y settings
- - F2 + Pattern saves a "snapshot" current state of that pattern. Patterns do not automatically save, this is a performance feature, allowing you to load a pattern, tweak it, then quickly load back to it's original state  </p>
-<p>Instrument View Mode:
-  - F1 + Keys 1-4 jump to Instrument View. This shows the current pattern on that instrument (over 2 pages since patterns are 32 steps) and playhead. The LED render of the pattern will update to show each page while playing <br />
-  - Top row lighted keys(A#1, C#2, D#2, F#2) are quick-keys for ACNT/X/Y/XAOS
-  - First 4 keys of bottom row will not be specially lit since they are rendering the pattern, but will allow you to quickly select a different instrument<br />
-  - F2 is a quick key to jump to params page to set Note Number, MIDI Channel and BPM<br />
-  - Key 3(F#1) in Instrument View is a quick key for Midi Channel for the instrument<br />
-  - AUX-key exits Instrument View </p>
-<p>Midi Keyboard Mode:
-   - F1 plus bottom key 16 enters into the Midi Keyboard for sending CCs or playing over the top of the sequencer. Everything works the same as mode MI<br />
-   - Hold Aux and bottom key 16 to exit out of the Midi Keyboard mode  </p>
-<p>Parameters:<br />
-Page 1 Event Densities:
+<h3 id="quick-keys">Quick Keys</h3>
+<p>Grids has many quick keys. Pressing these keys quickly jumps the display to select a specific parameter which can be adjusted with the encoder.</p>
+<h4 id="keyscommands">Keys/Commands:</h4>
+<ul>
+<li>AUX is sequencer Start/Stop  </li>
+<li>Pots 1-4 control "event density" (probability) of 4 instruments - values are shown on display  </li>
+<li>Pot 5 sets resolution (1/2, 1, 2)</li>
+<li>Bottom row keys 1-8 are quick-keys for X/Y values - hold a key and turn encoder to change that instrument's X or Y value. You can hold multiple keys to change X/Y on multiple instruments at the same time  </li>
+<li>LEDs on Keys 9-12 show trigger activity of the playing pattern  </li>
+<li>Lighted Keys 13,14,16 are quick keys for ACNT/XAOS/BPM</li>
+<li>Pattern keys (black keys) can load "snapshots" of density/x/y settings</li>
+<li>F2 + Pattern saves a "snapshot" current state of that pattern. Patterns do not automatically save, this is a performance feature, allowing you to load a pattern, tweak it, then quickly load back to it's original state  </li>
+</ul>
+<h4 id="instrument-view-mode">Instrument View Mode:</h4>
+<ul>
+<li>F1 + Keys 1-4 jump to Instrument View. This shows the current pattern on that instrument (over 2 pages since patterns are 32 steps) and playhead. The LED render of the pattern will update to show each page while playing   </li>
+<li>Top row lighted keys(A#1, C#2, D#2, F#2) are quick-keys for ACNT/X/Y/XAOS</li>
+<li>First 4 keys of bottom row will not be specially lit since they are rendering the pattern, but will allow you to quickly select a different instrument  </li>
+<li>F2 is a quick key to jump to params page to set Note Number, MIDI Channel and BPM  </li>
+<li>Key 3(F#1) in Instrument View is a quick key for Midi Channel for the instrument  </li>
+<li>AUX-key exits Instrument View </li>
+</ul>
+<h4 id="midi-keyboard-mode">Midi Keyboard Mode:</h4>
+<ul>
+<li>F1 plus bottom key 16 enters into the Midi Keyboard for sending CCs or playing over the top of the sequencer. Everything works the same as mode MI  </li>
+<li>Hold Aux and bottom key 16 to exit out of the Midi Keyboard mode  </li>
+</ul>
+<h3 id="menu-pages">Menu Pages</h3>
+<p>Page 1 Event Densities:
 - <code>DS 1</code>: event density - instrument 1<br />
 - <code>DS 2</code>: event density - instrument 2<br />
 - <code>DS 3</code>: event density - instrument 3<br />

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>MIDI Macro Modes - OMX-27 docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "MIDI Macro Modes";
+        var mkdocs_page_input_path = "MIDI-Macro-Modes.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> OMX-27 docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Concepts/">Concepts</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Chords/">Chords</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-1/">Sequencer 1</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Sequencer-2/">Sequencer 2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Grids-Sequencer/">Grids Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Euclidian-Sequencer/">Euclidian Sequencer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Drum/">Drum</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">MIDI Macro Modes</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#m8-macro-mode">M8 Macro Mode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#norns-macro-mode">Norns Macro Mode</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#norns-setup">Norns Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#norns-buttons">Norns Buttons</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#norns-encoders">Norns Encoders</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#norns-navigation">Norns Navigation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#deluge-macro-mode">Deluge Macro Mode</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#deluge-setup">Deluge Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#omx-setup">OMX Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#keys-leds">KEYS &amp; LEDS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#keys-leds-aux-button-held">KEYS &amp; LEDS - AUX Button Held</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#select-a-parameter">Select a parameter</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-octave">Change octave</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#lock-the-aux-view">Lock the AUX View</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#revert-values">Revert Values</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pot-pickups">POT Pickups</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#encoder">Encoder</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../MidiFX/">MidiFX</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Note-Select/">Note Select</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Step-Record/">Step Record</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Pattern-Parameters/">Pattern Parameters</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../MIDI-A-B-Switch/">MIDI A B Switch</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">---</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">OMX-27 docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Modes</li>
+      <li class="breadcrumb-item active">MIDI Macro Modes</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h3 id="midi-macro-modes">MIDI Macro Modes <a name="mimacromodes"></a></h3>
+<p>Midi macro modes are specialized Midi controller modes designed to be used with specific hardware that can be controlled via Midi. </p>
+<p>If a midi macro is selected, you can double click the AUX key to enter the midi macro mode, and double click the AUX key to exit the macro mode.</p>
+<p>Midi macro modes send control midi commands on the Midi Macro channel, which is <code>M-CH</code> in the parameters.</p>
+<p>Macro modes are supported in the MI and DRUM modes. </p>
+<h4 id="m8-macro-mode">M8 Macro Mode</h4>
+<p>From MI Mode, be sure <code>M8</code> is selected from the <code>MCRO</code> parameter and then double click the AUX button to enter Macro Mode.</p>
+<p><code>M-CH</code> should be set to the same value as the Control Map Channel in the M8 MIDI settings screen. Default is set to channel 10.  </p>
+<p>Double click the AUX button again to exit Macro Mode.</p>
+<p>The M8 macro mode has two pages, which change what the Keys do.</p>
+<ul>
+<li>Mute Solo Page:</li>
+</ul>
+<p>The bottom row of keys correspond to mutes (orange) and solos (red). The top "black keys" are as follows:  </p>
+<pre><code>Orange - release all mutes  
+Lime - go to mixer screen  
+Cyan - snapshot load/paste *   
+Magenta - snapshot save/enter selection mode *  
+Red - release all solos  
+Yellow - waveform display  
+Blue - play  
+</code></pre>
+<p><img src="images/omx27_m8macro.png" alt="omx27_m8_macro_mode" width="1045" height="425" /></p>
+<p>When M8 is selected from the <code>MCRO</code> parameter - potentiometers send on the <code>M-CH</code> MIDI channel in both regular keyboard mode and in the macro mode. However, notes played on keys send on the currently selected <code>CH</code> MIDI channel.</p>
+<p><strong>Notes:</strong>
+* M8 must be on the Mixer view for snapshots.<br />
+<em> Snapshot Load uses the M8 key combo [SHIFT]+[OPTION]. On any view with a grid (song, chain, phrase, table, etc.) this key enters selection mode.<br />
+</em> Snapshot Save uses the M8 key combo [SHIFT]+[EDIT]. On any view with a grid this key pastes the copied contents from selection mode.  </p>
+<ul>
+<li>Control Page:</li>
+</ul>
+<p>This page lets you navigate the M8 using the keys on the device instead of the keys on the M8.</p>
+<p>Top Key 1 and Bottoms Keys 1-3: These correspond to the directional arrow keys. </p>
+<p>Top Key 4: Option Key
+Top Key 5: Edit Key
+Bottom Key 6: Shift Key
+Bottom Key 7: Play Key</p>
+<p>The right half of the Keyboard is a 1-octave midi keyboard that sends notes on the same midi channel as when not in macro mode. </p>
+<h4 id="norns-macro-mode">Norns Macro Mode</h4>
+<p>The Norns macro mode gives you the ability to control the Monome Norns using the OMX-27. In this mode, you can control the three buttons and three encoders using the OMX-27. This is useful if your norns is not located close by and you would like to control it.</p>
+<p>Find the <code>MCRO</code> parameter in the menu and select <code>NRN</code> to enable the Norns Macro mode. </p>
+<p>Double click the AUX button to enter Macro Mode. Double click the AUX button again to exit Macro Mode.</p>
+<h5 id="norns-setup">Norns Setup</h5>
+<p>In order for this to work, you will need to setup the <a href="#https://llllllll.co/t/qremote/57549">qremote mod</a> on your norns. </p>
+<p>Obtain the mod here: https://llllllll.co/t/qremote/57549</p>
+<p>or install in Maiden
+<code>;install https://github.com/Quixotic7/qremote</code></p>
+<p>Enable the mod in the mod menu of norns, connect your OMX-27 to the norns and restart. The easiest way to connect the OMX-27 is to simply use a USB port on the norns. </p>
+<p>The qremote mod will default to using midi channel 10. If you are using defaults, make sure your OMX-27 Macro Channel <code>M-Chan</code> is set to 10. </p>
+<p>Use the default configuration for encoders and buttons:</p>
+<p>The default cc’s for the encoders are 58, 62, &amp; 63</p>
+<p>The default cc’s for the buttons are 85, 87, &amp; 88</p>
+<p>You can change these in the parameter menu. Or edit the script to change the defaults.</p>
+<h5 id="norns-buttons">Norns Buttons</h5>
+<p>These act the same as if pressing the buttons on the Norns.
+- <strong>[Top 3] B1</strong>
+- <strong>[Bot 4] B2</strong>
+- <strong>[Bot 5] B3</strong></p>
+<h5 id="norns-encoders">Norns Encoders</h5>
+<p>Use the OMX-27 Encoder to control one of the Norn's encoders. Since the OMX-27 only has one encoder, shortcut keys are used to determine which encoder will be controlled.
+- <strong>[Top 5] Enc 1</strong>
+- <strong>[Bot 6] Enc 2</strong>
+- <strong>[Bot 7] Enc 3</strong></p>
+<h5 id="norns-navigation">Norns Navigation</h5>
+<p>The keys of the OMX-27 are used to emulate up/down left/right keys useful for menu navigation. These work by controlling encoder 1 or encoder 2, sending one tick either clockwise or counter-clockwise. 
+- <strong>[Top 1] Up</strong>
+- <strong>[Bot 1] Left</strong>
+- <strong>[Bot 2] Down</strong>
+- <strong>[Bot 3] Right</strong></p>
+<h4 id="deluge-macro-mode">Deluge Macro Mode</h4>
+<p>The latest Deluge Community Firmware has added a new feature called Midi-Follow. </p>
+<p>https://github.com/SynthstromAudible/DelugeFirmware/blob/community/docs/features/midi_follow_mode.md</p>
+<p>This mode provides default CC mappings to control many of the synth parameters with a midi controller and to be able to play the active instrument without needing to midi learn everything. </p>
+<p>This Macro Mode provides parameter banks to control every available parameter on the Deluge using the 5 pots of the OMX-27. The Deluge will also send back the values of the parameters to the OMX-27 which will update the values in each bank on the OMX-27. This will only work if you are connected via USB as the OMX-27 does not have TRS Midi-in. Values are updated when changing them from the gold knobs, or from edit view, when entering a clip view, or when changing a synth or kit.</p>
+<h5 id="deluge-setup">Deluge Setup</h5>
+<p>Download and install the latest Deluge Nightly Firmware: https://github.com/SynthstromAudible/DelugeFirmware/releases . This Midi-Follow feature is not included in the 1.0.1 release. There is also a new beta build released which should have the feature, but it is not confirmed. </p>
+<p>To install the FW, place the <code>.bin</code> file on your sd card, ensuring there are no other <code>.bin</code> files. Carefully reinsert the SD Card in the Deluge, if it is misangled it can fall into the device. Turn on the Deluge while holding the shift key. </p>
+<p>Hold Shift + Click the main Select Knob, find Midi, click the Select Knob, find "MIDI-FOLLOW", click the select Knob, find "CHANNEL", click the select Knob, set each channel to something, I recommend channel 10. Also from the "MIDI-FOLLOW" level, select "FEEDBACK" and set the channel to 10 as well. </p>
+<p>For further help see https://github.com/SynthstromAudible/DelugeFirmware/blob/community/docs/features/midi_follow_mode.md </p>
+<h5 id="omx-setup">OMX Setup</h5>
+<p>Find the <code>MCRO</code> parameter in the menu and select <code>DEL</code> to enable the Deluge Macro mode. Change Macro Channel <code>M-CH</code> to 10 or whatever you set your Deluge to.</p>
+<p>Double click the AUX button to enter Macro Mode. Double click the AUX button again to exit Macro Mode.</p>
+<h5 id="keys-leds">KEYS &amp; LEDS</h5>
+<p>The keyboard is split into two halves. </p>
+<p>The right octave of the keyboard works the same as the midi keyboard from MI Mode and will inherit it's settings. </p>
+<p>The left half of the keyboard is dedicated to selecting different banks of parameters. </p>
+<p>Some keys will have multiple banks assigned to them, to access the other banks, click the key a second time. </p>
+<ul>
+<li><strong>[Top 1] Env 1</strong></li>
+<li><strong>[Top 2] Env 2</strong></li>
+<li><strong>[Top 3] LPF</strong></li>
+<li><strong>[Top 4] HPF</strong></li>
+<li><strong>[Top 5] EQ</strong></li>
+<li><strong>[Bot 1] Master</strong></li>
+<li><strong>[Bot 2] OSC 1</strong></li>
+<li><strong>[Bot 2] FM 1</strong> : Click the key a second time</li>
+<li><strong>[Bot 3] OSC 2</strong></li>
+<li><strong>[Bot 3] FM 2</strong> : Click the key a second time</li>
+<li><strong>[Bot 4] LFO Delay Reverb</strong></li>
+<li><strong>[Bot 4] ModFX</strong> : Click the key a second time</li>
+<li><strong>[Bot 5] Distortion Noise</strong></li>
+<li><strong>[Bot 6] Arp Sidechain</strong></li>
+<li><strong>[Bot 7] Custom 1</strong> : Bank of 5 parameters you can midi learn to whatever</li>
+<li><strong>[Bot 7] Custom 2</strong> : Click the key a second time</li>
+</ul>
+<h5 id="keys-leds-aux-button-held">KEYS &amp; LEDS - AUX Button Held</h5>
+<h6 id="select-a-parameter">Select a parameter</h6>
+<p>This will select a parameter. If you click the encoder to enter edit mode the encoder can be used to change the value without needing to pickup the pot. 
+- <strong>[Top 1] Param 1</strong>
+- <strong>[Top 2] Param 2</strong>
+- <strong>[Top 3] Param 3</strong>
+- <strong>[Top 4] Param 4</strong>
+- <strong>[Top 5] Param 5</strong></p>
+<h6 id="change-octave">Change octave</h6>
+<p>This effects the keyboard on the right half.
+- <strong>[Bot 1] Octave Down</strong>
+- <strong>[Bot 2] Octave Up</strong></p>
+<h6 id="lock-the-aux-view">Lock the AUX View</h6>
+<p>This locks the AUX view, allowing you to use the AUX shortcuts without holding down the AUX key. To unlock, use the AUX button again or press the lock AUX key. 
+- <strong>[Bot 4] Lock AUX</strong></p>
+<h6 id="revert-values">Revert Values</h6>
+<p>This will revert the values of the current bank to their previous state. The previous state is saved whenever the bank is changed, or when the values are updated from incoming Midi from the Deluge. This is fun to play with with the effects, crank up the bitcrush, delay, or reverb temporally, then press this button to revert it back to what it previously was. 
+- <strong>[Bot 8] Revert Bank</strong></p>
+<h5 id="pot-pickups">POT Pickups</h5>
+<p>Depending on which bank is selected, the OMX-27 will send out different CC's for each of the 5 potentiometers. When a change is detected on a pot, the screen will update to show the name of the current bank, parameter, and value that is being sent. </p>
+<p>In the MI and Drum modes, the pot values that are sent jump to the current position of the pot. In the Deluge Macro, you will need to pickup the value before it is sent. The small triangle on the screen represents the current raw value of the pot, the horizontal bar represents the value for that parameter. You will need to turn the knob left or right to pickup the value. </p>
+<p>The Deluge can also be setup to pickup, however this macro will work best if the Deluge is set to jump. </p>
+<h5 id="encoder">Encoder</h5>
+<p>The encoder can be used to send out values without needing it to be picked up. To edit a parameter, click the encoder, then turn. There is not currently a visual representation to provide feedback for this. If you click the encoder again, you can scroll to change which parameter in the bank to control. You can also use the AUX shortcuts to quickly jump to parameters, or lightly wiggle a knob. </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Drum/" class="btn btn-neutral float-left" title="Drum"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../MidiFX/" class="btn btn-neutral float-right" title="MidiFX">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Drum/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../MidiFX/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
