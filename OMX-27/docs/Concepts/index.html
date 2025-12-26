@@ -47,7 +47,11 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Concepts</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#midi">MIDI</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#layout">Layout</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#display">Display</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#encoder">Encoder</a>
     </li>
@@ -116,6 +120,10 @@
               </ul>
               <p class="caption"><span class="caption-text">---</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Firmware/">Firmware</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Firmware-Development/">Firmware Development</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
                   </li>
               </ul>
@@ -143,12 +151,17 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="concepts">Concepts <a name="concepts"></a></h2>
-<p>OMX-27 is a MIDI Keyboard and Sequencer. Both USBMIDI (in/out) and hardware MIDI in/out (via 1.8" TRS jack) are supported. Various "modes" can be accessed with the encoder and specific functions, parameters or sub-modes can be accessed with the encoder or key-presses/key-combinations.</p>
-<p>Sequencer modes have 8 patterns (tracks). Sequencer modes currently send MIDI clock and transport control (start/stop) by default.</p>
-<p>CV pitch output is limited to about 4.3 octaves.</p>
-<p>USBMIDI should be plug-and-play with any USBMIDI compatible host. iPad works great with the camera connection kit or a <a href="https://www.amazon.com/gp/product/B09KLXNYHL">lightning to usb micro cable</a>. Hardware MIDI TRS output jack is switchable between Type-A and Type-B.</p>
+<p>OMX-27 is a MIDI keyboard, sequencer and controller. Both USBMIDI (in/out) and hardware MIDI in/out (via 1.8" TRS jack) are supported. Various "modes" can be accessed with the encoder and specific functions, parameters or sub-modes can be accessed with the encoder or key-presses/key-combinations.</p>
+<p>Note - CV pitch output is limited to about 4.3 octaves.</p>
+<h3 id="midi">MIDI</h3>
+<p>OMX-27 is a USBMIDI <strong>device</strong> so a USBMIDI <strong>Host</strong> is required for USBMIDI connections. It should be plug-and-play with any USBMIDI compatible host. Typical hosts include a desktop/laptop computer, iPad, smartphone, norns, Raspberry Pi, and Retrokits RK-006 (among others). For example, an iPad works great with the Apple camera connection kit or a <a href="https://www.amazon.com/gp/product/B09KLXNYHL">lightning to USB-micro-b cable</a>(for v1 and v2) or lightning to USB-C cable (for v3).  </p>
+<p>Hardware MIDI TRS output jack is switchable between Type-A and Type-B. Hardware MIDI TRS input jack is auto-sensing and will magically work with either Type-A or Type-B.</p>
+<p>Sequencer modes currently send MIDI clock and transport control (start/stop) by default.  </p>
+<p>MIDI clock is sent all the time by default. This can be set to off in the MI (MIDI) Mode parameters.  </p>
 <h3 id="layout">Layout <a name="layout"></a></h3>
 <p><img alt="images/omx27_layout4.png" src="../images/omx27_layout4.png" /></p>
+<h3 id="display">Display</h3>
+<p>The OLED display will show various pages of parameters depending on the currently selected Mode.  </p>
 <h3 id="encoder">Encoder <a name="encoder"></a></h3>
 <p>The encoder is the knob directly to the right of the display.</p>
 <p>You can use the encoder to modify parameters and change the selected parameter and page. </p>
@@ -179,12 +192,12 @@
 <h4 id="white-keys-bottom-row">"White keys" (bottom row)</h4>
 <p>The bottom row (white) keys are referenced as <strong>Bottom 1-16</strong>.</p>
 <p>These have different functions depending on the current mode. For example, in sequencer modes, these are the sequencer step on/off keys.</p>
-<h3 id="changing-modes">Changing Modes <a name="changingmodes"></a></h3>
+<h3 id="changing-modes">Changing <a href="../Modes">Modes</a></h3>
 <p>The OMX-27 has multiple modes. Each is independent - only one mode can be used at a time. </p>
 <p>Long press the encoder to change modes. </p>
 <h3 id="sub-modes">Sub-Modes <a name="submodes"></a></h3>
 <p>Certain actions will cause you to enter a sub-mode, some examples could be editing MidiFX, configuring the pots, or saving/loading presets. If you are in a sub-mode, the AUX key will typically be flashing or red. A quick press of the AUX key will exit the sub-mode. </p>
-<h3 id="macro-modes">Macro-Modes <a name="macromodes"></a></h3>
+<h3 id="macro-modes"><a href="../MIDI-Macro-Modes">Macro-Modes</a></h3>
 <p>Macro modes are like sub-modes in that they are an alternate mode. Macro-modes can take over the keys, display, encoder, and pots. </p>
 <p>Macro modes are specialized modes designed to be used to control external gear like the M8, Norns, and Deluge. </p>
 <p>You can enter and exit macro modes by double clicking the AUX key in the root level mode. </p>

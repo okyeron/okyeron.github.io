@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Arpeggiator - OMX-27 docs</title>
+    <title>Firmware Development - OMX-27 docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Arpeggiator";
-        var mkdocs_page_input_path = "Arpeggiator.md";
+        var mkdocs_page_name = "Firmware Development";
+        var mkdocs_page_input_path = "Firmware-Development.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -49,7 +49,7 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Modes</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
@@ -66,9 +66,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Arpeggiator</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Drum/">Drum</a>
                   </li>
@@ -89,10 +87,22 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">---</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../Firmware/">Firmware</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Firmware-Development/">Firmware Development</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Firmware Development</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#install-vscode">Install VSCode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#install-platformio-ide-vscode-extension">Install PlatformIO IDE VSCode extension.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#alternate-installing-platformio-via-the-command-line">(alternate) Installing PlatformIO via the command line:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#optional-editorconfig">(optional) EditorConfig</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-the-project-in-vscode">Open the project in VSCode</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
                   </li>
@@ -111,8 +121,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Modes</li>
-      <li class="breadcrumb-item active">Arpeggiator</li>
+          <li class="breadcrumb-item">---</li>
+      <li class="breadcrumb-item active">Firmware Development</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -121,41 +131,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="arpeggiator">Arpeggiator</h2>
-<p>The arpeggiator is an advanced arpeggiator with many different combinations of patterns, Mod Patterns, and Transpose patterns. </p>
-<p>The arpeggiator is actually a MidiFX and is only available in the modes that support MidiFX: MIDI Keyboard (MI), Chords (CH), and Euclidian Sequencer (EL).</p>
-<p>In MIDI Keyboard and Chords modes, holding AUX allows you to quickly change basic settings of the arpeggiator. In order to access the more advanced functionalities, you need to access the arpeggiator parameters by either entering the MidiFX Group submode or by accessing the Arpeggiator pass-through mode by using AUX + Bottom Key 12.</p>
-<p>The arpeggiator sends clock when in use.</p>
-<p>Parameters:</p>
-<p>Page 1:
-- <code>MODE</code>: Arpeggiator mode: On, 1-Shot, Once, Hold<br />
-- <code>PAT</code>: The pattern of the arpeggiator<br />
-- <code>RSET</code>: Determines what will cause the arpeggiator to reset<br />
-- <code>CHC%</code>: How likely an incoming note will be used with the arpeggiator. Try playing with in the euclidean sequencer mode  </p>
-<p>Page 2:
-- <code>RATE</code>: How fast the arpeggiator plays<br />
-- <code>RANG</code>: How many octaves to advance through<br />
-- <code>GATE</code>: How long a note coming out of the arpeggiator is<br />
-- <code>BPM</code>: Controls the master tempo  </p>
-<p>Page 3:
-- <code>ODIST</code>: How many semitones to consider an octave. Set to -12 to make the arpeggiator go downwards. Set to a semitone offset if you like to get weird  </p>
-<p>Page 4:
-These are not modifyable<br />
-- <code>VEL</code> : Velocity based on first notes that turn on the arp<br />
-- <code>CHAN</code> : First note that starts the arp sets the channel<br />
-- <code>MIDI</code> : If midi data is output
-- <code>CV</code> : If CV data is output  </p>
-<p>Page 5 - Mod Pattern:
-- Each of the 16 steps can be used to modify the arp pattern in various ways  </p>
-<p>Page 6 - Transpose Pattern:
-- Each of the 16 steps can be used to transpose notes in semitones 
-- Recommend trying to use for some cool one key bass patterns  </p>
+                <h2 id="firmware-development">Firmware Development</h2>
+<p>Currently the firmware is best worked on with PlatformIO and VSCode.  </p>
+<h3 id="install-vscode">Install VSCode</h3>
+<p><a href="https://code.visualstudio.com/">Download and install</a> Microsoft's Visual Studio Code, PlatformIO IDE is built on top of it</p>
+<h3 id="install-platformio-ide-vscode-extension">Install PlatformIO IDE VSCode extension.</h3>
+<p><a href="https://platformio.org/install/ide?install=vscode">Instructions</a>  </p>
+<h3 id="alternate-installing-platformio-via-the-command-line">(alternate) Installing PlatformIO via the command line:</h3>
+<p>Ensure Homebrew in installed. <a href="https://brew.sh/">Instructions</a><br />
+Install PlatformIO CLI tools. <a href="https://platformio.org/install/cli">Detailed Instructions</a></p>
+<pre><code class="language-sh"># Mac OSX
+brew install platformio
+
+# check out the project
+git checkout https://github.com/okyeron/OMX-27.git
+
+# go to the project directory
+cd OMX-27
+
+# compile the project (this may take a while the first time)
+pio run
+
+# upload to hardware (press reset and boot and release reset before boot)
+pio run -t upload
+</code></pre>
+<h3 id="optional-editorconfig">(optional) EditorConfig</h3>
+<p>Install EditorConfig extension for your text editor. <a href="https://editorconfig.org/">Instructions</a></p>
+<h3 id="open-the-project-in-vscode">Open the project in VSCode</h3>
+<p>To open the project in VSCode:<br />
+- open a new window<br />
+- select the PlatformIO icon from the Primary Side Bar (left toolbar)<br />
+- use the "Pick a folder" button to select the OMX-27 repo folder you created above  </p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Organelle-Mother/" class="btn btn-neutral float-left" title="Organelle Mother"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Drum/" class="btn btn-neutral float-right" title="Drum">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Firmware/" class="btn btn-neutral float-left" title="Firmware"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../FAQ/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -178,10 +190,10 @@ These are not modifyable<br />
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../Organelle-Mother/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Firmware/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Drum/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../FAQ/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

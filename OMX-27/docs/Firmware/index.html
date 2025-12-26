@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Arpeggiator - OMX-27 docs</title>
+    <title>Firmware - OMX-27 docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Arpeggiator";
-        var mkdocs_page_input_path = "Arpeggiator.md";
+        var mkdocs_page_name = "Firmware";
+        var mkdocs_page_input_path = "Firmware.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -49,7 +49,7 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Modes</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../Modes/">Modes Overview</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../MIDI-Keyboard/">MIDI Keyboard</a>
@@ -66,9 +66,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Organelle-Mother/">Organelle Mother</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Arpeggiator</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Arpeggiator/">Arpeggiator</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Drum/">Drum</a>
                   </li>
@@ -89,8 +87,14 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">---</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../Firmware/">Firmware</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Firmware</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#omx-27-v3">OMX-27 v3</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#omx-27-v1v2">OMX-27 v1/v2</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Firmware-Development/">Firmware Development</a>
                   </li>
@@ -111,8 +115,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Modes</li>
-      <li class="breadcrumb-item active">Arpeggiator</li>
+          <li class="breadcrumb-item">---</li>
+      <li class="breadcrumb-item active">Firmware</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -121,41 +125,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="arpeggiator">Arpeggiator</h2>
-<p>The arpeggiator is an advanced arpeggiator with many different combinations of patterns, Mod Patterns, and Transpose patterns. </p>
-<p>The arpeggiator is actually a MidiFX and is only available in the modes that support MidiFX: MIDI Keyboard (MI), Chords (CH), and Euclidian Sequencer (EL).</p>
-<p>In MIDI Keyboard and Chords modes, holding AUX allows you to quickly change basic settings of the arpeggiator. In order to access the more advanced functionalities, you need to access the arpeggiator parameters by either entering the MidiFX Group submode or by accessing the Arpeggiator pass-through mode by using AUX + Bottom Key 12.</p>
-<p>The arpeggiator sends clock when in use.</p>
-<p>Parameters:</p>
-<p>Page 1:
-- <code>MODE</code>: Arpeggiator mode: On, 1-Shot, Once, Hold<br />
-- <code>PAT</code>: The pattern of the arpeggiator<br />
-- <code>RSET</code>: Determines what will cause the arpeggiator to reset<br />
-- <code>CHC%</code>: How likely an incoming note will be used with the arpeggiator. Try playing with in the euclidean sequencer mode  </p>
-<p>Page 2:
-- <code>RATE</code>: How fast the arpeggiator plays<br />
-- <code>RANG</code>: How many octaves to advance through<br />
-- <code>GATE</code>: How long a note coming out of the arpeggiator is<br />
-- <code>BPM</code>: Controls the master tempo  </p>
-<p>Page 3:
-- <code>ODIST</code>: How many semitones to consider an octave. Set to -12 to make the arpeggiator go downwards. Set to a semitone offset if you like to get weird  </p>
-<p>Page 4:
-These are not modifyable<br />
-- <code>VEL</code> : Velocity based on first notes that turn on the arp<br />
-- <code>CHAN</code> : First note that starts the arp sets the channel<br />
-- <code>MIDI</code> : If midi data is output
-- <code>CV</code> : If CV data is output  </p>
-<p>Page 5 - Mod Pattern:
-- Each of the 16 steps can be used to modify the arp pattern in various ways  </p>
-<p>Page 6 - Transpose Pattern:
-- Each of the 16 steps can be used to transpose notes in semitones 
-- Recommend trying to use for some cool one key bass patterns  </p>
+                <h2 id="flashing-firmware">Flashing firmware</h2>
+<p>The most recent firmware can be downloaded from <a href="https://github.com/okyeron/OMX-27/releases">Github here</a>.  </p>
+<p>Note:<br />
+    - <code>.uf2</code> firmware files are for v3<br />
+    - <code>.hex</code> firmware files are for v1/v2  </p>
+<h3 id="omx-27-v3">OMX-27 v3</h3>
+<p>v3 is based on the RP2040 microcontroller.  </p>
+<p>To flash the firmware, connect the device to your computer via USB while holding the BOOTSEL button to enter bootloader mode. Alternately, if already connected via USB, you can press and hold both the BOOT and RESET buttons and then release the RESET button before releasing the BOOT button. A new RPI-RP2 drive should mount on your computer. Drag and drop the appropriate UF2 firmware file onto the RPI-RP2 drive. After a few seconds, the drive will unmount and the board will reboot with the new firmware installed.  </p>
+<p>Be sure you are using a known working USB Type-C data cable</p>
+<h3 id="omx-27-v1v2">OMX-27 v1/v2</h3>
+<p>These versions are based on Teensy microcontrollers.  </p>
+<p>Firmware flashing using Teensy Loader:  </p>
+<p><a href="https://llllllll.co/t/how-to-flash-the-firmware-on-a-teensy-micro-controller/20317">See the instructions here (loading a HEX file with Teensy Loader)</a> if you don't know how to flash firmware to a Teensy. </p>
+<p>Firmware flashing using TyUploader:  </p>
+<p>Alternately you can use TyUploader (which is part of <a href="https://koromix.dev/tytools">TyTools</a>):<br />
+    - Open "TyUploader" (Note: "TyCommander" was also installed, don't use that.)<br />
+    - Make sure "omx-27 xxxxxxxx" is selected in the dropdown if you have other Teensy devices plugged into your computer.<br />
+ - Click "Upload" select the hex file.  </p>
+<p><img alt="tyuploader" src="../images/tyuploader.png" /></p>
+<p>Be sure you are using a known working USB Type-b-micro data cable</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Organelle-Mother/" class="btn btn-neutral float-left" title="Organelle Mother"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Drum/" class="btn btn-neutral float-right" title="Drum">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../MIDI-A-B-Switch/" class="btn btn-neutral float-left" title="MIDI A B Switch"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Firmware-Development/" class="btn btn-neutral float-right" title="Firmware Development">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -178,10 +173,10 @@ These are not modifyable<br />
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../Organelle-Mother/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../MIDI-A-B-Switch/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Drum/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../Firmware-Development/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
