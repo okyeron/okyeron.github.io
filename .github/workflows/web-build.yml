@@ -93,9 +93,10 @@ jobs:
           cp -R ./8x2/dist ./dist/8x2
           cp -R ./web-editor/dist ./dist/web-editor
           cp -R ./OMX-27 ./dist/OMX-27
+          rm -rf ./dist/OMX-27/docs
           cp -R ./OMX-27-mkdocs-dist ./dist/OMX-27/docs
           cp ./index.html ./dist
-
+          
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
