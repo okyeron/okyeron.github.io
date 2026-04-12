@@ -22,6 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Checkout OMX-27-mkdocs
+        uses: actions/checkout@v5
+        with:
+          repository: okyeron/OMX-27-mkdocs
+          path: OMX-27-mkdocs
+
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
@@ -67,6 +73,19 @@ jobs:
         run: pnpm run build
         working-directory: web-editor
 
+      # --- Build OMX-27 docs ---
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs
+        run: pip install mkdocs mkdocs-readthedocs
+
+      - name: Build MkDocs site
+        run: mkdocs build --site-dir ../../OMX-27-mkdocs-dist
+        working-directory: OMX-27-mkdocs/OMX-27
+
       # --- Collect artifacts ---
       - name: Collect build artifacts
         run: |
@@ -74,6 +93,7 @@ jobs:
           cp -R ./8x2/dist ./dist/8x2
           cp -R ./web-editor/dist ./dist/web-editor
           cp -R ./OMX-27 ./dist/OMX-27
+          cp -R ./OMX-27-mkdocs-dist ./dist/OMX-27/docs
           cp ./index.html ./dist
 
       - name: Setup Pages
