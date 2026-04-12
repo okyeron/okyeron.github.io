@@ -5,8 +5,8 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  repository_dispatch:
+    types: [mkdocs-update]
   workflow_dispatch:
 
 # Allow one concurrent deployment
